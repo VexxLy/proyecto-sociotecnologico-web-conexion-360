@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Materia - Proyecto Socioproductivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Colores (claro y oscuro) ===== */
+:root{
+  color-scheme: light;
+  --bg:#F2F8F7; --surface:#FFFFFF; --ink:#10282D; --muted:#4A666B; --line:#CCDFDC;
+  --accent:#0B5563; --hero-bg:#0B4753; --hero-ink:#FFFFFF; --hero-soft:#BFE3E0;
+  --sun:#F2B705; --sun-ink:#2A2000;
+  --crit:#B5321F; --alto:#9A5B00; --medio:#0B5563; --bajo:#4A666B; --ok:#23703F;
+  --bar-now:#D9826F; --bar-goal:#0B5563; --track:#E1ECEA;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#091A1E; --surface:#10282E; --ink:#E4EFED; --muted:#9FB8BA; --line:#24424A;
+    --accent:#7FD3DC; --hero-bg:#0D3540; --hero-ink:#FFFFFF; --hero-soft:#A9D6D6;
+    --sun:#F5C531; --sun-ink:#2A2000;
+    --crit:#FF9A88; --alto:#F3BE62; --medio:#7FD3DC; --bajo:#9FB8BA; --ok:#7FD6A0;
+    --bar-now:#C9705E; --bar-goal:#7FD3DC; --track:#1B363D;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#091A1E; --surface:#10282E; --ink:#E4EFED; --muted:#9FB8BA; --line:#24424A;
+  --accent:#7FD3DC; --hero-bg:#0D3540; --hero-ink:#FFFFFF; --hero-soft:#A9D6D6;
+  --sun:#F5C531; --sun-ink:#2A2000;
+  --crit:#FF9A88; --alto:#F3BE62; --medio:#7FD3DC; --bajo:#9FB8BA; --ok:#7FD6A0;
+  --bar-now:#C9705E; --bar-goal:#7FD3DC; --track:#1B363D;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0; min-height:100%; background:var(--bg); color:var(--ink);
+  font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1rem; line-height:1.55}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--hero-bg)}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Public Sans",system-ui,sans-serif; line-height:1.15; margin:0}
+h2{font-size:1.75rem; font-weight:800; margin:2.5rem 0 .5rem}
+h3{font-size:1.25rem; font-weight:700; margin:2.25rem 0 .5rem}
+h4{font-size:1.05rem; font-weight:700; margin:1.5rem 0 .5rem}
+p{margin:.5rem 0 1rem; max-width:72ch}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--sun); outline-offset:2px}
+.wrap{max-width:1080px; margin:0 auto; padding:0 1.1rem}
+
+/* ===== Menú superior ===== */
+header.menu{position:sticky; top:env(safe-area-inset-top,0px); z-index:9; background:var(--hero-bg); color:var(--hero-ink)}
+header.menu .wrap{display:flex; align-items:center; gap:1rem; max-width:1280px}
+.marca{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; white-space:nowrap; padding:.8rem 0}
+.marca span{color:var(--sun)}
+nav.vistas{display:flex; gap:.25rem; min-width:0; overflow-x:auto; scrollbar-width:none; margin-left:auto}
+nav.vistas::-webkit-scrollbar{display:none}
+nav.vistas a{color:var(--hero-ink); text-decoration:none; padding:.9rem .55rem; white-space:nowrap; font-weight:600; font-size:.95rem; border-bottom:3px solid transparent}
+nav.vistas a[aria-current="page"]{border-bottom-color:var(--sun); color:var(--sun)}
+@media (max-width:1150px){
+  html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 96px)}
+  header.menu .wrap{flex-direction:column; align-items:stretch; gap:0}
+  .marca{padding:.55rem 0 0; font-size:.9rem}
+  nav.vistas{margin-left:-.55rem; margin-right:-1.1rem; padding-right:1.1rem}
+  nav.vistas a{font-size:.9rem; padding:.55rem .55rem .6rem}
+}
+
+/* ===== Portada ===== */
+.portada{background:var(--hero-bg); color:var(--hero-ink); padding:2.5rem 0 3rem}
+.portada h1{font-size:clamp(2rem,6vw,3.6rem); font-weight:800; letter-spacing:-.02em; max-width:18ch}
+.portada .lema{font-size:1.2rem; color:var(--hero-soft); margin:1rem 0 0}
+.portada .equipo{margin:.4rem 0 0; color:var(--hero-soft); font-size:.95rem}
+.ruta{list-style:none; margin:2.2rem 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); position:relative}
+.ruta::before{content:""; position:absolute; left:8px; right:12%; top:7px; border-top:2px dashed var(--sun)}
+.ruta li{position:relative; padding:1.6rem .8rem 0 0}
+.ruta li::before{content:""; position:absolute; left:0; top:0; width:16px; height:16px; border-radius:50%; background:var(--sun); box-shadow:0 0 0 4px var(--hero-bg)}
+.ruta b{display:block; font-family:"Bricolage Grotesque",sans-serif; font-size:1.15rem}
+.ruta small{display:block; color:var(--hero-soft); font-size:.9rem}
+@media (max-width:640px){
+  .ruta{grid-template-columns:1fr}
+  .ruta::before{display:none}
+  .ruta li{padding:0 0 1.1rem 2rem}
+  .ruta li:not(:last-child)::after{content:""; position:absolute; left:7px; top:18px; bottom:-2px; border-left:2px dashed var(--sun)}
+}
+
+/* ===== Bloques comunes ===== */
+main{padding-bottom:4rem}
+.vista[hidden]{display:none}
+.entrada{color:var(--muted); font-size:1.05rem}
+.nota{border-left:4px solid var(--sun); background:var(--surface); padding:.8rem 1rem; margin:1rem 0; max-width:78ch; font-size:.95rem}
+.nota p{margin:.2rem 0}
+.codigo{display:inline-block; background:var(--sun); color:var(--sun-ink); font-weight:700; font-size:.85rem; padding:.1rem .5rem; border-radius:4px; margin-right:.5rem; vertical-align:.15em; font-family:"Public Sans",sans-serif}
+.rejilla{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:1rem 0}
+.ficha{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem}
+.ficha h4{margin-top:0}
+.ficha p{margin:.3rem 0 0}
+.valores{display:flex; flex-wrap:wrap; gap:.5rem; padding:0; list-style:none; margin:.5rem 0 1rem}
+.valores li{border:1.5px solid var(--accent); color:var(--accent); border-radius:999px; padding:.25rem .8rem; font-weight:600; font-size:.95rem}
+.indice{display:flex; flex-wrap:wrap; gap:.4rem; margin:1rem 0 0}
+.indice button{font:inherit; font-size:.9rem; font-weight:600; background:var(--surface); color:var(--accent); border:1px solid var(--line); border-radius:6px; padding:.4rem .7rem; cursor:pointer}
+
+/* ===== Organigrama ===== */
+.arbol, .arbol ul{list-style:none; margin:0; padding:0}
+.arbol ul{margin-left:1.1rem; padding-left:1.1rem; border-left:2px solid var(--line)}
+.arbol li{position:relative; margin:.5rem 0}
+.arbol ul>li::before{content:""; position:absolute; left:-1.1rem; top:1.15rem; width:1.1rem; border-top:2px solid var(--line)}
+.arbol span{display:inline-block; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:.45rem .8rem; font-weight:600}
+.arbol span small{display:block; font-weight:400; color:var(--muted)}
+.arbol .raiz{background:var(--hero-bg); color:var(--hero-ink); border-color:var(--hero-bg)}
+.arbol .ti{border-color:var(--sun); border-width:2px}
+.arbol .externo{border-style:dashed}
+
+/* ===== Tablas ===== */
+.tabla-wrap{overflow-x:auto; margin:1rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.93rem}
+th,td{text-align:left; vertical-align:top; padding:.65rem .8rem; border-bottom:1px solid var(--line)}
+thead th{background:var(--hero-bg); color:var(--hero-ink); font-weight:700; font-size:.88rem}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.pill{display:inline-block; font-weight:700; font-size:.85rem; border:1.5px solid currentColor; border-radius:999px; padding:0 .55rem; white-space:nowrap}
+.p-crit{color:var(--crit)} .p-alto{color:var(--alto)} .p-medio{color:var(--medio)} .p-bajo{color:var(--bajo)} .p-ok{color:var(--ok)}
+.pendiente{color:var(--muted); font-style:italic; font-weight:400}
+@media (max-width:760px){
+  .tabla-wrap{border:0; background:transparent; overflow:visible}
+  table,tbody,tr,td{display:block; width:100%}
+  thead{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%)}
+  tbody tr{background:var(--surface); border:1px solid var(--line); border-radius:10px; margin-bottom:.8rem; padding:.3rem 0}
+  td{border:0; padding:.4rem .9rem}
+  td::before{content:attr(data-label); display:block; font-size:.78rem; font-weight:700; color:var(--muted)}
+  td:first-child{font-size:1rem}
+}
+
+/* ===== Decálogo ===== */
+.decalogo{counter-reset:d; list-style:none; padding:0; margin:1rem 0; display:grid; gap:.7rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.decalogo li{counter-increment:d; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.9rem 1rem .9rem 3.6rem; position:relative}
+.decalogo li::before{content:counter(d); position:absolute; left:.9rem; top:.7rem; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.9rem; color:var(--accent)}
+.decalogo b{display:block}
+.decalogo span{color:var(--muted); font-size:.95rem}
+
+/* ===== Infografías ===== */
+.info{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1.2rem; margin:1rem 0}
+.capa{margin-top:1.4rem}
+.capa:first-child{margin-top:0}
+.capa>h4{margin:0 0 .7rem; display:flex; align-items:center; gap:.6rem}
+.capa>h4 i{font-style:normal; background:var(--hero-bg); color:var(--hero-ink); border-radius:50%; width:1.9rem; height:1.9rem; display:grid; place-items:center; font-size:.95rem; flex:none}
+.tres{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tres>div{border:1px solid var(--line); border-top:5px solid var(--accent); border-radius:8px; padding:.8rem .9rem; background:var(--bg)}
+.tres>div:nth-child(2){border-top-color:var(--sun)}
+.tres>div:nth-child(3){border-top-color:var(--bar-now)}
+.tres b{font-family:"Bricolage Grotesque",sans-serif; font-size:1.1rem; display:block}
+.tres small{color:var(--muted); display:block; margin-bottom:.35rem}
+.tres p{margin:0; font-size:.95rem}
+.frase{background:var(--hero-bg); color:var(--hero-ink); border-radius:10px; padding:1rem 1.2rem; font-family:"Bricolage Grotesque",sans-serif; font-size:1.15rem; font-weight:500; margin:0; max-width:none}
+
+/* ===== Gráfica actual vs. meta ===== */
+.grafica{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; margin:1rem 0}
+.leyenda{display:flex; gap:1.2rem; font-size:.88rem; color:var(--muted); margin-bottom:.6rem}
+.leyenda i{display:inline-block; width:.9rem; height:.9rem; border-radius:3px; margin-right:.35rem; vertical-align:-.1em}
+.fila-g{padding:.65rem 0; border-top:1px solid var(--line)}
+.fila-g b{display:block; font-size:.95rem}
+.fila-g small{color:var(--muted)}
+.barra{display:grid; grid-template-columns:1fr 3.2rem; align-items:center; gap:.5rem; margin-top:.3rem}
+.barra div{background:var(--track); border-radius:4px; height:.85rem; overflow:hidden}
+.barra div i{display:block; height:100%; border-radius:4px}
+.barra span{font-weight:700; font-size:.9rem; text-align:right}
+
+/* ===== Entregas ===== */
+.enlaces{list-style:none; padding:0; margin:.5rem 0 0}
+.enlaces li{padding:.45rem 0; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:1rem}
+.enlaces li:first-child{border-top:0}
+/* ===== Diagnóstico ===== */
+.cifras{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin:1rem 0}
+.cifras div{border-left:4px solid var(--accent); padding:.2rem 0 .2rem .8rem}
+.cifras div:first-child{border-left-color:var(--crit)}
+.cifras dt{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.6rem; line-height:1.1}
+.cifras dd{margin:.2rem 0 0; color:var(--muted); font-size:.92rem}
+.filtros{display:flex; flex-wrap:wrap; gap:.8rem; align-items:flex-end; margin:1rem 0 .4rem}
+.filtros label{display:flex; flex-direction:column; gap:.25rem; font-size:.85rem; font-weight:600; color:var(--muted)}
+.filtros select{font:inherit; font-size:.95rem; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:.4rem .6rem; min-width:10rem}
+.conteo{color:var(--muted); font-size:.9rem; margin:.2rem 0 0}
+.flujo{margin:.6rem 0 1rem; padding-left:1.4rem; max-width:72ch}
+.flujo li{margin:.4rem 0}
+.flujo b{color:var(--accent)}
+.peso{font-family:"Public Sans",sans-serif; font-weight:700; font-size:.9rem; color:var(--accent); margin-left:.4rem}
+
+/* ===== Botón para volver arriba ===== */
+.arriba{position:fixed; right:calc(1rem + env(safe-area-inset-right,0px)); bottom:calc(1rem + env(safe-area-inset-bottom,0px)); z-index:8;
+  width:3rem; height:3rem; border-radius:50%; border:2px solid var(--hero-bg); background:var(--sun); color:var(--sun-ink);
+  display:grid; place-items:center; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.25); opacity:0; visibility:hidden; transform:translateY(.5rem)}
+.arriba.visible{opacity:1; visibility:visible; transform:none}
+.arriba svg{width:1.4rem; height:1.4rem}
+@media (prefers-reduced-motion:no-preference){ .arriba{transition:opacity .2s, transform .2s, visibility .2s} }
+
+/* ===== Sesión 2 ===== */
+.etapas{margin:0; padding-left:1.1rem}
+.etapas li{margin:.15rem 0}
+.origen{display:block; margin-top:.35rem}
+.fases{display:grid; gap:.9rem; margin:1rem 0}
+.carril{background:var(--surface); border:1px solid var(--line); border-left:6px solid var(--c); border-radius:10px; padding:.85rem 1rem}
+.carril h5{font-family:"Bricolage Grotesque",sans-serif; font-size:1.05rem; margin:0 0 .65rem}
+.carril h5 small{font-family:"Public Sans",sans-serif; font-weight:400; color:var(--muted); font-size:.85rem; margin-left:.4rem}
+.carril ol{list-style:none; counter-reset:f; display:flex; flex-wrap:wrap; row-gap:.5rem; padding:0; margin:0}
+.carril li{counter-increment:f; display:flex; align-items:center}
+.carril li span{background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:.3rem .75rem; font-size:.9rem}
+.carril li span::before{content:counter(f) ". "; font-weight:700; color:var(--c)}
+.carril li:not(:last-child)::after{content:"\2192"; margin:0 .45rem; color:var(--muted)}
+.manuscrito p{color:var(--muted)}
+
+/* ===== Portafolio digital ===== */
+.pf-portada{background:var(--hero-bg); color:var(--hero-ink); padding:2.2rem 0 2.4rem}
+.pf-portada .wrap{display:grid; grid-template-columns:1.3fr 1fr; gap:1.5rem; align-items:center}
+.pf-portada h2{margin:0; font-size:clamp(1.9rem,5vw,3rem); letter-spacing:-.02em}
+.pf-portada .sub{color:var(--hero-soft); font-size:1.1rem; margin:.6rem 0 1.2rem}
+.pf-portada dl{display:grid; grid-template-columns:auto 1fr; gap:.3rem .9rem; margin:0; font-size:.95rem}
+.pf-portada dt{color:var(--sun); font-weight:700}
+.pf-portada dd{margin:0}
+.pf-portada svg{width:100%; height:auto; max-width:420px; justify-self:end}
+@media (max-width:760px){ .pf-portada .wrap{grid-template-columns:1fr} .pf-portada svg{justify-self:start; max-width:320px} }
+.meta{color:var(--muted); font-size:.92rem; margin:-.2rem 0 .8rem}
+.proceso{border-top:1px dashed var(--line); padding-top:.7rem; font-size:.95rem}
+.autor{display:grid; grid-template-columns:5rem 1fr; gap:1rem; align-items:start}
+.autor .foto{width:5rem; height:5rem; border-radius:50%; object-fit:cover; background:var(--hero-bg); color:var(--sun); display:grid; place-items:center;
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.6rem; border:3px solid var(--sun)}
+.autor h4{margin:0 0 .2rem}
+.autor .rol{color:var(--accent); font-weight:600; font-size:.92rem; margin:0 0 .4rem}
+/* infografía */
+.ig{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin:1rem 0}
+.ig-cabeza{background:var(--hero-bg); color:var(--hero-ink); padding:1.1rem 1.2rem}
+.ig-cabeza h4{margin:0 0 .4rem; font-size:1.3rem; color:var(--sun)}
+.ig-cabeza p{margin:0; max-width:80ch}
+.ig-rasgos{display:flex; flex-wrap:wrap; gap:.5rem; padding:1rem 1.2rem 0; margin:0; list-style:none}
+.ig-rasgos li{border:1.5px solid var(--accent); color:var(--accent); border-radius:999px; padding:.2rem .7rem; font-size:.88rem; font-weight:600}
+.ig-grid{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); padding:1rem 1.2rem}
+.ig-crit{border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; background:var(--bg)}
+.ig-crit h5{font-family:"Bricolage Grotesque",sans-serif; font-size:1rem; margin:0 0 .45rem}
+.ig-crit ul{list-style:none; padding:0; margin:0; display:grid; gap:.4rem}
+.ig-crit li{font-size:.88rem; line-height:1.4; padding-left:.6rem; border-left:3px solid var(--line)}
+.ig-crit li.inf{border-left-color:var(--sun)}
+.ig-crit li b{display:block; font-size:.92rem}
+.tag-inf{display:inline-block; background:var(--sun); color:var(--sun-ink); font-size:.72rem; font-weight:700; border-radius:4px; padding:0 .35rem; margin-left:.35rem; vertical-align:.1em}
+.ig-dif{padding:0 1.2rem 1.1rem}
+.ig-dif h5{font-family:"Bricolage Grotesque",sans-serif; font-size:1rem; margin:.2rem 0 .5rem}
+.ig-dif ul{margin:0; padding-left:1.1rem; font-size:.92rem}
+/* mapa mixto */
+.mapa{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1.2rem; margin:1rem 0}
+.mapa .centro{max-width:560px; margin:0 auto; text-align:center; background:var(--hero-bg); color:var(--hero-ink); border-radius:14px; padding:.9rem 1.1rem}
+.mapa .centro b{font-family:"Bricolage Grotesque",sans-serif; font-size:1.35rem; color:var(--sun); display:block}
+.mapa .centro span{font-size:.9rem; color:var(--hero-soft)}
+.ramas{display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:0}
+.rama{position:relative; padding-top:2.6rem}
+.rama::before{content:""; position:absolute; left:50%; top:0; height:1.1rem; border-left:2px solid var(--line)}
+.palabra{position:absolute; top:1.1rem; left:50%; transform:translateX(-50%); white-space:nowrap; font-style:italic; font-size:.88rem; color:var(--muted);
+  background:var(--surface); border:1px dashed var(--muted); border-radius:999px; padding:.05rem .7rem}
+.rama h5{font-family:"Bricolage Grotesque",sans-serif; font-size:1.05rem; margin:.4rem 0 .6rem; text-align:center}
+.nodos{display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem}
+.nodo{border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.5rem .65rem; background:var(--bg); font-size:.88rem; line-height:1.4}
+.nodo b{display:block; font-size:.93rem}
+.nodo .conecta{display:inline-block; margin-top:.3rem; font-size:.78rem; color:var(--alto); font-weight:700}
+.cadena{list-style:none; padding:0; margin:0; display:grid; gap:.2rem}
+.cadena li{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:.5rem; align-items:center}
+.cadena li + li::before{content:"\2193"; grid-column:1/-1; justify-self:start; margin-left:2.2rem; color:var(--muted)}
+.cadena .nodo.pst{border-left-color:var(--sun)}
+.cadena em{font-size:.78rem; color:var(--muted); text-align:center; max-width:7.5rem; line-height:1.25}
+@media (max-width:760px){ .ramas{grid-template-columns:minmax(0,1fr)} .nodos{grid-template-columns:minmax(0,1fr)} .cadena em{max-width:5.5rem} }
+/* ejemplos */
+.ejemplos{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin:1rem 0}
+.ejemplo{background:var(--surface); border:1px solid var(--line); border-top:5px solid var(--c); border-radius:10px; padding:.9rem 1rem}
+.ejemplo .area{display:inline-block; font-size:.78rem; font-weight:700; color:var(--c); border:1.5px solid var(--c); border-radius:999px; padding:0 .5rem}
+.ejemplo h4{margin:.5rem 0 .6rem}
+.ejemplo dl{margin:0; font-size:.9rem}
+.ejemplo dt{font-weight:700; color:var(--muted); font-size:.8rem; margin-top:.45rem}
+.ejemplo dd{margin:0}
+.reflex{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; margin:1rem 0}
+.reflex h4{margin:0 0 .6rem}
+.reflex dl{margin:0}
+.reflex dt{font-weight:700; color:var(--accent); margin-top:.8rem}
+.reflex dt:first-child{margin-top:0}
+.reflex dd{margin:.2rem 0 0; max-width:80ch}
+
+footer{border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; padding:1.5rem 0}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+</style>
+</head>
+<body>
+
+<header class="menu">
+  <div class="wrap">
+    <div class="marca">Conexión <span>360</span></div>
+    <nav class="vistas" aria-label="Secciones del sitio">
+      <a href="#caso">El caso</a>
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#habilidades">Habilidades técnicas y blandas</a>
+      <a href="#soporte">Soporte técnico</a>
+      <a href="#proyecto">Proyecto</a>
+      <a href="#portafolio">Portafolio digital</a>
+      <a href="#marco">Marco teórico</a>
+      <a href="#entregas">Entregas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     VISTA 1 · EL CASO
+     ============================================================ -->
+<section class="vista" id="v-caso">
+  <div class="portada">
+    <div class="wrap">
+      <h1>Fundación Rutas del Araguaney</h1>
+      <p class="lema">“Conocer Venezuela es un derecho de todos”</p>
+      <p class="equipo" id="firma-equipo"></p>
+      <ol class="ruta" id="ruta" aria-label="Sedes de la Fundación"></ol>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h2>La organización</h2>
+    <p class="entrada">La Fundación Rutas del Araguaney es una organización venezolana de turismo social. Promueve planes vacacionales y recreacionales para institutos de educación básica y universitaria y para los trabajadores y trabajadoras de organismos públicos. Creció hasta abrir tres sucursales en el interior y acaba de crear su Departamento de Tecnología: dos personas para cuatro sedes.</p>
+
+    <div class="rejilla">
+      <div class="ficha"><h4>Misión</h4><p>Organizar planes vacacionales y recreacionales a bajo costo para estudiantes y para trabajadores y trabajadoras del sector público, con los recursos y servicios turísticos de cada región de Venezuela.</p></div>
+      <div class="ficha"><h4>Visión</h4><p>Ser la organización de turismo social más reconocida del país, con sedes en todas las regiones y una plataforma tecnológica que no detenga el trabajo de ninguna de ellas.</p></div>
+      <div class="ficha"><h4>Eslogan</h4><p>“Conocer Venezuela es un derecho de todos”.</p></div>
+    </div>
+
+    <h3>Valores</h3>
+    <ul class="valores">
+      <li>Inclusión</li><li>Solidaridad</li><li>Vocación de servicio</li><li>Responsabilidad</li><li>Identidad regional</li><li>Transparencia</li>
+    </ul>
+
+    <h3>Organigrama</h3>
+    <ul class="arbol">
+      <li><span class="raiz">Presidencia<small style="color:var(--hero-soft)">Impulsa el convenio de dotación</small></span>
+        <ul>
+          <li><span>Administración y Finanzas</span></li>
+          <li><span>Talento Humano</span></li>
+          <li><span>Operaciones y Planes Turísticos</span></li>
+          <li><span class="ti">Departamento de Tecnología<small>Creado en la reestructuración</small></span>
+            <ul>
+              <li><span>Ingeniero en Sistemas<small>Jefe del departamento</small></span>
+                <ul><li><span>Técnico en informática<small>Único soporte operativo</small></span></li></ul>
+              </li>
+            </ul>
+          </li>
+          <li><span>Coordinación de Sucursales</span>
+            <ul>
+              <li><span>Sucursal Mérida</span></li>
+              <li><span>Sucursal Porlamar</span></li>
+              <li><span>Sucursal Coro</span></li>
+            </ul>
+          </li>
+          <li><span class="externo">Empresa privada aliada<small>Provee los equipos; no participa en la gestión interna</small></span></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Lugares</h3>
+    <div id="t-lugares"></div>
+
+    <h3>Los actores</h3>
+    <div id="t-actores"></div>
+
+    <h3>El desafío del semestre</h3>
+    <div class="rejilla">
+      <div class="ficha"><h4>Soporte técnico al usuario <span class="peso">30 %</span></h4><p>Organizar la atención e identificar las habilidades blandas que necesita el equipo.</p></div>
+      <div class="ficha"><h4>Proyecto sociotecnológico <span class="peso">30 %</span></h4><p>Planificar cómo se reciben, configuran, distribuyen y atienden los equipos del convenio.</p></div>
+      <div class="ficha"><h4>Enfoque de Marco Lógico <span class="peso">40 %</span></h4><p>Armar la matriz del proyecto con sus objetivos, indicadores, medios de verificación y supuestos, y definir cómo se mantiene después de la entrega.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 2 · DIAGNÓSTICO
+     ============================================================ -->
+<section class="vista" id="v-diagnostico" hidden>
+  <div class="wrap">
+    <h2>Diagnóstico</h2>
+    <p class="entrada">Cómo está hoy la plataforma tecnológica de la Fundación, antes de recibir los equipos del convenio.</p>
+
+    <h3>Inventario de equipos y ubicación</h3>
+    <p>Levantamiento físico hecho puesto por puesto en las cuatro sedes en noviembre de 2026. Cada equipo quedó con su código, especificaciones, ubicación, usuario, estado y la acción que le corresponde.</p>
+    <dl class="cifras" id="cifras"></dl>
+
+    <h4>Resumen por sede</h4>
+    <div id="t-inventario"></div>
+
+    <h4>Criterios de obsolescencia</h4>
+    <p>Un equipo se evalúa con seis criterios. La última columna dice cuántos de los 40 equipos no cumplen cada uno.</p>
+    <div id="t-criterios"></div>
+
+    <h4>Qué se hace con cada equipo</h4>
+    <div id="t-decision"></div>
+    <div class="nota" id="nota-convenio"></div>
+
+    <h4>Detalle de los 40 equipos</h4>
+    <div class="filtros">
+      <label>Sede<select id="f-sede"><option value="">Todas</option></select></label>
+      <label>Estado<select id="f-estado"><option value="">Todos</option></select></label>
+      <label>Acción<select id="f-accion"><option value="">Todas</option></select></label>
+    </div>
+    <p class="conteo" id="conteo" aria-live="polite"></p>
+    <div id="t-equipos"></div>
+
+    <h3>Problemas detectados</h3>
+    <div id="t-problemas-diag"></div>
+
+    <h3>Software de atención de fallas</h3>
+    <div class="rejilla">
+      <div class="ficha"><h4>Hoy</h4><p>No hay software. Las fallas se reportan por llamada al técnico; no quedan registradas, no tienen prioridad ni seguimiento, y no se pueden sacar estadísticas.</p></div>
+      <div class="ficha"><h4>Propuesta</h4><p>Una mesa de ayuda de software libre (GLPI), que reúne en una sola herramienta los tickets de fallas y el inventario de equipos, sin costo de licencia.</p></div>
+      <div class="ficha"><h4>Complementos</h4><p>Acceso remoto para atender a las sucursales, un formulario en línea como canal de respaldo para reportar fallas y un tablero en Looker Studio con los indicadores.</p></div>
+    </div>
+
+    <h4>Herramientas evaluadas</h4>
+    <div id="t-opciones"></div>
+
+    <h4>Flujo de atención propuesto</h4>
+    <ol class="flujo">
+      <li><b>Registro.</b> El usuario reporta la falla en la mesa de ayuda, por correo o por teléfono, y toda solicitud queda como ticket.</li>
+      <li><b>Clasificación.</b> El técnico define la categoría (hardware, software, redes o soporte remoto) y si es un incidente o una solicitud.</li>
+      <li><b>Priorización.</b> Se asigna la prioridad según cuántos usuarios afecta y cuánto puede esperar el trabajo, como indica la tabla de SLA.</li>
+      <li><b>Atención.</b> Se intenta resolver a distancia; si no se puede, el enlace local de la sucursal apoya en sitio.</li>
+      <li><b>Escalado.</b> Si vence el tiempo del SLA, el caso pasa al jefe del Departamento de Tecnología.</li>
+      <li><b>Cierre.</b> El técnico explica al usuario qué pasó y confirma que el equipo quedó funcionando.</li>
+      <li><b>Encuesta y registro.</b> El usuario responde la encuesta y la solución se guarda en la base de conocimiento para el próximo caso.</li>
+    </ol>
+
+    <h3>Cumplimiento de normas de atención al usuario</h3>
+    <div id="t-cumplimiento"></div>
+    <div class="nota" id="nota-cumplimiento"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 3 · HABILIDADES (Sesión: El STU y las habilidades blandas)
+     ============================================================ -->
+<section class="vista" id="v-habilidades" hidden>
+  <div class="wrap">
+    <h2>Parte I: Habilidades técnicas y blandas</h2>
+    <p class="entrada">Qué debe saber hacer el equipo de soporte y cómo debe tratar a las personas que atiende.</p>
+    <div class="indice" aria-label="Ir a">
+      <button data-ir="a1">A.1 Técnicas del caso</button><button data-ir="a2">A.2 Técnicas del equipo</button>
+      <button data-ir="b1">B.1 Blandas del caso</button><button data-ir="b2">B.2 Blandas del equipo</button>
+      <button data-ir="b3">B.3 Decálogo</button><button data-ir="b4">B.4 Infografía</button>
+    </div>
+
+    <h3 id="a1"><span class="codigo">A.1</span>Habilidades técnicas para atender el caso</h3>
+    <div id="t-a1"></div>
+
+    <h3 id="a2"><span class="codigo">A.2</span>Habilidades técnicas del equipo de trabajo</h3>
+    <p>Tres habilidades por integrante, con su nivel, la evidencia que se puede revisar en esta página y el problema del caso donde se usaría.</p>
+    <div id="t-a2"></div>
+
+    <h3 id="b1"><span class="codigo">B.1</span>Habilidades blandas para atender la situación actual</h3>
+    <div id="t-b1"></div>
+
+    <h3 id="b2"><span class="codigo">B.2</span>Habilidades blandas del equipo de trabajo</h3>
+    <p>Cada habilidad viene de algo que pasó mientras hacíamos este trabajo. El enlace Ver lleva a la evidencia.</p>
+    <div id="t-b2"></div>
+
+    <h3 id="b3"><span class="codigo">B.3</span>Decálogo del soporte</h3>
+    <p>Diez principios de trato al usuario para el técnico de soporte de la Fundación.</p>
+    <ol class="decalogo" id="decalogo"></ol>
+
+    <h3 id="b4"><span class="codigo">B.4</span>Infografía del marco teórico</h3>
+    <div class="info">
+      <div class="capa">
+        <h4><i>1</i>Qué dice cada enfoque</h4>
+        <div class="tres">
+          <div><b>Goleman</b><small>Inteligencia emocional</small><p>Capacidad de reconocer y manejar las emociones propias y las de los demás. Tiene cinco componentes: autoconciencia, autorregulación, motivación, empatía y habilidades sociales.</p></div>
+          <div><b>Riggio</b><small>Habilidades sociales</small><p>Comunicarse bien es saber expresar, captar y controlar mensajes en dos planos: el emocional (no verbal) y el social (verbal). De ahí salen seis habilidades: expresividad, sensibilidad y control, emocionales y sociales.</p></div>
+          <div><b>SayIT</b><small>Soft skills para TI</small><p>Enfoque de habilidades blandas pensado para profesionales de TI. Parte de una idea simple: resolver la falla no alcanza si el técnico no sabe explicarla. Reúne las que más pesan en tecnología: comunicar sin jerga, orientarse al usuario, trabajar en equipo y adaptarse a los cambios.</p></div>
+        </div>
+      </div>
+      <div class="capa">
+        <h4><i>2</i>Cómo se aplica en la Fundación</h4>
+        <div class="tres">
+          <div><b>Goleman</b><small>Empatía y autorregulación</small><p>Cuando un trabajador con un equipo obsoleto llama molesto por tercera vez, el técnico controla su propio cansancio y primero reconoce la frustración: “tiene razón, así es difícil trabajar”.</p></div>
+          <div><b>Riggio</b><small>Sensibilidad social</small><p>Las sucursales se sienten desatendidas. El técnico capta ese malestar y llama a cada sede una vez por semana, aunque no haya fallas, para preguntar cómo van.</p></div>
+          <div><b>SayIT</b><small>Comunicar sin jerga</small><p>El ingeniero presenta al presidente el plan del convenio en una página, hablando de sedes paralizadas, fechas y riesgos, y no de términos técnicos.</p></div>
+        </div>
+      </div>
+      <div class="capa">
+        <h4><i>3</i>Autoevaluación</h4>
+        <p class="frase" id="autoevaluacion"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 4 · SOPORTE TÉCNICO
+     ============================================================ -->
+<section class="vista" id="v-soporte" hidden>
+  <div class="wrap">
+    <h2>Parte II: Soporte técnico</h2>
+    <p class="entrada">Clasificación de los problemas, acuerdos de nivel de servicio, estadísticas y el marco teórico que lo sostiene.</p>
+    <div class="indice" aria-label="Ir a">
+      <button data-ir="s1">Clasificación</button><button data-ir="s2">Problemas futuros</button>
+      <button data-ir="s3">SLA</button><button data-ir="s4">Estadísticas</button><button data-ir="s5">Infografía ITIL, COBIT e ISO</button>
+    </div>
+
+    <h3 id="s1">Clasificación de los problemas actuales</h3>
+    <p>En ITIL 4, un <b>incidente</b> es una interrupción no planificada de un servicio o una reducción de su calidad, y un <b>problema</b> es la causa, real o potencial, de uno o más incidentes.</p>
+    <div id="t-clasif"></div>
+
+    <h3 id="s2">Problemas futuros al recibir los equipos del convenio</h3>
+    <div id="t-futuros"></div>
+    <div class="nota"><p>Respaldo teórico: ITIL 4 pide planificar los despliegues y registrar cada activo desde que entra (gestión de despliegues y de activos de TI); COBIT 2019 exige identificar estos riesgos antes de que ocurran (APO12, riesgo gestionado; BAI09, activos gestionados), e ISO/IEC 20000-1 pide que los cambios y las entregas queden documentados.</p></div>
+
+    <h3 id="s3">SLA por categoría de atención</h3>
+    <p>La prioridad sale de cruzar el impacto (cuántos usuarios quedan afectados) con la urgencia (cuánto puede esperar el trabajo). Los tiempos son en horas y días hábiles.</p>
+    <div id="t-sla"></div>
+
+    <h4>Por qué estos tiempos</h4>
+    <p>Los tiempos se asignaron siguiendo la práctica de gestión de incidentes de ITIL 4, que busca restaurar el servicio lo antes posible y ordena la atención según el impacto y la urgencia: por eso una sede paralizada (crítico) recibe respuesta en 15 minutos y un caso que afecta a una sola persona con alternativa puede esperar un día hábil. También se ajustaron a la capacidad real de la Fundación: dos personas atienden cuatro sedes y 40 equipos, y prometer menos tiempo sería firmar un acuerdo imposible de cumplir. El hardware tiene plazos de resolución más largos porque depende de repuestos o de un equipo de respaldo, y el soporte remoto crítico tiene un tope de dos horas, tras el cual se activa el enlace local o una visita, para que la sede no quede detenida. ISO/IEC 20000-1 pide que estos tiempos queden por escrito, así que el SLA se firma entre el Departamento de Tecnología y la Presidencia. Cada ticket guarda la hora de apertura, de respuesta y de cierre, y ese registro es la evidencia documental de que el acuerdo se cumple. El acuerdo se revisa cada tres meses.</p>
+
+    <div class="nota">
+      <p><b>Si no se cumple el SLA:</b></p>
+      <p>1. <b>Escalado.</b> Al vencer el tiempo, el caso sube al jefe del Departamento; si es crítico y sigue sin resolverse, sube a la Presidencia.</p>
+      <p>2. <b>Registro.</b> El incumplimiento queda anotado en el ticket con su causa (falta de repuesto, falla del proveedor de Internet, sobrecarga).</p>
+      <p>3. <b>Revisión con el jefe.</b> Cada semana se revisan los casos vencidos; si una causa se repite, se abre un problema para atacar la raíz o se ajusta el acuerdo.</p>
+      <p>Respaldo: ITIL 4 (priorización por impacto y urgencia), ISO/IEC 20000-1 (documentación y cumplimiento de acuerdos) y COBIT 2019 (control del riesgo de incumplimiento: APO09, APO12 y MEA01).</p>
+    </div>
+
+    <h3 id="s4">Estadísticas de los servicios</h3>
+    <p>Diez medidas para que el soporte no se detenga, cada una con su indicador.</p>
+    <div id="t-medidas"></div>
+
+    <h4>Cómo se recolecta cada dato</h4>
+    <div id="t-recoleccion"></div>
+
+    <h4>Situación actual frente a la meta</h4>
+    <div class="grafica" id="grafica"></div>
+    <div class="nota"><p>Línea base: el registro de equipos en la mesa de ayuda, los tickets, los enlaces locales y el SLA parten de 0 % porque hoy no existen. Equipos en buen estado: 22 de 40. La satisfacción y la resolución en el primer contacto se ubican en 40 % por el volumen de quejas del personal; la primera medición con la mesa de ayuda fijará el valor definitivo.</p></div>
+
+    <h3 id="s5">Infografía: ITIL, COBIT e ISO 20000</h3>
+    <div class="info">
+      <div class="capa">
+        <h4><i>1</i>Definición y fundamentos</h4>
+        <div class="tres">
+          <div><b>ITIL 4</b><small>Cómo se hace</small><p>Marco de buenas prácticas para gestionar servicios de TI. Organiza el trabajo en un sistema de valor del servicio y en prácticas como mesa de servicio, gestión de incidentes, problemas, cambios y activos.</p></div>
+          <div><b>COBIT 2019</b><small>Qué se controla y quién responde</small><p>Marco de gobierno y gestión de TI creado por ISACA. Define objetivos agrupados en cinco dominios (EDM, APO, BAI, DSS y MEA) para que la tecnología responda a lo que la organización necesita y sus riesgos estén controlados.</p></div>
+          <div><b>ISO/IEC 20000</b><small>Qué se demuestra</small><p>Norma internacional certificable. Establece los requisitos de un sistema de gestión de servicios y exige evidencia documentada de que los servicios se planifican, se entregan y se mejoran.</p></div>
+        </div>
+      </div>
+      <div class="capa">
+        <h4><i>2</i>Aplicación al caso</h4>
+        <div class="tres">
+          <div><b>ITIL 4</b><small>Fallas reportadas por llamada</small><p>Se crea una mesa de servicio como punto único de contacto: toda falla se registra como incidente y se prioriza por impacto y urgencia, en lugar de atender “al que llame primero”.</p></div>
+          <div><b>COBIT 2019</b><small>Equipos movidos en cuarentena</small><p>Con el objetivo BAI09 (activos gestionados), cada equipo tiene un responsable asignado y el jefe del Departamento vigila el riesgo de pérdida de control con el inventario.</p></div>
+          <div><b>ISO/IEC 20000</b><small>Sucursales desatendidas</small><p>Se firma un SLA con tiempos de respuesta para cada sede y se emite un reporte mensual. La atención de la sucursal queda respaldada por un acuerdo escrito y deja de depender de la buena voluntad.</p></div>
+        </div>
+      </div>
+      <div class="capa">
+        <h4><i>3</i>Cómo se complementan</h4>
+        <p class="frase">COBIT define qué se debe controlar y quién responde; ITIL explica cómo hacerlo en el día a día, e ISO/IEC 20000 comprueba con evidencia que se cumple.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 5 · PROYECTO (Sesión didáctica 2)
+     ============================================================ -->
+<section class="vista" id="v-proyecto" hidden>
+  <div class="wrap">
+    <h2>Proyecto</h2>
+    <p class="entrada">Qué tipo de proyecto es la renovación tecnológica de la Fundación, de qué elementos se compone y qué opina cada integrante sobre su carácter sociotecnológico.</p>
+    <div class="indice" aria-label="Ir a">
+      <button data-ir="p1">1.1 Clasificación del Proyecto</button><button data-ir="p2">1.2 Manuscritos Individuales</button><button data-ir="p3">1.3 Elementos del Proyecto</button>
+    </div>
+
+    <h3 id="p1"><span class="codigo">1.1</span>Clasificación del Proyecto</h3>
+    <p>La lectura de la UNETI define el proyecto como “un plan o esquema que consiste en una serie de pasos o actividades a ejecutar de manera estructurada, con el fin de producir determinados bienes o servicios, capaces de satisfacer necesidades o resolver problemas, dentro de los límites de un presupuesto y de un periodo de tiempo dados” (Armao y Urbina, 2021). Su clasificación es “flexible y no excluyente”: un mismo proyecto puede ubicarse en más de una clase. Por eso el caso se revisa criterio por criterio.</p>
+
+    <h4>Según la lectura (Armao y Urbina, 2021)</h4>
+    <div id="t-tipos"></div>
+
+    <h4>Criterios complementarios</h4>
+    <p>El artículo de GanttPRO (Stepanets, 2026) y el PMBOK 7 (PMI, 2021) agregan criterios que la lectura no trae: entregables, carácter, presupuesto, duración, localización y enfoque de desarrollo.</p>
+    <div id="t-tipos2"></div>
+
+    <h4>Los tres tipos seleccionados</h4>
+    <p>De todos los tipos identificados, estos tres explican mejor el caso porque responden tres preguntas distintas: qué problema se resuelve, para quién y con qué recursos.</p>
+    <div class="rejilla" id="tipos-sel"></div>
+    <h4>Etapas del proyecto sociotecnológico</h4>
+    <p>La lectura propone cuatro etapas. Así avanzan en el caso a lo largo del semestre:</p>
+    <ol class="flujo">
+      <li><b>Diagnóstico.</b> “Identificación del problema y caracterizarlo”: el levantamiento de los 40 equipos, los problemas y el cumplimiento de normas (Sesión didáctica 1).</li>
+      <li><b>Planificación.</b> “Organización sistemática de las tareas para lograr uno o varios objetivos”: la clasificación, los elementos del proyecto y las herramientas (Sesión didáctica 2).</li>
+      <li><b>Ejecución.</b> La realización de las tareas previstas: recibir, configurar y entregar los equipos y poner en marcha la mesa de ayuda.</li>
+      <li><b>Evaluación.</b> Determinar “qué tanto un proyecto ha logrado cumplir sus objetivos”: los indicadores del SLA y el Enfoque de Marco Lógico del Módulo 3.</li>
+    </ol>
+    <div class="nota"><p><b>Cómo se gestiona.</b> Con un enfoque híbrido, como lo define el PMBOK 7: la recepción y entrega de los equipos sigue un cronograma fijo atado al convenio, y la mesa de ayuda y la capacitación se ajustan en ciclos cortos según lo que reportan los usuarios.</p></div>
+
+    <h3 id="p2"><span class="codigo">1.2</span>Manuscritos Individuales</h3>
+    <p>¿Es el caso de la Fundación un proyecto sociotecnológico? Cada integrante responde en su propio manuscrito, con tres argumentos basados en la lectura y en el caso, y una conclusión personal.</p>
+    <div class="rejilla" id="manuscritos"></div>
+
+    <h3 id="p3"><span class="codigo">1.3</span>Elementos del Proyecto</h3>
+    <p>Definición breve de cada elemento y cómo se aplica al caso. La última columna indica el dominio de desempeño del PMBOK 7 con el que se relaciona.</p>
+    <div id="t-elementos"></div>
+    <p id="manuscrito-elementos"></p>
+
+    <h3>Referencias</h3>
+    <ul class="flujo" id="referencias-proyecto"></ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 6 · PORTAFOLIO DIGITAL
+     ============================================================ -->
+<section class="vista" id="v-portafolio" hidden>
+  <div class="pf-portada">
+    <div class="wrap">
+      <div>
+        <h2>Portafolio digital</h2>
+        <p class="sub">Hagamos un Portafolio digital: proyectos sociotecnológicos aplicados a la Fundación Rutas del Araguaney</p>
+        <dl>
+          <dt>Institución</dt><dd>Universidad Nacional Experimental para las Telecomunicaciones e Informática (UNETI)</dd>
+          <dt>Programa</dt><dd>PNF en Ingeniería en Informática</dd>
+          <dt>Unidad curricular</dt><dd>Proyecto Sociotecnológico I. Trayecto I, Módulo 1, Sesión didáctica 2</dd>
+          <dt>Equipo</dt><dd id="pf-equipo"></dd>
+        </dl>
+      </div>
+      <svg viewBox="0 0 420 300" role="img" aria-label="Ilustración: una computadora portátil conectada a las cuatro sedes de la Fundación">
+        <title>Una computadora conectada a cuatro sedes</title>
+        <rect x="0" y="0" width="420" height="300" rx="18" fill="#FFFFFF" opacity=".06"/>
+        <path d="M60 70 C 140 30, 200 120, 270 70 S 380 120, 360 200" fill="none" stroke="#F2B705" stroke-width="3" stroke-dasharray="8 8"/>
+        <circle cx="60" cy="70" r="11" fill="#F2B705"/><circle cx="270" cy="70" r="11" fill="#F2B705"/><circle cx="360" cy="200" r="11" fill="#F2B705"/><circle cx="150" cy="62" r="11" fill="#F2B705"/>
+        <text x="60" y="48" fill="#BFE3E0" font-size="13" text-anchor="middle" font-family="Public Sans, sans-serif">Caracas</text>
+        <text x="150" y="40" fill="#BFE3E0" font-size="13" text-anchor="middle" font-family="Public Sans, sans-serif">Mérida</text>
+        <text x="270" y="48" fill="#BFE3E0" font-size="13" text-anchor="middle" font-family="Public Sans, sans-serif">Coro</text>
+        <text x="372" y="230" fill="#BFE3E0" font-size="13" text-anchor="middle" font-family="Public Sans, sans-serif">Porlamar</text>
+        <rect x="110" y="140" width="170" height="105" rx="8" fill="#0D3540" stroke="#BFE3E0" stroke-width="3"/>
+        <rect x="124" y="153" width="142" height="78" rx="3" fill="#FFFFFF" opacity=".12"/>
+        <path d="M90 252 H300 L286 266 H104 Z" fill="#BFE3E0"/>
+        <path d="M142 200 l18 -18 l14 12 l22 -26 l20 20 l18 -14" fill="none" stroke="#F2B705" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M195 140 V95" stroke="#BFE3E0" stroke-width="2" stroke-dasharray="4 5"/>
+        <circle cx="195" cy="88" r="6" fill="#BFE3E0"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="indice" aria-label="Ir a">
+      <button data-ir="pf-autores">Autores</button><button data-ir="pf-intro">Introducción</button>
+      <button data-ir="pf-a1">1. Infografía</button><button data-ir="pf-a2">2. Mapa mixto</button><button data-ir="pf-a3">3. Ejemplos</button>
+      <button data-ir="c1">4. Catálogo de Herramientas</button><button data-ir="pf-a5">5. Conclusiones</button>
+      <button data-ir="pf-reflex">Reflexiones</button><button data-ir="pf-refs">Referencias</button>
+    </div>
+
+    <h3 id="pf-autores">Autores</h3>
+    <div class="rejilla" id="autores"></div>
+
+    <h3 id="pf-intro">Introducción</h3>
+    <p>Este portafolio reúne las actividades de la Sesión didáctica 2 de Proyecto Sociotecnológico I. Su objetivo es mostrar cómo aplicamos el concepto de proyecto, sus tipos, sus elementos y su ciclo de vida a un caso concreto: la renovación tecnológica de la Fundación Rutas del Araguaney, que tiene 18 de sus 40 equipos obsoletos o con fallas y un departamento de tecnología de dos personas para cuatro sedes.</p>
+    <p>Cada actividad trae su fecha de publicación, la evidencia y una nota sobre cómo la hicimos. Después vienen las reflexiones individuales, la conclusión y las referencias. Trabajamos a distancia, así que todo se armó con herramientas compartidas.</p>
+
+    <h2>Desarrollo</h2>
+
+    <h3 id="pf-a1">Actividad 1. Infografía: tipos de proyectos</h3>
+    <p class="meta" data-fecha="a1"></p>
+    <div class="ig">
+      <div class="ig-cabeza">
+        <h4>¿Qué es un proyecto?</h4>
+        <p>“Un plan o esquema que consiste en una serie de pasos o actividades a ejecutar de manera estructurada, con el fin de producir determinados bienes o servicios, capaces de satisfacer necesidades o resolver problemas, dentro de los límites de un presupuesto y de un periodo de tiempo dados” (Armao y Urbina, 2021).</p>
+      </div>
+      <ul class="ig-rasgos" aria-label="Características de todo proyecto">
+        <li>Pasos ordenados</li><li>Produce bienes o servicios</li><li>Resuelve un problema o una necesidad</li><li>Tiene presupuesto</li><li>Tiene un plazo</li>
+      </ul>
+      <div class="ig-grid" id="ig-grid"></div>
+      <div class="ig-dif">
+        <h5>Diferencias que más confunden</h5>
+        <ul>
+          <li><b>Tecnológico e informático.</b> El primero se define por el problema (técnico); el segundo, por el contenido (sistemas, software, redes o equipos). Un proyecto informático casi siempre es tecnológico, pero no todo proyecto tecnológico es informático.</li>
+          <li><b>Social y sin fines de lucro.</b> Social habla del propósito; sin fines de lucro, de qué pasa con el dinero. Un proyecto puede ser social y aun así cobrar una cuota para sostenerse.</li>
+          <li><b>Simple y micro.</b> Simple mide cuántas partes dependen entre sí; micro mide el tamaño. Un proyecto pequeño puede ser complejo si coordina a muchos actores.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="proceso"><b>Cómo la hicimos.</b> Partimos de los once criterios de Armao y Urbina (2021) e investigamos las características de cada tipo. Marcamos en amarillo los que más se relacionan con Ingeniería en Informática y anotamos las diferencias que nos costó separar al clasificar el caso.</p>
+
+    <h3 id="pf-a2">Actividad 2. Mapa mixto: elementos y ciclo de vida de un proyecto</h3>
+    <p class="meta" data-fecha="a2"></p>
+    <div class="mapa">
+      <div class="centro"><b>Proyecto</b><span>Pasos ordenados para resolver un problema con un presupuesto y un plazo</span></div>
+      <div class="ramas">
+        <div class="rama">
+          <span class="palabra">se compone de</span>
+          <h5>Elementos (Armao y Urbina, 2021)</h5>
+          <div class="nodos" id="mapa-elementos"></div>
+        </div>
+        <div class="rama">
+          <span class="palabra">avanza por</span>
+          <h5>Ciclo de vida</h5>
+          <ol class="cadena" id="mapa-ciclo"></ol>
+        </div>
+      </div>
+    </div>
+    <p class="proceso"><b>Cómo la hicimos.</b> Es un mapa mixto porque combina un mapa mental (todo sale del concepto central) con uno conceptual (las ramas se unen con palabras de enlace). A la izquierda van los ocho elementos de la lectura; a la derecha, el ciclo de vida genérico del PMBOK (PMI, 2017) junto a las etapas del proyecto sociotecnológico. La etiqueta naranja de cada elemento indica en qué etapa pesa más.</p>
+
+    <h3 id="pf-a3">Actividad 3. Ejemplos de proyectos sociotecnológicos en Ingeniería en Informática</h3>
+    <p class="meta" data-fecha="a3"></p>
+    <p>Resumen gráfico de tres proyectos venezolanos y del nuestro. Cada tarjeta responde las mismas preguntas para poder compararlos.</p>
+    <div class="ejemplos" id="ejemplos"></div>
+    <p class="proceso"><b>Cómo la hicimos.</b> Buscamos proyectos reales que unieran informática y beneficio social, y los ordenamos por área: soporte técnico, sistemas operativos libres y desarrollo de aplicaciones. Agregamos el caso de la Fundación para ver dónde encaja.</p>
+
+    <h3 id="c1">Actividad 4. Catálogo de Herramientas</h3>
+    <p class="meta" data-fecha="a4"></p>
+    <p>Cada fila toma un problema identificado en la Sesión didáctica 1 y explica cómo lo resuelve la herramienta. El nombre de la herramienta abre su sitio oficial o su documentación. Respaldo: ITIL 4 (gestión de servicios), COBIT (gestión de activos) e ISO/IEC 20000.</p>
+    <div id="t-catalogo"></div>
+    <p class="proceso"><b>Cómo la hicimos.</b> Tomamos los problemas actuales y futuros de la Sesión didáctica 1 y buscamos para cada uno una herramienta con sitio oficial. Preferimos software libre por el presupuesto de la Fundación.</p>
+
+    <h3 id="pf-a5">Actividad 5. Conclusiones: importancia e impacto de los proyectos sociotecnológicos en Informática</h3>
+    <p class="meta" data-fecha="a5"></p>
+    <p><b>Llevan la carrera a problemas reales.</b> La Resolución 549 del MPPEU (2010), citada por Armao y Urbina (2021), define los proyectos como el eje central de los Programas Nacionales de Formación, donde se integran saberes y se contrastan teoría y práctica. En informática ese contraste es inmediato: un inventario, una mesa de ayuda o una red funcionan o no funcionan.</p>
+    <p><b>El impacto se mide en personas atendidas.</b> Una sola jornada del plan de mantenimiento de Canaimitas devolvió 60 computadoras a una escuela de La Vega (DPL News, 2019). En la Fundación, bajar los equipos con fallas de 45 % a 10 % o menos significa que las cuatro sedes atienden sin detenerse a quienes viajan con ella.</p>
+    <p><b>Sostienen la soberanía tecnológica.</b> Canaima GNU/Linux nació del Decreto 3.390 y es el sistema oficial de las estaciones de trabajo de la Administración Pública desde 2011 (EcuRed, s.f.). Por eso nuestro catálogo prefiere software libre: baja costos y no depende de licencias externas.</p>
+    <p><b>Fortalecen a las comunidades organizadas.</b> La Info App de Infocentro busca digitalizar los datos de las comunidades para agilizar sus procesos (DPL News, 2023). La tecnología sirve cuando la usan quienes la necesitan, y por eso nuestro proyecto incluye enlaces locales y capacitación.</p>
+    <p><b>Nos preparan para las pasantías.</b> El próximo trayecto incluye pasantías de servicio técnico. Diagnosticar equipos, clasificar incidentes y documentar soluciones en este caso es la misma práctica que haremos en una institución real.</p>
+
+    <h3 id="pf-reflex">Reflexiones de aprendizaje individuales</h3>
+    <p>Cada integrante reflexiona sobre lo que aprendió en cada actividad.</p>
+    <div id="reflexiones"></div>
+
+    <h3>Conclusión del portafolio</h3>
+    <p>Clasificar el caso, ordenar sus elementos y revisar ejemplos reales nos mostró que la renovación tecnológica de la Fundación es un proyecto sociotecnológico completo: tiene un problema técnico medible, una comunidad que lo vive y un plan para resolverlo con recursos limitados. El catálogo de herramientas convierte ese plan en acciones concretas, y la mayoría se pueden aplicar con software libre. Lo que sigue es ejecutarlo y evaluarlo con el Enfoque de Marco Lógico.</p>
+
+    <h3 id="pf-refs">Referencias</h3>
+    <ul class="flujo" id="referencias-portafolio"></ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 7 · MARCO TEÓRICO
+     ============================================================ -->
+<section class="vista" id="v-marco" hidden>
+  <div class="wrap">
+    <h2>Marco teórico</h2>
+    <p class="entrada">Tendencias para gestionar el proyecto, software para llevarlo y autores que ordenan el trabajo de soporte técnico.</p>
+    <div class="indice" aria-label="Ir a">
+      <button data-ir="m1">3.1 Tendencias</button><button data-ir="m2">3.2 Herramientas de gestión</button><button data-ir="m3">3.3 Autores de soporte técnico</button>
+    </div>
+
+    <h3 id="m1"><span class="codigo">3.1</span>Tendencias en Gestión de Proyectos</h3>
+    <p>Cinco tendencias con sus etapas de ejecución y cómo se usarían en la renovación tecnológica de la Fundación.</p>
+    <div id="t-tendencias"></div>
+
+    <h3 id="m2"><span class="codigo">3.2</span>Herramientas de Gestión de Proyectos</h3>
+    <div id="t-gestion"></div>
+
+    <h3 id="m3"><span class="codigo">3.3</span>Autores de Soporte Técnico</h3>
+    <div id="t-autores"></div>
+    <h4>Fases de cada procedimiento</h4>
+    <p>Cada línea es un procedimiento y se lee de izquierda a derecha.</p>
+    <div class="fases" id="fases"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISTA 8 · ENTREGAS (enlaces al Drive)
+     ============================================================ -->
+<section class="vista" id="v-entregas" hidden>
+  <div class="wrap">
+    <h2>Entregas y evaluación</h2>
+    <p class="entrada">Dónde está cada parte que se evalúa en el semestre, con su peso y los enlaces al Drive del equipo. Los pesos son tentativos.</p>
+    <p id="carpeta"></p>
+    <div id="entregas"></div>
+    <h3>Equipo</h3>
+    <div id="t-equipo"></div>
+  </div>
+</section>
+
+</main>
+
+<button type="button" class="arriba" id="arriba" aria-label="Volver al principio de la página" title="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<footer><div class="wrap">Caso de estudio académico. UNETI, Ingeniería en Informática. Equipo Conexión 360: soluciones técnicas y comunicación efectiva.</div></footer>
+
+<script>
+/* =====================================================================
+   1. DATOS QUE EL EQUIPO DEBE EDITAR
+   Cambien el texto entre comillas. No borren comas ni comillas.
+   ===================================================================== */
+
+const EQUIPO = {
+  nombre: 'Conexión 360',
+  lema: 'Soluciones técnicas y comunicación efectiva',
+  /* Cada integrante tiene una lista de habilidades técnicas y otra de blandas.
+     enlace: sección de esta página donde se ve la evidencia ("vista/ancla" o solo "vista"). */
+  integrantes: [
+    {
+      nombre: 'Alfonzo Rojas',
+      tecnicas: [
+        { habilidad: 'Desarrollo web con HTML, CSS y JavaScript', nivel: 'Avanzado',
+          evidencia: 'Esta página: menú por pestañas, tablas que se ajustan al teléfono, filtros del inventario y cifras que se recalculan solas',
+          enlace: 'diagnostico/t-equipos',
+          caso: 'Publicar la base de conocimiento y las guías de autoservicio para los usuarios (A.1, documentación técnica)' },
+        { habilidad: 'Análisis de datos en hojas de cálculo y Looker Studio', nivel: 'Avanzado',
+          evidencia: 'Archivos de datos para Looker Studio y los resúmenes del diagnóstico: equipos por sede, criterios de obsolescencia y decisión por equipo',
+          enlace: 'diagnostico/t-criterios',
+          caso: 'Medir los indicadores del SLA y la continuidad del soporte (Parte II, estadísticas)' },
+        { habilidad: 'Diagnóstico de hardware y sistemas operativos', nivel: 'Intermedio',
+          evidencia: 'Levantamiento de los 40 equipos con especificaciones, estado y acción recomendada',
+          enlace: 'diagnostico/t-decision',
+          caso: 'Decidir qué equipos se reemplazan, reparan o repotencian con el convenio (A.1, equipos obsoletos)' }
+      ],
+      blandas: [
+        { habilidad: 'Comunicación efectiva',
+          situacion: 'Como estudiamos a distancia, le explicó a Paola por mensajes y notas de voz cómo está organizada la página y qué partes puede editar sin romperla.',
+          evidencia: 'Textos de la página escritos sin jerga, como el decálogo del soporte',
+          enlace: 'habilidades/b3',
+          caso: 'Hablar con el presidente y con los usuarios en palabras sencillas (B.1, comunicación con personas no técnicas)' },
+        { habilidad: 'Escucha activa y apertura a las observaciones',
+          situacion: 'Cuando el docente indicó los nombres que debían tener las pestañas, los cambió el mismo día y ajustó los títulos de cada parte.',
+          evidencia: 'Menú de la página con las pestañas Habilidades técnicas y blandas y Soporte técnico',
+          enlace: 'habilidades',
+          caso: 'Dejar que el usuario termine su reclamo antes de proponer una solución (decálogo, principio 2)' },
+        { habilidad: 'Planificación y organización del tiempo',
+          situacion: 'Ordenó el trabajo según el cronograma de cinco semanas: primero la empresa y el diagnóstico, luego la Parte I y al final la Parte II.',
+          evidencia: 'Sección Entregas, con los módulos, sus pesos y el estado de cada parte',
+          enlace: 'entregas',
+          caso: 'Repartir los casos del día entre dos personas para cuatro sedes (B.1, trabajo en equipo)' }
+      ]
+    },
+    {
+      nombre: 'Paola Bellorin',
+      tecnicas: [
+        { habilidad: 'Ofimática: procesador de textos y presentaciones', nivel: 'Intermedio',
+          evidencia: 'Documento en PDF de la sesión 1, enlazado en Entregas',
+          enlace: 'entregas',
+          caso: 'Redactar procedimientos y guías de uso para los trabajadores (A.1, documentación técnica)' },
+        { habilidad: 'Gestión de archivos en la nube con Google Drive', nivel: 'Intermedio',
+          evidencia: 'Carpeta del equipo ordenada por módulo, con permisos de lectura para el docente',
+          enlace: 'entregas/carpeta',
+          caso: 'Copias de seguridad de la información de las sedes (A.1, planes de contingencia)' },
+        { habilidad: 'Grabación y edición básica de audio', nivel: 'Básico',
+          evidencia: 'Podcast de la sesión 1, enlazado en Entregas',
+          enlace: 'entregas',
+          caso: 'Grabar instrucciones cortas para que los usuarios resuelvan fallas simples sin llamar (A.1, guías de autoservicio)' }
+      ],
+      blandas: [
+        { habilidad: 'Responsabilidad y cumplimiento',
+          situacion: 'Grabó su parte del podcast desde su casa y la entregó a tiempo para unir los audios antes de la fecha.',
+          evidencia: 'Podcast de la sesión 1, enlazado en Entregas',
+          enlace: 'entregas',
+          caso: 'Cumplir los tiempos de respuesta que promete el SLA (decálogo, principio 7)' },
+        { habilidad: 'Orden y método de trabajo',
+          situacion: 'Organizó la carpeta de Drive por módulo y por tipo de entrega para que los dos encuentren cada archivo sin preguntar.',
+          evidencia: 'Carpeta general del equipo en la sección Entregas',
+          enlace: 'entregas/carpeta',
+          caso: 'Llevar el registro de equipos y tickets sin que se pierda información (B.1, tacto durante el inventario)' },
+        { habilidad: 'Adaptabilidad',
+          situacion: 'Se adaptó a trabajar a distancia con herramientas compartidas, como Drive y los audios enviados como documento, para no depender de reunirse.',
+          evidencia: 'Entregas armadas entre los dos sin reuniones presenciales',
+          enlace: 'entregas',
+          caso: 'Atender a las sucursales a distancia cuando no se puede viajar (B.1, sedes desatendidas)' }
+      ]
+    }
+  ]
+};
+
+
+/* Frase personal de la infografía B.4 (cada integrante debe escribir la suya) */
+const AUTOEVALUACION = '“Debo reforzar la escucha activa: suelo proponer la solución antes de que el usuario termine de explicar su problema, y Goleman me recuerda que la empatía va antes que la respuesta técnica.”';
+
+/* Portafolio digital: autores, fechas de publicación y reflexiones individuales.
+   foto: enlace a una imagen (si queda vacío se muestran las iniciales). */
+const AUTORES_PORTAFOLIO = [
+  { nombre: 'Alfonzo Rojas', foto: '', rol: 'Página web, datos y diagnóstico de equipos',
+    presentacion: 'Estudiante de Ingeniería en Informática en la UNETI. Técnico Superior en Administración, mención Informática, con experiencia en desarrollo web y en reportes automatizados.' },
+  { nombre: 'Paola Bellorin', foto: '', rol: 'Documentos, carpeta de Drive y audio',
+    presentacion: 'Estudiante de Ingeniería en Informática en la UNETI.' }
+];
+const FECHAS_PORTAFOLIO = { a1: '18 de noviembre de 2026', a2: '18 de noviembre de 2026', a3: '18 de noviembre de 2026', a4: '18 de noviembre de 2026', a5: '18 de noviembre de 2026' };
+const ACTIVIDADES_PORTAFOLIO = ['Actividad 1. Infografía', 'Actividad 2. Mapa mixto', 'Actividad 3. Ejemplos', 'Actividad 4. Catálogo de Herramientas', 'Actividad 5. Conclusiones'];
+/* Una reflexión por actividad, en el mismo orden. Cada integrante escribe las suyas. */
+const REFLEXIONES = {
+  'Alfonzo Rojas': [
+    'Al clasificar el caso entendí que la clasificación de Armao y Urbina (2021) es “flexible y no excluyente”: el mismo proyecto de la Fundación es tecnológico, social y mixto a la vez. Antes veía los tipos como cajas separadas. Ahora los uso como preguntas: qué problema atiende, para quién y con qué recursos.',
+    'Me llamó la atención que la lectura define el alcance como “la repercusión total que tendrá el proyecto en la sociedad” (Armao y Urbina, 2021), mientras el PMBOK lo trata como el límite del trabajo. Al ponerlos juntos en el mapa vi que se complementan: uno dice hasta dónde llega el trabajo y el otro a quién le cambia el día a día.',
+    'En una sola jornada del plan de mantenimiento de Canaimitas se repararon 60 computadoras de una escuela de La Vega (DPL News, 2019). Es el mismo tipo de trabajo que planteamos para la Fundación. Aprendí que un proyecto sociotecnológico de informática puede tener un gran impacto sin crear software nuevo; a veces basta con que los equipos funcionen.',
+    'Armar el catálogo me obligó a pasar del problema a la herramienta concreta y a explicar cómo la usaría. Casi todas son software libre, como GLPI, RustDesk y Clonezilla, lo que encaja con el presupuesto de la Fundación y con el Decreto 3.390. También vi que algunas herramientas dependen de otras: Windows LAPS necesita que los equipos estén en un dominio.',
+    'La Resolución 549 del MPPEU (2010), citada por Armao y Urbina (2021), dice que los proyectos son el eje central de los PNF. Con este trabajo entendí por qué: es donde lo técnico se cruza con una necesidad real. Me siento mejor preparado para las pasantías de servicio técnico del próximo trayecto.'
+  ],
+  'Paola Bellorin': ['', '', '', '', '']
+};
+
+/* Manuscritos escaneados (Sesión didáctica 2). Peguen el enlace del Drive en url. */
+const MANUSCRITOS = [
+  { integrante: 'Alfonzo Rojas', url: '' },
+  { integrante: 'Paola Bellorin', url: '' }
+];
+const MANUSCRITO_ELEMENTOS = '';
+
+/* Enlaces del Drive. Peguen el enlace entre las comillas de url.
+   enPagina: sección de esta página donde está el trabajo (déjenlo vacío si no aplica). */
+const CARPETA_DRIVE = '';
+
+const MODULOS = [
+  { titulo: 'Módulo 1. Soporte técnico del usuario y habilidades blandas', peso: 30,
+    partes: [
+      { nombre: 'Parte I. Habilidades técnicas y blandas', peso: 15, enPagina: 'habilidades', url: '' },
+      { nombre: 'Parte II. Soporte técnico', peso: 15, enPagina: 'soporte', url: '' } ],
+    evidencias: [
+      { tipo: 'Podcast', url: '' },
+      { tipo: 'Documento en PDF', url: '' },
+      { tipo: 'Documento manuscrito', url: '' },
+      { tipo: 'Tablero en Looker Studio', url: '' } ] },
+  { titulo: 'Módulo 2. Proyecto sociotecnológico', peso: 30,
+    partes: [
+      { nombre: 'Parte I. Proyecto', peso: 10, enPagina: 'proyecto', url: '' },
+      { nombre: 'Parte II. Portafolio digital', peso: 12, enPagina: 'portafolio', url: '' },
+      { nombre: 'Parte III. Marco teórico', peso: 8, enPagina: 'marco', url: '' } ],
+    evidencias: [
+      { tipo: 'Manuscrito 1.2 de Alfonzo Rojas', url: '' },
+      { tipo: 'Manuscrito 1.2 de Paola Bellorin', url: '' },
+      { tipo: 'Manuscrito 1.3, Elementos del Proyecto', url: '' },
+      { tipo: 'Podcast de la sesión 2', url: '' },
+      { tipo: 'Portafolio digital (enlace a esta página, pestaña Portafolio digital)', url: '' } ] },
+  { titulo: 'Módulo 3. Enfoque de Marco Lógico (EML)', peso: 40,
+    partes: [
+      { nombre: 'Página web', peso: 8, enPagina: 'caso', url: '' },
+      { nombre: 'Presentación final', peso: 12, enPagina: '', url: '' },
+      { nombre: 'Informe final', peso: 12, enPagina: '', url: '' },
+      { nombre: 'Podcast final', peso: 8, enPagina: '', url: '' } ],
+    evidencias: [] }
+];
+
+/* =====================================================================
+   2. CONTENIDO DE LAS TABLAS (una fila por línea)
+   ===================================================================== */
+
+/* Inventario: un equipo por línea. Si cambia un dato, el resumen por sede,
+   los criterios y las cifras del diagnóstico se recalculan solos. */
+const EQUIPOS = [
+  {"codigo": "RA-CCS-001", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Recepción", "usuario": "Recepcionista", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches de seguridad; tarda unos seis minutos en encender", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-002", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Se congela al abrir las hojas de cálculo con las listas de inscritos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-003", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-004", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Coordinador de atención al público", "estado": "Operativo", "hallazgo": "Estaba asignado a Talento Humano antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-005", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de inscripciones", "estado": "Falla recurrente", "hallazgo": "Pantalla azul varias veces por semana desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-006", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista contable", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-007", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Jefa de Administración y Finanzas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-008", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Asistente de pagos", "estado": "Obsoleto", "hallazgo": "El usuario instaló otra versión del programa contable y ya no abre los reportes", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-009", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista de presupuesto", "estado": "Operativo", "hallazgo": "Estaba asignado a Operaciones; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-010", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Analista de nómina", "estado": "Operativo", "hallazgo": "El sistema de nómina tarda en cargar por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-011", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Asistente de personal", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; el navegador actual no instala", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-012", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Jefe de Talento Humano", "estado": "Operativo", "hallazgo": "Estaba asignado a Presidencia antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-013", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Presidente", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-014", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Asistente de Presidencia", "estado": "Falla recurrente", "hallazgo": "Se apaga solo; la fuente de poder está dañada", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-015", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de planes turísticos", "estado": "Obsoleto", "hallazgo": "No soporta el programa de diseño de folletos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-016", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Coordinadora de planes turísticos", "estado": "Operativo", "hallazgo": "Tiene programas instalados sin autorización; hay que desinstalarlos", "accion": "Mantener", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-017", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de logística de viajes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-018", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de convenios con prestadores", "estado": "Obsoleto", "hallazgo": "Tarda más de un minuto en abrir el correo", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-019", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Coordinador de sucursales", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-020", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Analista de seguimiento de sedes", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Talento Humano; la batería no carga y se apaga al desconectarlo", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-021", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Ingeniero en Sistemas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-022", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Técnico en informática", "estado": "Operativo", "hallazgo": "Se usa para el soporte remoto a las sucursales", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-001", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-002", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; la impresora de la sede no tiene controlador para este sistema", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-003", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Se reinicia solo desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-MER-004", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Administración; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-MER-005", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Se congela al cargar el sistema administrativo en línea", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-006", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Mérida", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-001", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Coordinación", "usuario": "Coordinador de sucursal", "estado": "Operativo", "hallazgo": "Estaba asignado a Atención al público antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-POR-002", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Puertos USB con corrosión por la humedad salina", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-003", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Pierde la conexión varias veces al día; el puerto de red está dañado", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-004", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Operativo", "hallazgo": "El usuario lo actualizó por su cuenta; disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-POR-005", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Porlamar", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches y sin antivirus vigente", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-006", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-001", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-002", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Muy lento; el ventilador está lleno de polvo y arena", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-003", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Coordinación; varias teclas no responden", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-COR-004", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Falla recurrente", "hallazgo": "Se apaga por recalentamiento; el usuario le instaló programas para \"acelerarlo\"", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-COR-005", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-006", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Promoción de planes", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Coordinación antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false}
+];
+
+const DESC_SEDE = { 'Caracas': 'Sede principal, edificio de dos pisos', 'Mérida': 'Sucursal de los Andes', 'Porlamar': 'Sucursal insular, Nueva Esparta', 'Coro': 'Sucursal de Falcón' };
+const ORDEN_SEDES = ['Caracas', 'Mérida', 'Porlamar', 'Coro'];
+const malo = e => e.estado !== 'Operativo';
+const cuantos = f => EQUIPOS.filter(f).length;
+const SEDES = ORDEN_SEDES.map(s => [s, DESC_SEDE[s], cuantos(e => e.sede === s), cuantos(e => e.sede === s && malo(e))]);
+
+const LUGARES = [
+  ['Sede principal', 'Caracas, Distrito Capital', 'Edificio de dos pisos. Aquí trabajan la Presidencia y el Departamento de Tecnología.', 'Presencial'],
+  ['Sucursal Mérida', 'Mérida, estado Mérida', 'Planes de montaña y turismo andino.', 'Remoto'],
+  ['Sucursal Porlamar', 'Porlamar, estado Nueva Esparta', 'Planes de playa en la isla de Margarita.', 'Remoto'],
+  ['Sucursal Coro', 'Coro, estado Falcón', 'Planes en los médanos, Paraguaná y la costa falconiana.', 'Remoto']
+];
+
+const ACTORES = [
+  ['Presidente de la Fundación', 'Impulsó el convenio', 'Presionado por las quejas del personal y por el presupuesto'],
+  ['Ingeniero en Sistemas', 'Jefe del Departamento de Tecnología', 'Responde por la estrategia con dos personas para cuatro sedes'],
+  ['Técnico en informática', 'Único soporte operativo', 'Atiende las llamadas de toda la organización'],
+  ['Trabajadores con equipos obsoletos', 'Usuarios del servicio', 'Frustrados; algunos ya improvisaron sus propias soluciones'],
+  ['Sedes del interior', 'Usuarios a distancia', 'Dependen del soporte remoto y se sienten desatendidas'],
+  ['Empresa privada', 'Aliada del convenio', 'Entrega los equipos, pero no participa en la gestión interna']
+];
+
+
+const PROBLEMAS_DIAG = [
+  ['Inventario desactualizado', `En cuarentena varios trabajadores cambiaron de puesto y se llevaron los computadores. El levantamiento encontró ${cuantos(e => e.trasladado)} equipos en un puesto distinto al que tenían asignado.`, 'Las cuatro sedes'],
+  ['Actualizaciones sin coordinación', `Usuarios con conocimientos de informática actualizaron software por su cuenta, sin registro. El levantamiento encontró ${cuantos(e => e.softwareUsuario)} equipos con programas instalados o actualizados por el propio usuario.`, 'Las cuatro sedes'],
+  ['Equipos obsoletos', '18 de los 40 equipos son obsoletos o fallan de forma recurrente y no permiten trabajar con eficiencia.', 'Las cuatro sedes'],
+  ['Dependencia del soporte remoto', 'Las sucursales dependen por completo de dos personas a distancia; si la falla no se resuelve así, la sede se detiene.', 'Mérida, Porlamar y Coro'],
+  ['Personal insuficiente', 'El Departamento tiene dos personas para cuatro sedes y no hay presupuesto para contratar.', 'Departamento de Tecnología'],
+  ['Convenio sin plan', 'El convenio está firmado, pero nadie definió cómo se recibirán, configurarán, distribuirán y atenderán los equipos nuevos.', 'Presidencia y Tecnología'],
+  ['Sin registro de fallas', 'Todo se atiende por llamada al técnico; no hay tickets, prioridades ni estadísticas.', 'Departamento de Tecnología'],
+  ['Usuarios desatendidos', 'Hay quejas y frustración; algunos trabajadores ya improvisan sus propias soluciones.', 'Las cuatro sedes']
+];
+
+const NO = '<span class="pill p-crit">No cumple</span>', PARCIAL = '<span class="pill p-alto">Parcial</span>';
+const CUMPLIMIENTO = [
+  ['Punto único de contacto para reportar fallas', 'ITIL 4, mesa de servicio', 'Se llama directamente al técnico; no hay canal formal.', PARCIAL],
+  ['Registro de todos los incidentes', 'ITIL 4, gestión de incidentes', 'Las llamadas no quedan registradas.', NO],
+  ['Prioridad según impacto y urgencia', 'ITIL 4, gestión de incidentes', 'Se atiende por orden de llamada o por insistencia.', NO],
+  ['Acuerdos de nivel de servicio documentados', 'ISO/IEC 20000-1, gestión de niveles de servicio', 'No existe ningún SLA.', NO],
+  ['Inventario y control de activos', 'ITIL 4, activos de TI; COBIT BAI09', 'Ya existe el levantamiento del diagnóstico, pero nadie controla las altas, los traslados ni las bajas.', PARCIAL],
+  ['Control de cambios de software', 'ITIL 4, habilitación de cambios; COBIT BAI06', 'Los usuarios actualizan por su cuenta.', NO],
+  ['Información al usuario sobre el estado de su caso', 'ITIL 4, mesa de servicio', 'El usuario debe volver a llamar para saber.', NO],
+  ['Medición y reporte del servicio', 'ISO/IEC 20000-1; COBIT MEA01', 'No se mide nada.', NO],
+  ['Plan de continuidad ante fallas', 'COBIT DSS04; ISO/IEC 20000-1', 'Si falla el soporte remoto, la sede se detiene.', NO],
+  ['Roles y responsabilidades definidos', 'COBIT 2019', 'Hay jefe y técnico, pero sin funciones ni procedimientos escritos.', PARCIAL]
+];
+
+const OPCIONES = [
+  ['GLPI', 'Sí, trae inventario de equipos', 'Libre (GPL)', 'Sí', 'Elegida: tickets e inventario en una sola herramienta'],
+  ['osTicket', 'No, solo tickets', 'Libre (GPL)', 'Sí', 'Descartada: el inventario tendría que llevarse aparte'],
+  ['Zammad', 'No, solo tickets', 'Libre (AGPL)', 'Sí', 'Descartada: no trae inventario y pide un servidor más potente']
+];
+
+const A1 = [
+  ['Inventario desactualizado y equipos movidos en cuarentena', 'Gestión de activos de TI: levantamiento, etiquetado y registro de equipos', 'Sin saber dónde está cada equipo y quién lo usa no se puede planificar el reemplazo ni dar soporte.', 'ITIL 4 (gestión de activos de TI); COBIT BAI09; ISO/IEC 20000-1 (gestión de activos y configuración)'],
+  ['Actualizaciones de software sin coordinación', 'Administración de sistemas operativos y control de cambios (cuentas con permisos, actualizaciones centralizadas)', 'Para que solo Tecnología instale o actualice y cada cambio quede probado y registrado.', 'ITIL 4 (habilitación de cambios); COBIT BAI06'],
+  ['18 equipos obsoletos o con fallas recurrentes', 'Diagnóstico y mantenimiento de hardware; evaluación de obsolescencia', 'Hay que decidir con criterio técnico qué equipo se repara, se repotencia o se reemplaza con el convenio.', 'ITIL 4 (ciclo de vida del activo); COBIT BAI09'],
+  ['Sucursales dependientes del soporte remoto', 'Soporte remoto y redes: acceso remoto seguro y diagnóstico de conectividad', 'Es la única vía para atender tres sedes sin viajar.', 'ITIL 4 (mesa de servicio y gestión de incidentes); COBIT DSS02'],
+  ['Sede detenida cuando la falla no se resuelve a distancia', 'Planes de contingencia: equipos de respaldo, copias de seguridad y enlace local capacitado', 'La sede debe seguir trabajando mientras llega la solución definitiva.', 'ITIL 4 (gestión de la continuidad); COBIT DSS04; ISO/IEC 20000-1'],
+  ['Fallas atendidas por llamada, sin registro', 'Implementación y administración de una mesa de ayuda (tickets, categorías y prioridades)', 'Sin registro no hay seguimiento, prioridades ni estadísticas.', 'ITIL 4 (gestión de incidentes); ISO/IEC 20000-1 (información documentada)'],
+  ['Convenio firmado sin plan de implementación', 'Planificación de despliegues: recepción, imagen estándar, configuración y distribución', 'Para que los equipos nuevos lleguen configurados igual y no repitan el desorden actual.', 'ITIL 4 (gestión de despliegues); COBIT BAI11'],
+  ['Dos personas para cuatro sedes', 'Documentación técnica y automatización: base de conocimiento y guías de autoservicio', 'Permite que los usuarios resuelvan lo simple y libera tiempo del técnico.', 'ITIL 4 (gestión del conocimiento); COBIT BAI08']
+];
+
+const B1 = [
+  ['Trabajadores frustrados por sus equipos obsoletos', 'Empatía', 'El técnico reconoce la molestia con sus propias palabras antes de explicar nada y da una fecha estimada de atención.', 'Goleman: empatía'],
+  ['Sucursales que se sienten desatendidas', 'Comunicación proactiva', 'Llama a cada sede una vez por semana, aunque no haya fallas, y confirma por escrito el estado de sus casos.', 'Riggio: sensibilidad y expresividad social'],
+  ['Usuarios que actualizaron software por su cuenta', 'Asertividad y manejo de conflictos', 'Explica el riesgo y la nueva norma sin señalar culpables, y los invita a ser enlaces de apoyo en su área.', 'Goleman: habilidades sociales; Riggio: control social'],
+  ['Un solo técnico recibe las llamadas de toda la organización', 'Autorregulación y manejo del estrés', 'Mantiene el tono sereno en la décima llamada del día y no promete lo que no puede cumplir.', 'Goleman: autorregulación; Riggio: control emocional'],
+  ['Presidente presionado por las quejas y el presupuesto', 'Comunicación clara con personas no técnicas', 'El ingeniero presenta el plan en una página, con fechas, riesgos y costos, sin jerga.', 'SayIT: comunicar sin jerga'],
+  ['Departamento de dos personas para cuatro sedes', 'Trabajo en equipo', 'Jefe y técnico se reúnen diez minutos al iniciar el día para repartir los casos y se cubren entre sí.', 'Goleman: habilidades sociales (colaboración); SayIT'],
+  ['Trabajadores que se llevaron equipos en cuarentena', 'Tacto y generación de confianza', 'Durante el inventario se pregunta sin acusar: “estamos actualizando el registro para darle mejor soporte”.', 'Riggio: control social; Goleman: empatía'],
+  ['Empresa del convenio que no participa en la gestión interna', 'Negociación', 'Se acuerdan por escrito, en tono cordial, las fechas de entrega, las garantías y la persona de contacto.', 'Goleman: habilidades sociales (influencia)']
+];
+
+const DECALOGO = [
+  ['Saludar e identificarse con respeto', 'Al atender la llamada de cualquier sede, el técnico dice su nombre y pregunta el del trabajador antes de hablar de la falla.'],
+  ['Escuchar antes de actuar', 'Cuando una trabajadora de la sucursal cuenta que lleva semanas sin poder trabajar bien, el técnico la deja terminar y repite lo que entendió antes de proponer algo.'],
+  ['Reconocer la frustración del otro', 'Ante un trabajador con un equipo obsoleto, el técnico empieza diciendo: “tiene razón en estar molesto; así es difícil cumplir con su trabajo”.'],
+  ['Hablar en palabras sencillas', 'Al personal que organiza los planes vacacionales se le explica qué pasó y qué sigue con palabras cotidianas, sin tecnicismos.'],
+  ['No culpar al usuario', 'Con quienes intentaron resolver por su cuenta durante la cuarentena, el técnico habla de cómo coordinarse mejor y no de quién se equivocó.'],
+  ['Tratar a todas las sedes por igual', 'La llamada de la sucursal del interior recibe la misma cortesía y dedicación que la de la oficina del presidente.'],
+  ['Prometer solo lo que se puede cumplir', 'Si hoy no puede atender a un trabajador, el técnico se lo dice con honestidad y le indica cuándo lo hará.'],
+  ['Mantener informado al usuario', 'Si la solución para una sucursal se demora, el técnico llama para contar cómo va, sin esperar a que le reclamen.'],
+  ['Conservar la calma bajo presión', 'Cuando coinciden llamadas de varias sedes, responde con tono sereno y no descarga su estrés en quien llama.'],
+  ['Despedirse con amabilidad y confirmar la conformidad', 'Antes de colgar, pregunta al trabajador si quedó conforme y le agradece su paciencia.']
+];
+
+const INC = '<span class="pill p-alto">Incidente</span>', PRO = '<span class="pill p-medio">Problema</span>';
+const CLASIF = [
+  ['No existe un inventario actualizado', PRO, 'Proceso', 'No se pueden planificar los reemplazos ni la distribución del convenio.'],
+  ['Equipos trasladados en cuarentena sin registro', PRO, 'Proceso', 'Se desconoce la ubicación y el responsable de cada equipo; riesgo de pérdida.'],
+  ['Actualizaciones de software hechas por los usuarios', PRO, 'Proceso', 'Es la causa raíz de incompatibilidades que se repiten.'],
+  ['Incompatibilidades y fallas tras una actualización', INC, 'Técnico', 'El trabajador no puede usar sus programas; aumentan las llamadas.'],
+  ['18 de 40 equipos obsoletos', PRO, 'Técnico', 'Baja productividad y fallas recurrentes en casi la mitad de los puestos.'],
+  ['Un equipo obsoleto se bloquea y detiene a un usuario', INC, 'Técnico', 'Trabajo interrumpido y atención al público demorada.'],
+  ['Las sucursales dependen del soporte remoto de dos personas', PRO, 'Proceso', 'Punto único de falla para tres sedes.'],
+  ['Falla que no se resuelve a distancia y detiene la sede', INC, 'Técnico', 'Actividades paralizadas y planes vacacionales sin gestionar.'],
+  ['Dos personas para cuatro sedes, sin presupuesto', PRO, 'Proceso', 'Sobrecarga, tiempos de espera largos y desgaste del personal.'],
+  ['Convenio firmado sin plan de implementación', PRO, 'Proceso', 'Riesgo de que los equipos nuevos repitan el desorden actual.'],
+  ['No hay registro ni canal formal de fallas', PRO, 'Proceso', 'Sin seguimiento ni estadísticas para decidir.'],
+  ['Las sedes del interior se sienten desatendidas', PRO, 'Comunicación', 'Se pierde la confianza en el Departamento de Tecnología.'],
+  ['Trabajadores que improvisan sus propias soluciones', PRO, 'Comunicación', 'Más fallas y riesgos de seguridad.']
+];
+
+const FUTUROS = [
+  ['Equipos nuevos entregados sin registrarse en el inventario', PRO, 'Proceso', 'Se repite la pérdida de control sobre los activos.'],
+  ['Programas actuales incompatibles con el sistema operativo nuevo', PRO, 'Técnico', 'Áreas que no pueden usar sus herramientas de trabajo.'],
+  ['Pérdida de archivos al pasar los datos del equipo viejo al nuevo', INC, 'Técnico', 'Información de planes y beneficiarios perdida.'],
+  ['Impresoras y escáneres que no funcionan con los equipos nuevos', INC, 'Técnico', 'No se pueden emitir documentos ni constancias.'],
+  ['Equipos que llegan dañados o incompletos a las sucursales', INC, 'Proceso', 'Puestos sin equipo y reclamos a la empresa aliada.'],
+  ['Cada equipo configurado de forma distinta', PRO, 'Proceso', 'Soporte más lento y fallas difíciles de reproducir.'],
+  ['Usuarios que no saben usar el sistema nuevo', PRO, 'Comunicación', 'Aumentan las llamadas y baja la productividad las primeras semanas.'],
+  ['Licencias de software insuficientes o sin activar', PRO, 'Proceso', 'Programas bloqueados y riesgo legal.'],
+  ['Puntos de red o instalación eléctrica insuficientes en las sedes', PRO, 'Técnico', 'Equipos nuevos que no se pueden conectar o se dañan.'],
+  ['Equipo nuevo con falla de fábrica y sin procedimiento de garantía', INC, 'Proceso', 'Equipo detenido durante semanas.'],
+  ['Equipos viejos retirados sin borrar su información', PRO, 'Proceso', 'Exposición de datos de trabajadores y beneficiarios.'],
+  ['Desacuerdos sobre a quién le toca equipo nuevo', PRO, 'Comunicación', 'Malestar entre áreas y quejas a la Presidencia.']
+];
+
+const C = '<span class="pill p-crit">Crítico</span>', A = '<span class="pill p-alto">Alto</span>', M = '<span class="pill p-medio">Medio</span>', B = '<span class="pill p-bajo">Bajo</span>';
+const JEFE = 'Jefe del Departamento de Tecnología', SEMANAL = 'Jefe del Departamento, en la revisión semanal';
+const SLA = {
+  'Hardware': [
+    [C, 'Sede completa o equipo compartido (6 o más usuarios)', 'Alta', '15 minutos', '8 horas, con equipo de respaldo', JEFE + ' y luego Presidencia'],
+    [A, '3 a 5 usuarios', 'Alta', '30 minutos', '2 días', JEFE],
+    [M, '1 o 2 usuarios sin alternativa', 'Intermedia', '2 horas', '3 días', JEFE],
+    [B, '1 usuario con alternativa', 'Baja', '1 día', '5 días', SEMANAL]
+  ],
+  'Software': [
+    [C, 'Sistema usado por toda una sede (6 o más usuarios)', 'Alta', '15 minutos', '4 horas', JEFE + ' y luego Presidencia'],
+    [A, '3 a 5 usuarios', 'Alta', '30 minutos', '8 horas', JEFE],
+    [M, '1 o 2 usuarios', 'Intermedia', '2 horas', '2 días', JEFE],
+    [B, '1 usuario (duda o solicitud)', 'Baja', '1 día', '5 días', SEMANAL]
+  ],
+  'Redes y conectividad': [
+    [C, 'Sede completa sin conexión (6 o más usuarios)', 'Alta', '15 minutos', '4 horas', JEFE + ', proveedor de Internet y Presidencia'],
+    [A, 'Un piso o área sin red (3 a 5 usuarios)', 'Alta', '30 minutos', '8 horas', JEFE + ' y proveedor de Internet'],
+    [M, '1 o 2 usuarios con conexión intermitente', 'Intermedia', '2 horas', '2 días', JEFE],
+    [B, '1 usuario con lentitud ocasional', 'Baja', '1 día', '5 días', SEMANAL]
+  ],
+  'Soporte remoto': [
+    [C, 'Sucursal detenida (6 usuarios)', 'Alta', '15 minutos', '2 horas a distancia; si no, enlace local o visita en 24 horas', JEFE + ' y Presidencia, que autoriza el traslado'],
+    [A, '3 a 5 usuarios de una sucursal', 'Alta', '30 minutos', '8 horas', JEFE],
+    [M, '1 o 2 usuarios de una sucursal', 'Intermedia', '2 horas', '2 días', JEFE],
+    [B, '1 usuario (consulta)', 'Baja', '1 día', '5 días', SEMANAL]
+  ]
+};
+
+const MEDIDAS = [
+  ['1. Levantar y mantener el inventario de equipos', 'Inventario desactualizado', '% de equipos con ubicación y responsable registrados', '100 %', 'Inventario de la mesa de ayuda'],
+  ['2. Registrar toda falla como ticket', 'Fallas atendidas por llamada, sin registro', '% de solicitudes registradas', '95 %', 'Mesa de ayuda'],
+  ['3. Aplicar el SLA por prioridad', 'Demoras y sedes desatendidas', '% de tickets resueltos dentro del SLA', '85 %', 'Reporte de la mesa de ayuda'],
+  ['4. Norma de control de cambios: solo Tecnología instala o actualiza', 'Actualizaciones sin coordinación', 'Cambios de software no autorizados por mes', '0', 'Registro de cambios y revisión de equipos'],
+  ['5. Reemplazar equipos obsoletos con el convenio', '18 de 40 equipos obsoletos', '% de equipos obsoletos o con fallas recurrentes', 'De 45 % a 10 % o menos', 'Inventario'],
+  ['6. Formar un enlace local en cada sucursal', 'Dependencia total del soporte remoto', 'Sucursales con enlace capacitado', '3 de 3', 'Registro de capacitación'],
+  ['7. Dejar un equipo de respaldo por sede', 'Sede detenida cuando falla el soporte remoto', 'Horas de paralización de sede por mes', '2 horas o menos', 'Tickets críticos'],
+  ['8. Crear guías de autoservicio para fallas frecuentes', 'Dos personas para cuatro sedes', '% de casos resueltos en el primer contacto', '70 %', 'Mesa de ayuda'],
+  ['9. Encuesta de satisfacción al cerrar cada caso', 'Quejas y usuarios frustrados', '% de usuarios satisfechos', '85 %', 'Formulario de encuesta'],
+  ['10. Plan de implementación del convenio con configuración estándar', 'Convenio sin plan', '% de equipos nuevos entregados configurados y registrados', '100 %', 'Actas de entrega e inventario']
+];
+
+const RECOLECCION = [
+  'El técnico registra cada equipo durante el levantamiento inicial, con apoyo del enlace de cada sucursal. El jefe revisa el porcentaje el último viernes de cada mes en el reporte de inventario.',
+  'El técnico abre un ticket por cada llamada o mensaje en el momento en que lo recibe. Cada semana, el jefe compara los tickets abiertos con las llamadas recibidas.',
+  'La mesa de ayuda calcula sola el tiempo entre la apertura y el cierre de cada ticket. El jefe descarga el reporte cada lunes y lo revisa con el técnico.',
+  'El técnico revisa los programas instalados en una muestra de equipos el primer lunes de cada mes y los compara con el registro de cambios. Lo que no esté autorizado se cuenta y se informa al jefe.',
+  'El técnico marca el estado de cada equipo (bueno, con fallas u obsoleto) en el inventario cada vez que lo atiende o lo reemplaza. El jefe consulta el porcentaje al cierre de cada mes.',
+  'El jefe anota en una hoja de control la fecha en que cada enlace completa su capacitación. Se actualiza al terminar cada jornada de formación y se revisa cada trimestre.',
+  'El técnico registra en el ticket crítico la hora en que la sede se detuvo y la hora en que volvió a trabajar. El jefe suma las horas al final del mes con el reporte de tickets críticos.',
+  'Al cerrar el ticket, el técnico marca si el caso se resolvió en el primer contacto. El jefe obtiene el porcentaje mensual con el reporte de la mesa de ayuda.',
+  'Al cerrarse el ticket, el usuario recibe un formulario en línea de tres preguntas. El jefe revisa los resultados cada mes en el tablero de Looker Studio.',
+  'El técnico firma con el usuario un acta de entrega por cada equipo nuevo y lo registra en el inventario ese mismo día. El jefe compara cada semana las actas con los equipos recibidos de la empresa.'
+];
+
+const GRAFICA = [
+  ['Equipos registrados en la mesa de ayuda', 0, 100, 'El levantamiento está en una hoja de cálculo, fuera de una herramienta de control'],
+  ['Solicitudes registradas como ticket', 0, 95, 'Hoy todo se atiende por llamada'],
+  ['Tickets resueltos dentro del SLA', 0, 85, 'Hoy no existe SLA ni se mide'],
+  ['Equipos en buen estado', 55, 90, '22 de 40 equipos'],
+  ['Sucursales con enlace local capacitado', 0, 100, 'Ninguna de las 3 sucursales'],
+  ['Casos resueltos en el primer contacto', 40, 70, 'Estimado por las llamadas repetidas al técnico'],
+  ['Usuarios satisfechos', 40, 85, 'Estimado por el volumen de quejas del personal']
+];
+
+/* ===== Sesión didáctica 2 ===== */
+const TIPOS = [
+  ['Social o económico', 'Social', 'La Fundación no busca ganancias: organiza turismo social para trabajadores públicos y estudiantes.'],
+  ['Según la naturaleza del problema que se enfrenta', 'Tecnológico', 'El problema es de equipos, software y soporte: 18 de 40 computadoras obsoletas o con fallas y ningún registro de incidencias.'],
+  ['Según el alcance', 'De mediano alcance', 'Abarca cuatro sedes y 40 equipos en unas 12 semanas. Es mayor que un microproyecto y está muy lejos de un megaproyecto.'],
+  ['Según el número de responsables', 'Grupal o colectivo', 'Participan la Presidencia, el Departamento de Tecnología, un enlace por sucursal y la empresa del convenio.'],
+  ['Según el beneficio económico que persigue', 'Sin fines de lucro', 'Los equipos llegan por convenio y su uso mejora un servicio social, no genera ingresos.'],
+  ['Según el contexto ante el cual se presenta', 'Académico', 'Se desarrolla como proyecto del Programa Nacional de Formación en Ingeniería en Informática.'],
+  ['Según el sector de la economía', 'Sector terciario', 'Tanto el turismo como el soporte técnico son servicios.'],
+  ['Dependiendo de su financiación', 'Mixto', 'La Fundación aporta personal, repuestos y traslados; la empresa privada aporta los 14 equipos nuevos.'],
+  ['Dependiendo de su contenido', 'Informático', 'Su contenido es inventario de hardware, configuración de sistemas, mesa de ayuda y acceso remoto.'],
+  ['Dependiendo de la complejidad', 'Complejo', 'Combina un proveedor externo, cuatro sedes distantes, copia de datos, capacitación y procesos nuevos de soporte.'],
+  ['Dependiendo de su finalidad', 'Social', 'El fin último es que la Fundación atienda mejor a sus beneficiarios en todas sus sedes.']
+];
+const TIPOS2 = [
+  ['Entregables', 'Implementación y mantenimiento', 'Stepanets (2026), GanttPRO', 'Pone en marcha equipos nuevos y una mesa de ayuda, y los mantiene después de la entrega.'],
+  ['Carácter', 'Mixto (técnico, organizacional y social)', 'Stepanets (2026), GanttPRO', 'Entrega equipos con parámetros técnicos, cambia procesos internos y mejora un servicio social.'],
+  ['Presupuesto', 'Intermedio', 'Stepanets (2026), GanttPRO', 'No basta la aprobación de una unidad: lo acuerda la Presidencia, que firmó el convenio.'],
+  ['Duración', 'Corto plazo', 'Stepanets (2026), GanttPRO', 'Se ejecuta en 12 semanas, muy por debajo de un año.'],
+  ['Localización', 'Regional', 'Stepanets (2026), GanttPRO', 'Cubre varias regiones del país: Distrito Capital, los Andes, Oriente insular y Falcón.'],
+  ['Tipo de financiación', 'Colaboración público-privada', 'Stepanets (2026), GanttPRO', 'Una fundación pública recibe equipos de una empresa privada mediante un convenio.'],
+  ['Enfoque de desarrollo', 'Híbrido', 'PMI (2021), PMBOK 7', 'La entrega de equipos tiene fechas fijas; la mesa de ayuda y la capacitación se ajustan en ciclos cortos.']
+];
+
+
+const TIPOS_SELECCIONADOS = [
+  ['Tecnológico', 'Qué problema se resuelve.', 'La lectura clasifica los proyectos “según la naturaleza del problema que se enfrenta”, y el de la Fundación es tecnológico: 18 de sus 40 equipos están obsoletos o fallan, no hay inventario y nadie registra las fallas. Todo lo que el proyecto entrega es técnico: equipos configurados, inventario, mesa de ayuda y acceso remoto.'],
+  ['Social', 'Para quién se hace.', 'Por su finalidad y por el beneficio que persigue, la lectura lo ubica entre los sociales y sin fines de lucro. La tecnología es el medio; el fin es que la Fundación siga ofreciendo turismo social a trabajadores públicos y estudiantes en sus cuatro sedes. Esto coincide con la definición de proyecto sociotecnológico de la misma lectura: conocimientos tecnológicos “en función y beneficio de la sociedad, ya sea una comunidad, institución pública u otros”.'],
+  ['Mixto por su financiación', 'Con qué recursos.', 'La lectura distingue proyectos privados, públicos y mixtos según su financiación. Aquí los equipos los pone una empresa privada y el resto lo pone la Fundación: personal, repuestos, traslados y capacitación. Esto obliga a planificar la coordinación con un actor externo que, según el caso, “no participa en la gestión interna”.']
+];
+
+const REFERENCIAS_PROYECTO = [
+  'Armao, C. y Urbina, C. (2021). <i>Introducción a los Proyectos Sociotecnológicos y al EML</i>. PNFII, Proyecto Sociotecnológico I, Módulo I. Universidad Nacional Experimental para las Telecomunicaciones e Informática (UNETI).',
+  'Stepanets, A. (2026, 9 de abril). <i>Por qué es importante definir los tipos de proyectos para lograr sus objetivos</i>. GanttPRO Blog. <a href="https://blog.ganttpro.com/es/por-que-es-importante-definir-los-tipos-de-proyectos-para-lograr-sus-objetivos/" target="_blank" rel="noopener">blog.ganttpro.com</a>',
+  'Project Management Institute (2021). <i>Guía de los fundamentos para la dirección de proyectos (Guía del PMBOK)</i>, 7.ª ed. PMI.'
+];
+
+
+const ELEMENTOS = [
+  ['Tareas', 'La lectura las define como el “reparto de las tareas y funciones” (Armao y Urbina, 2021). En la práctica se ordenan en una estructura de desglose del trabajo (EDT) y cada una tiene un responsable.',
+   '<ol class="etapas"><li>Levantar los 40 equipos (hecho en el diagnóstico).</li><li>Recibir y revisar los 14 equipos del convenio.</li><li>Preparar la imagen estándar de Windows 11.</li><li>Copiar los datos de cada usuario antes del cambio.</li><li>Entregar por sede con acta firmada.</li><li>Reparar 4 equipos y repotenciar 8.</li><li>Instalar la mesa de ayuda y el acceso remoto.</li><li>Capacitar a usuarios y enlaces locales.</li><li>Borrar los discos y dar de baja los equipos retirados.</li></ol>',
+   'Trabajo del proyecto; Planificación'],
+  ['Alcance', 'Para la lectura es “la repercusión total que tendrá el proyecto en la sociedad” (Armao y Urbina, 2021). El PMBOK 7 lo ve también como el límite entre lo que entra y lo que no entra en el proyecto.',
+   'Repercusión: los trabajadores públicos y estudiantes que viajan con la Fundación reciben atención sin demoras en las cuatro sedes. Entra: las cuatro sedes y sus 40 equipos, la mesa de ayuda, el soporte remoto, el SLA y la capacitación. No entra: contratar personal, cambiar la instalación eléctrica de las sedes ni comprar licencias de software nuevas, porque se usa software libre donde se puede.',
+   'Planificación; Entrega'],
+  ['Organización y planes', 'Según la lectura, “las actividades a desarrollar, así como los plazos, para lanzar el proyecto” (Armao y Urbina, 2021). Incluye quién hace qué y los planes que guían el trabajo.',
+   'Interesados: Presidencia, trabajadores de las cuatro sedes y la empresa del convenio. Patrocinador: el Presidente. Líder del proyecto: el Ingeniero en Sistemas. Trabajo técnico: el técnico en informática. Apoyo en sitio: un enlace local por sucursal. Proveedor: la empresa del convenio, que responde por la entrega y la garantía. Planes: cronograma por fases, plan de riesgos (retraso de la entrega, equipos dañados en el traslado) y plan de capacitación.',
+   'Equipo; Interesados'],
+  ['Comunicación', '“Cómo se va a desarrollar la comunicación, así como los flujos de información” (Armao y Urbina, 2021): a quién se informa, cuándo y por qué medio.',
+   'Reporte semanal de una página para la Presidencia. Videollamada de 30 minutos cada lunes con los enlaces locales. Aviso a cada usuario 48 horas antes de cambiarle el equipo. Un solo canal para dudas: la mesa de ayuda.',
+   'Interesados'],
+  ['Resultados', '“La medición de los objetivos que esperamos obtener del proyecto” (Armao y Urbina, 2021). Son los entregables y los cambios que se pueden medir.',
+   '40 equipos funcionando con Windows 11 y registrados en GLPI. Mesa de ayuda con SLA firmado. Tres enlaces locales capacitados. Equipos obsoletos o con fallas: de 45 % a 10 % o menos.',
+   'Entrega; Medición'],
+  ['Gestión de costo y tiempo', 'El costo es “el coste de los recursos necesarios para sacar el proyecto” y el tiempo, “el periodo que va a durar el proyecto” (Armao y Urbina, 2021). Gestionarlos es estimarlos y controlar que se cumplan.',
+   'Tiempo: 12 semanas en cuatro fases (preparación, 2 semanas; recepción y configuración, 4; despliegue por sede, 4; cierre y capacitación, 2). Costo: los 14 equipos llegan por el convenio. La Fundación paga los repuestos (6 discos SSD, 2 módulos de memoria y 4 reparaciones), los traslados a las sucursales y la capacitación. GLPI, RustDesk y Clonezilla son libres, sin pago de licencias.',
+   'Planificación; Medición']
+];
+
+const INFOGRAFIA = [
+  ['Según su propósito', [['Sociales', 'Buscan mejorar la calidad de vida de un grupo; su éxito se mide por el beneficio colectivo.'], ['Económicos', 'Buscan rentabilidad; su éxito se mide por la ganancia o el retorno de la inversión.']]],
+  ['Según la naturaleza del problema', [['De acción social o comunitario', 'Atienden una necesidad de una comunidad con su participación.'], ['De investigación', 'Generan conocimiento nuevo para responder una pregunta.'], ['Tecnológicos', 'Crean o mejoran una solución técnica: equipos, software o procesos.', 1]]],
+  ['Según el alcance', [['Microproyectos', 'Pocos recursos, un grupo pequeño y poco tiempo.'], ['De mediano alcance', 'Varias áreas o sedes y una duración de meses.'], ['Megaproyectos', 'Gran escala, varios años y alto impacto.']]],
+  ['Según el número de responsables', [['Grupales o colectivos', 'El trabajo se reparte entre varias personas o instituciones.'], ['Individuales', 'Una sola persona planifica y ejecuta.']]],
+  ['Según el beneficio económico', [['Sin fines de lucro o sociales', 'Si hay excedente, se reinvierte en el fin social.']]],
+  ['Según el contexto', [['Académicos o escolares', 'Forman parte de un plan de estudios y se evalúan como aprendizaje.', 1]]],
+  ['Según el sector de la economía', [['Primario', 'Extraen recursos: agricultura, pesca o minería.'], ['Secundario', 'Transforman materias primas: industria y construcción.'], ['Terciario', 'Prestan servicios: turismo, educación o tecnología.', 1]]],
+  ['Según su financiación', [['Privados', 'Con capital de empresas o particulares.'], ['Públicos', 'Con fondos del Estado.'], ['Mixtos o subvencionados', 'Combinan aportes públicos y privados.']]],
+  ['Según su contenido', [['Construcción', 'Levantan o remodelan obras físicas.'], ['Empresarial', 'Crean o mejoran una empresa.'], ['Producción de bienes o servicios', 'Fabrican productos o prestan un servicio.'], ['Informático', 'Desarrollan sistemas, software, redes o soporte a equipos.', 1]]],
+  ['Según la complejidad', [['Simples', 'Pocas actividades y casi sin dependencias entre ellas.'], ['Complejos', 'Muchas actividades que dependen unas de otras y varios actores.', 1]]],
+  ['Según su finalidad', [['Sociales', 'Mejoran el bienestar de un grupo.'], ['Educativos', 'Buscan formar o capacitar.'], ['Comunitarios', 'Los decide y ejecuta la propia comunidad.'], ['De investigación o académicos', 'Producen conocimiento o cumplen un requisito de formación.'], ['De producción', 'Generan bienes o servicios para su uso o venta.']]]
+];
+
+const MAPA_ELEMENTOS = [
+  ['Coste', 'El costo de los recursos necesarios.', 'Planificación'],
+  ['Alcance', 'La repercusión total del proyecto en la sociedad.', 'Diagnóstico'],
+  ['Tiempo', 'El periodo que va a durar.', 'Planificación'],
+  ['Organización y planificación', 'Actividades y plazos para lanzarlo.', 'Planificación'],
+  ['Gestión de interesados', 'Atender los intereses de quienes participan o se ven afectados.', 'Todo el ciclo'],
+  ['Comunicación', 'Cómo fluye la información.', 'Todo el ciclo'],
+  ['Asignación de tareas', 'Reparto de tareas y funciones.', 'Ejecución'],
+  ['Resultados', 'La medición de los objetivos.', 'Evaluación']
+];
+const MAPA_CICLO = [
+  ['Inicio del proyecto', 'Diagnóstico'],
+  ['Organización y preparación', 'Planificación'],
+  ['Ejecución del trabajo', 'Ejecución'],
+  ['Cierre del proyecto', 'Evaluación']
+];
+
+const EJEMPLOS = [
+  { area: 'Soporte técnico', color: 'var(--accent)', nombre: 'Mantenimiento de Canaimitas',
+    problema: 'Computadoras escolares dañadas que dejan a los estudiantes sin su herramienta de estudio.',
+    solucion: 'Jornadas de diagnóstico y reparación en las escuelas, que CANTV e Industrias Canaima realizan desde 2018.',
+    beneficiados: 'Estudiantes y escuelas. En una jornada en La Vega, Caracas, se repararon 60 equipos.',
+    fuente: 'DPL News (2019)' },
+  { area: 'Sistemas operativos libres', color: 'var(--ok)', nombre: 'Canaima GNU/Linux',
+    problema: 'Dependencia de licencias de software privativo en la Administración Pública y en las escuelas.',
+    solucion: 'Distribución venezolana basada en Debian, lanzada en 2007 a raíz del Decreto 3.390.',
+    beneficiados: 'Estaciones de trabajo de la Administración Pública, donde es el sistema oficial desde 2011, y escuelas públicas.',
+    fuente: 'EcuRed (s.f.)' },
+  { area: 'Desarrollo de aplicaciones', color: 'var(--alto)', nombre: 'Info App de Infocentro',
+    problema: 'Los datos de las comunidades organizadas se llevan a mano y sus trámites son lentos.',
+    solucion: 'Aplicación en desarrollo para digitalizar la información de las comunidades.',
+    beneficiados: 'Comunidades organizadas y sus procesos vinculados al poder popular.',
+    fuente: 'DPL News (2023)' },
+  { area: 'Soporte e infraestructura', color: 'var(--crit)', nombre: 'Renovación tecnológica de la Fundación Rutas del Araguaney',
+    problema: '18 de 40 equipos obsoletos o con fallas y dos personas para dar soporte a cuatro sedes.',
+    solucion: 'Equipos del convenio, mesa de ayuda, soporte remoto, enlaces locales y SLA.',
+    beneficiados: 'Trabajadores de las cuatro sedes y quienes viajan con los planes de turismo social.',
+    fuente: 'Nuestro caso de estudio' }
+];
+
+const REFERENCIAS_PORTAFOLIO = [
+  'Armao, C. y Urbina, C. (2021). <i>Introducción a los Proyectos Sociotecnológicos y al EML</i>. PNFII, Proyecto Sociotecnológico I, Módulo I. UNETI.',
+  'DPL News (2019, 21 de junio). <i>CANTV se despliega en comunidades para reparar canaimitas</i>. <a href="https://dplnews.com/?p=16546" target="_blank" rel="noopener">dplnews.com</a>',
+  'DPL News (2023, 8 de agosto). <i>Venezuela: Infocentro desarrolla aplicación para digitalizar las comunas</i>. <a href="https://dplnews.com/?p=203401" target="_blank" rel="noopener">dplnews.com</a>',
+  'EcuRed (s.f.). <i>Canaima Linux</i>. <a href="https://www.ecured.cu/Canaima_Linux" target="_blank" rel="noopener">ecured.cu</a>',
+  'González, E. (2023, actualizado en 2025). <i>6 pasos para crear un portfolio digital y todo lo que debe incluir</i>. ESDesign. <a href="https://www.esdesignbarcelona.com/actualidad/diseno-espacios/6-pasos-para-crear-un-portfolio-digital-y-todo-lo-que-debe-incluir" target="_blank" rel="noopener">esdesignbarcelona.com</a>',
+  'Project Management Institute (2017). <i>Guía de los fundamentos para la dirección de proyectos (Guía del PMBOK)</i>, 6.ª ed. PMI.',
+  'Stepanets, A. (2026, 9 de abril). <i>Por qué es importante definir los tipos de proyectos para lograr sus objetivos</i>. GanttPRO Blog. <a href="https://blog.ganttpro.com/es/por-que-es-importante-definir-los-tipos-de-proyectos-para-lograr-sus-objetivos/" target="_blank" rel="noopener">blog.ganttpro.com</a>'
+];
+
+const ACT = 'Actual', FUT = 'Futuro';
+const CATALOGO = [
+  ['No existe un inventario actualizado', ACT, 'GLPI Agent', 'https://glpi-agent.readthedocs.io/', 'Inventario automático (software libre)', 'Un agente instalado en cada equipo envía a GLPI el procesador, la memoria, el disco, el sistema operativo y los programas. El inventario se actualiza solo y deja ver si un equipo cambió de puesto.'],
+  ['No hay registro ni canal formal de fallas', ACT, 'GLPI', 'https://glpi-project.org/', 'Mesa de ayuda (software libre)', 'Cada llamada o correo se convierte en un ticket con categoría, prioridad y responsable. El técnico trabaja con una cola ordenada y el jefe saca el reporte de tiempos del SLA.'],
+  ['Actualizaciones de software hechas por los usuarios', ACT, 'Windows LAPS', 'https://learn.microsoft.com/windows-server/identity/laps/laps-overview', 'Control de cuentas de administrador (incluido en Windows)', 'Los usuarios trabajan con cuentas estándar y la clave del administrador local cambia sola en cada equipo. Nadie instala ni actualiza sin pasar por Tecnología. Funciona con Active Directory o Microsoft Entra ID, así que va junto con unir los equipos a un dominio.'],
+  ['Las sucursales dependen del soporte remoto de dos personas', ACT, 'RustDesk', 'https://rustdesk.com/', 'Acceso remoto (código abierto)', 'El técnico toma el control del equipo de la sucursal desde Caracas. Con un servidor propio, las conexiones no dependen de un servicio externo ni de una licencia por equipo.'],
+  ['Falla que no se resuelve a distancia y detiene la sede', ACT, 'BookStack', 'https://www.bookstackapp.com/', 'Base de conocimiento (software libre)', 'Guarda guías paso a paso con fotos para el enlace local: cambiar un cable, reiniciar el router o conectar el equipo de respaldo. El enlace sigue la guía mientras el técnico lo acompaña por teléfono.'],
+  ['18 de 40 equipos obsoletos', ACT, 'WhyNotWin11', 'https://github.com/rcmaehl/WhyNotWin11', 'Diagnóstico de compatibilidad (código abierto)', 'Revisa en segundos si el procesador, la memoria, el disco y el TPM cumplen con Windows 11. Con ese resultado se decide si el equipo se reemplaza o se repotencia.'],
+  ['Las sedes del interior se sienten desatendidas', ACT, 'Zabbix', 'https://www.zabbix.com/', 'Monitoreo de red (software libre)', 'Vigila el router y los equipos de cada sede y avisa al técnico apenas una sede pierde la conexión, antes de que alguien tenga que llamar.'],
+  ['Trabajadores frustrados que improvisan sus propias soluciones', ACT, 'Google Forms', 'https://www.google.com/forms/about/', 'Encuestas en línea', 'Al cerrar cada ticket el usuario responde tres preguntas. Las respuestas alimentan el tablero de Looker Studio y muestran qué sede o qué tipo de falla genera más quejas.'],
+  ['Cada equipo configurado de forma distinta', FUT, 'Clonezilla', 'https://clonezilla.org/', 'Clonación de discos (software libre)', 'Se prepara un equipo modelo con Windows 11 y los programas de la Fundación, se saca su imagen y se copia a los 14 equipos nuevos. Todos quedan iguales y una falla se puede reproducir en cualquiera.'],
+  ['Pérdida de archivos al pasar los datos del equipo viejo al nuevo', FUT, 'UrBackup', 'https://urbackup.org/', 'Copias de seguridad (software libre)', 'Antes del cambio se guarda una copia completa de cada equipo en un servidor de la sede. Si un archivo no aparece en el equipo nuevo, se recupera desde la copia.'],
+  ['Equipos viejos retirados sin borrar su información', FUT, 'ShredOS (nwipe)', 'https://github.com/PartialVolume/shredos.x86_64', 'Borrado seguro de discos (código abierto)', 'Arranca desde una memoria USB y sobrescribe todo el disco antes de dar de baja el equipo. El reporte de borrado se anexa al acta de baja.'],
+  ['Licencias de software insuficientes o sin activar', FUT, 'LibreOffice', 'https://es.libreoffice.org/', 'Paquete de oficina (software libre)', 'Cubre textos, hojas de cálculo y presentaciones sin pagar licencia por equipo. Las licencias pagadas quedan para los puestos que de verdad las necesitan.'],
+  ['Usuarios que no saben usar el sistema nuevo', FUT, 'OBS Studio', 'https://obsproject.com/', 'Grabación de pantalla (software libre)', 'El técnico graba videos de dos o tres minutos con las tareas que más se repiten: entrar al correo, imprimir o guardar en la carpeta compartida. Los videos se publican en la base de conocimiento.'],
+  ['Equipo nuevo con falla de fábrica y sin procedimiento de garantía', FUT, 'GLPI, gestión de contratos', 'https://glpi-project.org/', 'Gestión de activos y garantías', 'Cada equipo del convenio queda registrado con su fecha de entrega y su garantía. Cuando falla, el técnico ve si está cubierto y abre el reclamo a la empresa aliada.']
+];
+
+const TENDENCIAS = [
+  ['Ágil con Scrum', 'Ken Schwaber y Jeff Sutherland, The Scrum Guide (2020)', 'Trabajo en ciclos de hasta un mes, llamados sprints, que entregan algo que ya se puede usar. Al final de cada ciclo el equipo revisa el resultado y ajusta el plan.',
+   ['Armar la lista priorizada de trabajo (product backlog)', 'Planificar el sprint', 'Ejecutar el sprint con una reunión diaria corta', 'Revisar el sprint con los interesados', 'Hacer la retrospectiva para mejorar el siguiente'],
+   'La mesa de ayuda y la base de conocimiento se construyen en sprints de dos semanas, empezando por las fallas que más llaman los usuarios.'],
+  ['Gestión híbrida', 'PMI, PMBOK 7 (2021)', 'Combina partes planificadas de principio a fin con partes que se desarrollan por iteraciones, según lo que pida cada entregable.',
+   ['Inicio', 'Planificación general', 'Ejecución por fases, con iteraciones donde haga falta', 'Monitoreo y control', 'Cierre'],
+   'La entrega de los equipos sigue el cronograma fijo del convenio; la capacitación cambia por iteraciones según lo que pregunten los usuarios.'],
+  ['DevOps', 'Jez Humble y David Farley, Continuous Delivery (2010)', 'Une a quien desarrolla con quien opera para entregar cambios pequeños, frecuentes, probados y automatizados.',
+   ['Planificar', 'Codificar', 'Construir', 'Probar', 'Liberar', 'Desplegar', 'Operar', 'Monitorear'],
+   'La imagen estándar de Windows se maneja por versiones: cada cambio se prueba en un equipo antes de aplicarlo a todos, y luego se vigila con Zabbix.'],
+  ['Lean', 'James Womack y Daniel Jones, Lean Thinking (1996)', 'Elimina lo que no aporta valor a quien recibe el servicio y busca que el trabajo fluya sin esperas.',
+   ['Definir el valor desde el usuario', 'Mapear el flujo de valor', 'Hacer que el trabajo fluya', 'Producir según la demanda (pull)', 'Buscar la perfección'],
+   'Se dibuja el recorrido de una falla desde la llamada hasta el cierre y se quitan los pasos sobrantes, como pedirle al usuario los datos del equipo dos veces.'],
+  ['Gestión de riesgos', 'ISO 31000:2018', 'Identifica lo que puede salir mal y decide qué hacer antes de que ocurra.',
+   ['Definir alcance, contexto y criterios', 'Identificar los riesgos', 'Analizarlos', 'Evaluarlos', 'Tratarlos', 'Dar seguimiento y revisar'],
+   'Riesgos del convenio: retraso en la entrega, equipos dañados en el traslado a Porlamar y usuarios que no asisten a la capacitación. Cada uno tiene un responsable y una respuesta acordada.']
+];
+
+const HERRAMIENTAS_GESTION = [
+  ['Trello', 'Ágil (tableros Kanban)', 'Tareas en tarjetas que pasan por columnas, con responsables, fechas y listas de verificación.', 'Un tablero por sede con las columnas Por recibir, Configurando, Entregado y Con incidencia. Cada tarjeta es un equipo del convenio.', 'https://trello.com/'],
+  ['OpenProject', 'Híbrida', 'Cronograma con diagrama de Gantt, tableros ágiles, paquetes de trabajo, presupuesto y horas. Es software libre.', 'El cronograma de 12 semanas del convenio va en el Gantt y la capacitación en un tablero ágil, dentro de la misma herramienta.', 'https://www.openproject.org/'],
+  ['GanttProject', 'Predictiva', 'Diagrama de Gantt con dependencias entre tareas, recursos y ruta crítica. Es software libre de escritorio.', 'Planificar el despliegue sede por sede y ver qué tareas se retrasan si el proveedor se atrasa con la entrega.', 'https://www.ganttproject.biz/'],
+  ['Jira', 'Ágil (Scrum y Kanban)', 'Lista de trabajo, sprints, tableros y reportes de avance. Tiene un plan gratuito para equipos pequeños.', 'Llevar los sprints de la mesa de ayuda y de la base de conocimiento, con un reporte de avance al final de cada uno.', 'https://www.atlassian.com/software/jira']
+];
+
+const AUTORES = [
+  ['Charles Kepner y Benjamin Tregoe', 'The Rational Manager (1965) y The New Rational Manager (1981)', 'Análisis racional de problemas: se describe la falla comparando lo que es con lo que podría ser y no es, hasta aislar la causa.',
+   ['Definir el problema', 'Describirlo: qué, dónde, cuándo y cuánto (es y no es)', 'Buscar diferencias y cambios', 'Probar las causas posibles', 'Confirmar la causa real'],
+   'Tres equipos de Caracas, Mérida y Coro dan pantalla azul, se reinician o se recalientan. La sede y el modelo cambian de un caso a otro; lo que comparten es que sus usuarios los actualizaron o les instalaron programas por su cuenta. Esa es la causa.', 'var(--accent)'],
+  ['AXELOS (ITIL 4)', 'ITIL Foundation, ITIL 4 Edition (2019), práctica de gestión de incidentes', 'Flujo para restablecer el servicio lo antes posible: cada incidente se registra, se ordena por prioridad y se cierra con el usuario.',
+   ['Detectar y registrar', 'Clasificar', 'Priorizar', 'Diagnosticar', 'Escalar si hace falta', 'Resolver y recuperar', 'Cerrar'],
+   'Es el flujo de la mesa de ayuda propuesto en el diagnóstico, con los tiempos del SLA de la Parte II.', 'var(--alto)'],
+  ['CompTIA', 'Metodología de resolución de problemas de la certificación CompTIA A+', 'Seis pasos para diagnosticar una falla técnica sin saltar a conclusiones y dejando registro de lo aprendido.',
+   ['Identificar el problema', 'Proponer una causa probable', 'Probar la teoría', 'Planificar la solución y aplicarla', 'Verificar el funcionamiento y prevenir', 'Documentar'],
+   'El equipo RA-POR-003 pierde la conexión. El técnico pregunta y revisa, sospecha del puerto de red, prueba con un adaptador USB, cambia la tarjeta, confirma que no se cae durante un día y lo anota en GLPI.', 'var(--bar-now)'],
+  ['W. Edwards Deming', 'Ciclo PDCA, base de la mejora continua que pide ISO/IEC 20000-1', 'Ciclo de mejora continua: se planifica un cambio, se aplica, se mide el resultado y se ajusta.',
+   ['Planificar', 'Hacer', 'Verificar', 'Actuar'],
+   'Cada tres meses se revisa el SLA: se fija la meta, se trabaja, se miden los tickets en Looker Studio y se ajustan los tiempos o el proceso.', 'var(--ok)']
+];
+
+/* =====================================================================
+   3. FUNCIONES QUE ARMAN LA PÁGINA (no hace falta tocarlas)
+   ===================================================================== */
+
+function tabla(id, cols, filas) {
+  document.getElementById(id).innerHTML =
+    '<div class="tabla-wrap"><table><thead><tr>' +
+    cols.map(c => '<th scope="col">' + c + '</th>').join('') +
+    '</tr></thead><tbody>' +
+    filas.map(f => '<tr>' + f.map((c, i) => '<td data-label="' + cols[i] + '">' + c + '</td>').join('') + '</tr>').join('') +
+    '</tbody></table></div>';
+}
+const oPend = v => v ? v : '<span class="pendiente">Por completar</span>';
+
+// Portada
+document.getElementById('firma-equipo').textContent = 'Caso de estudio del equipo ' + EQUIPO.nombre + ': ' + EQUIPO.lema.toLowerCase() + '.';
+document.getElementById('ruta').innerHTML = SEDES.map(s =>
+  '<li><b>' + s[0] + '</b><small>' + s[1] + '</small><small>' + s[2] + ' equipos, ' + s[3] + ' obsoletos o con fallas</small></li>').join('');
+
+// El caso
+tabla('t-lugares', ['Sede', 'Ubicación', 'Descripción', 'Soporte que recibe'], LUGARES);
+tabla('t-actores', ['Actor', 'Papel', 'Situación'], ACTORES);
+
+// Diagnóstico
+const pillEstado = { 'Operativo': 'p-ok', 'Obsoleto': 'p-crit', 'Falla recurrente': 'p-alto' };
+const pillAccion = { 'Reemplazar': 'p-crit', 'Reparar': 'p-alto', 'Repotenciar': 'p-medio', 'Mantener': 'p-ok' };
+const pill = (txt, mapa) => '<span class="pill ' + (mapa[txt] || '') + '">' + txt + '</span>';
+const ANIO_ACTUAL = 2026;
+const total = EQUIPOS.length, nMalos = cuantos(malo);
+
+document.getElementById('cifras').innerHTML = [
+  [nMalos + ' de ' + total, 'equipos obsoletos o con fallas recurrentes (' + Math.round(nMalos * 100 / total) + '\u00a0%)'],
+  [cuantos(e => e.trasladado), 'equipos estaban en un puesto distinto al asignado, por los traslados de la cuarentena'],
+  [cuantos(e => e.softwareUsuario), 'equipos tienen programas instalados o actualizados por el propio usuario'],
+  [cuantos(e => e.so !== 'Windows 11'), 'equipos no tienen Windows 11 y ya no reciben parches de seguridad']
+].map(c => '<div><dt>' + c[0] + '</dt><dd>' + c[1] + '</dd></div>').join('');
+
+// Resumen por sede (Caracas se separa por piso)
+const grupos = [];
+ORDEN_SEDES.forEach(s => {
+  const pisos = [...new Set(EQUIPOS.filter(e => e.sede === s).map(e => e.piso))];
+  pisos.forEach(p => grupos.push([s, p]));
+});
+const filasSede = grupos.map(([s, p]) => {
+  const g = EQUIPOS.filter(e => e.sede === s && e.piso === p);
+  return [p ? s + ', ' + p.toLowerCase() : s, [...new Set(g.map(e => e.area))].join(', '), g.length,
+          g.filter(e => !malo(e)).length, g.filter(malo).length, g.filter(e => e.trasladado).length];
+});
+filasSede.push(['<b>Total</b>', 'Cuatro sedes', '<b>' + total + '</b>', '<b>' + (total - nMalos) + '</b>', '<b>' + nMalos + '</b>', '<b>' + cuantos(e => e.trasladado) + '</b>']);
+tabla('t-inventario', ['Sede', 'Áreas', 'Equipos', 'Operativos', 'Obsoletos o con fallas', 'Trasladados en cuarentena'], filasSede);
+
+// Criterios de obsolescencia
+tabla('t-criterios', ['Criterio', 'Valor aceptable', 'Por qué importa', 'Equipos que no lo cumplen'], [
+  ['Procesador', 'Compatible con Windows 11 (Intel Core de 8.ª generación o posterior)', 'Windows 10 dejó de recibir parches de seguridad el 14 de octubre de 2025. Un procesador más viejo no puede pasar a Windows 11.', cuantos(e => !e.compatibleW11)],
+  ['Memoria RAM', '8 GB o más', 'Con 4 GB el sistema y el navegador ocupan casi toda la memoria y el equipo se congela con varias ventanas abiertas.', cuantos(e => e.ram < 8)],
+  ['Disco', 'SSD', 'Con un disco mecánico el arranque y la apertura de programas tardan varias veces más.', cuantos(e => e.disco.startsWith('HDD'))],
+  ['Sistema operativo', 'Windows 11', 'Windows 7 no recibe parches desde el 14 de enero de 2020 y Windows 10 desde el 14 de octubre de 2025.', cuantos(e => e.so !== 'Windows 11')],
+  ['Antigüedad', '7 años o menos', 'Pasado ese tiempo la garantía venció y los repuestos cuestan conseguirlos.', cuantos(e => ANIO_ACTUAL - e.anio > 7)],
+  ['Fallas', 'Menos de 3 fallas reportadas en 6 meses', 'Tres fallas o más apuntan a un problema de fondo y no a un incidente aislado.', cuantos(e => e.estado === 'Falla recurrente')]
+]);
+
+// Decisión por equipo
+const nAcc = a => cuantos(e => e.accion === a);
+const nSSD = cuantos(e => e.accion === 'Repotenciar' && e.disco.startsWith('HDD'));
+const nRAM = cuantos(e => e.accion === 'Repotenciar' && e.ram < 8);
+tabla('t-decision', ['Acción', 'Cuándo se aplica', 'Equipos', 'Qué hace falta'], [
+  [pill('Reemplazar', pillAccion), 'El procesador no es compatible con Windows 11 y además falla al menos otro criterio', nAcc('Reemplazar'), 'Un equipo nuevo del convenio por cada uno'],
+  [pill('Reparar', pillAccion), 'Falla recurrente en un equipo con hardware vigente', nAcc('Reparar'), 'Diagnóstico y repuesto: fuente de poder, batería, teclado o puerto de red'],
+  [pill('Repotenciar', pillAccion), 'Hardware vigente con poca memoria o con disco mecánico', nAcc('Repotenciar'), nSSD + ' discos SSD, ' + nRAM + ' módulos de memoria de 4 GB y migración a Windows 11'],
+  [pill('Mantener', pillAccion), 'Cumple todos los criterios', nAcc('Mantener'), 'Mantenimiento preventivo dos veces al año']
+]);
+const reemplazoSede = ORDEN_SEDES.map(s => s + ' ' + cuantos(e => e.sede === s && e.accion === 'Reemplazar')).join(', ');
+document.getElementById('nota-convenio').innerHTML = '<p>Para el convenio: hacen falta al menos <b>' + nAcc('Reemplazar') +
+  ' equipos nuevos</b> (' + reemplazoSede + '). Los ' + nAcc('Reparar') + ' equipos por reparar y los ' + nAcc('Repotenciar') +
+  ' por repotenciar se atienden con repuestos, sin esperar la dotación.</p>';
+
+// Detalle con filtros
+const llenar = (id, valores) => {
+  const sel = document.getElementById(id);
+  valores.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
+  sel.addEventListener('change', pintarEquipos);
+};
+llenar('f-sede', ORDEN_SEDES);
+llenar('f-estado', ['Operativo', 'Obsoleto', 'Falla recurrente']);
+llenar('f-accion', ['Reemplazar', 'Reparar', 'Repotenciar', 'Mantener']);
+function pintarEquipos() {
+  const fs = document.getElementById('f-sede').value, fe = document.getElementById('f-estado').value, fa = document.getElementById('f-accion').value;
+  const lista = EQUIPOS.filter(e => (!fs || e.sede === fs) && (!fe || e.estado === fe) && (!fa || e.accion === fa));
+  document.getElementById('conteo').textContent = 'Mostrando ' + lista.length + ' de ' + total + ' equipos.';
+  tabla('t-equipos', ['Código', 'Equipo', 'Especificaciones', 'Sistema operativo', 'Ubicación', 'Usuario', 'Estado', 'Hallazgo', 'Acción'],
+    lista.map(e => [e.codigo, e.modelo + '<br><small>' + e.tipo + ', ' + e.anio + '</small>',
+      e.cpu + ', ' + e.ram + ' GB de RAM, ' + e.disco, e.so,
+      e.sede + (e.piso ? ', ' + e.piso.toLowerCase() : '') + '<br><small>' + e.area + '</small>',
+      e.usuario, pill(e.estado, pillEstado), e.hallazgo, pill(e.accion, pillAccion)]));
+}
+pintarEquipos();
+
+tabla('t-opciones', ['Herramienta', 'Inventario de equipos', 'Licencia', 'En español', 'Decisión'], OPCIONES);
+tabla('t-problemas-diag', ['Problema', 'Descripción', 'Dónde ocurre'], PROBLEMAS_DIAG);
+tabla('t-cumplimiento', ['Práctica de atención al usuario', 'Norma o marco', 'Situación actual', 'Cumplimiento'], CUMPLIMIENTO);
+{
+  const nNo = CUMPLIMIENTO.filter(f => f[3] === NO).length, nPar = CUMPLIMIENTO.filter(f => f[3] === PARCIAL).length;
+  const nSi = CUMPLIMIENTO.length - nNo - nPar;
+  document.getElementById('nota-cumplimiento').innerHTML = '<p>Resultado: de ' + CUMPLIMIENTO.length + ' prácticas revisadas, ' +
+    (nSi ? nSi + ' se cumplen' : 'ninguna se cumple') + ' por completo, ' + nPar + ' se cumplen de forma parcial y ' + nNo + ' no se cumplen.</p>';
+}
+
+// Habilidades
+tabla('t-a1', ['Problema del caso', 'Habilidad técnica necesaria', '¿Por qué se necesita?', 'Marco teórico que la respalda'], A1);
+const verEn = (texto, enlace) => oPend(texto) + (texto && enlace ? ' <a href="#' + enlace + '">Ver</a>' : '');
+tabla('t-a2', ['Nombre del integrante', 'Habilidad técnica que domina', 'Nivel', 'Evidencia', 'Relación con el caso'],
+  EQUIPO.integrantes.flatMap(p => p.tecnicas.map(t => [oPend(p.nombre), oPend(t.habilidad), oPend(t.nivel), verEn(t.evidencia, t.enlace), oPend(t.caso)])));
+tabla('t-b1', ['Situación del caso', 'Habilidad blanda necesaria', 'Conducta observable esperada', 'Marco teórico que la respalda'], B1);
+tabla('t-b2', ['Nombre del integrante', 'Habilidad blanda demostrada', 'Situación concreta donde la demostró', 'Evidencia en la página web', 'Relación con el caso'],
+  EQUIPO.integrantes.flatMap(p => p.blandas.map(b => [oPend(p.nombre), oPend(b.habilidad), oPend(b.situacion), verEn(b.evidencia, b.enlace), oPend(b.caso)])));
+document.getElementById('decalogo').innerHTML = DECALOGO.map(d => '<li><b>' + d[0] + '</b><span>' + d[1] + '</span></li>').join('');
+document.getElementById('autoevaluacion').textContent = AUTOEVALUACION;
+
+// Soporte técnico
+const COLS_CLASIF = ['Problema', '¿Incidente o problema? (ITIL)', 'Naturaleza', 'Consecuencia para la Fundación'];
+tabla('t-clasif', COLS_CLASIF, CLASIF);
+tabla('t-futuros', COLS_CLASIF, FUTUROS);
+document.getElementById('t-sla').innerHTML = Object.keys(SLA).map((cat, i) => '<h4>' + cat + '</h4><div id="sla-' + i + '"></div>').join('');
+Object.keys(SLA).forEach((cat, i) => tabla('sla-' + i,
+  ['Categoría', 'Prioridad', 'Impacto (usuarios afectados)', 'Urgencia', 'Tiempo de respuesta', 'Tiempo de resolución', '¿A quién se escala si no se cumple?'],
+  SLA[cat].map(f => [cat].concat(f))));
+tabla('t-medidas', ['Medida', '¿Qué problema del caso atiende?', 'Indicador estadístico', 'Meta', 'Fuente de datos'], MEDIDAS);
+tabla('t-recoleccion', ['Medida', 'Quién, cuándo y con qué herramienta'], RECOLECCION.map((r, i) => [MEDIDAS[i][0], r]));
+document.getElementById('grafica').innerHTML =
+  '<div class="leyenda"><span><i style="background:var(--bar-now)"></i>Actual</span><span><i style="background:var(--bar-goal)"></i>Meta</span></div>' +
+  GRAFICA.map(g =>
+    '<div class="fila-g"><b>' + g[0] + '</b><small>' + g[3] + '</small>' +
+    '<div class="barra"><div><i style="width:' + g[1] + '%;background:var(--bar-now)"></i></div><span>' + g[1] + ' %</span></div>' +
+    '<div class="barra"><div><i style="width:' + g[2] + '%;background:var(--bar-goal)"></i></div><span>' + g[2] + ' %</span></div></div>').join('');
+
+// Entregas
+const enlace = (url, texto) => url ? '<a href="' + url + '" target="_blank" rel="noopener">' + texto + '</a>' : '<span class="pendiente">Enlace pendiente</span>';
+document.getElementById('carpeta').innerHTML = '<b>Carpeta general del equipo en Drive:</b> ' + enlace(CARPETA_DRIVE, 'Abrir carpeta');
+document.getElementById('entregas').innerHTML = MODULOS.map((m, i) =>
+  '<h3>' + m.titulo + ' <span class="peso">' + m.peso + ' %</span></h3><div id="mod-' + i + '"></div>' +
+  (m.evidencias.length ? '<h4>Evidencias del módulo</h4><div class="ficha"><ul class="enlaces">' +
+    m.evidencias.map(ev => '<li><span>' + ev.tipo + '</span>' + enlace(ev.url, 'Abrir') + '</li>').join('') + '</ul></div>' : '')
+).join('');
+MODULOS.forEach((m, i) => tabla('mod-' + i, ['Parte', 'Peso', 'Dónde está'], m.partes.map(p => [p.nombre, p.peso + ' %',
+  p.url ? enlace(p.url, 'Abrir en Drive') :
+  p.enPagina ? '<a href="#' + p.enPagina + '">' + (p.enPagina === 'caso' ? 'Esta página' : 'Pestaña ' + document.querySelector('nav.vistas a[href="#' + p.enPagina + '"]').textContent) + '</a>' :
+  '<span class="pendiente">Próximas sesiones</span>'])));
+tabla('t-equipo', ['Integrante', 'Equipo'], EQUIPO.integrantes.map(p => [oPend(p.nombre), EQUIPO.nombre]));
+
+// Sesión didáctica 2: Proyecto
+const lista = pasos => '<ol class="etapas">' + pasos.map(x => '<li>' + x + '</li>').join('') + '</ol>';
+const externo = (nombre, url) => '<a href="' + url + '" target="_blank" rel="noopener">' + nombre + '</a>';
+tabla('t-tipos', ['Criterio de la lectura', 'Tipo de proyecto', 'Por qué aplica al caso'], TIPOS);
+tabla('t-tipos2', ['Criterio', 'Tipo de proyecto', 'Fuente', 'Por qué aplica al caso'], TIPOS2);
+document.getElementById('referencias-proyecto').innerHTML = REFERENCIAS_PROYECTO.map(r => '<li>' + r + '</li>').join('');
+document.getElementById('tipos-sel').innerHTML = TIPOS_SELECCIONADOS.map(t =>
+  '<div class="ficha"><h4>' + t[0] + '</h4><p><b>' + t[1] + '</b> ' + t[2] + '</p></div>').join('');
+document.getElementById('manuscritos').innerHTML = MANUSCRITOS.map(m =>
+  '<div class="ficha manuscrito"><h4>' + m.integrante + '</h4><p>Manuscrito 1.2: ¿Es el caso un proyecto sociotecnológico?</p><p>' +
+  enlace(m.url, 'Ver manuscrito') + '</p></div>').join('');
+tabla('t-elementos', ['Elemento', '¿Qué es?', '¿Cómo se aplica al caso de la Fundación?', 'Dominio del PMBOK 7'], ELEMENTOS);
+document.getElementById('manuscrito-elementos').innerHTML = '<b>Manuscrito 1.3:</b> ' + enlace(MANUSCRITO_ELEMENTOS, 'Ver manuscrito');
+
+// Portafolio digital
+document.getElementById('pf-equipo').textContent = EQUIPO.nombre + ': ' + AUTORES_PORTAFOLIO.map(a => a.nombre).join(' y ');
+const iniciales = n => n.split(' ').map(x => x[0]).slice(0, 2).join('');
+document.getElementById('autores').innerHTML = AUTORES_PORTAFOLIO.map(a =>
+  '<div class="ficha autor">' + (a.foto ? '<img class="foto" src="' + a.foto + '" alt="Foto de ' + a.nombre + '">' : '<div class="foto" aria-hidden="true">' + iniciales(a.nombre) + '</div>') +
+  '<div><h4>' + a.nombre + '</h4><p class="rol">' + a.rol + '</p><p>' + a.presentacion + '</p></div></div>').join('');
+document.querySelectorAll('[data-fecha]').forEach(p => {
+  p.textContent = 'Actividad grupal. Publicada el ' + FECHAS_PORTAFOLIO[p.dataset.fecha] + '.';
+});
+document.getElementById('ig-grid').innerHTML = INFOGRAFIA.map(c =>
+  '<div class="ig-crit"><h5>' + c[0] + '</h5><ul>' + c[1].map(t =>
+    '<li' + (t[2] ? ' class="inf"' : '') + '><b>' + t[0] + (t[2] ? '<span class="tag-inf">Informática</span>' : '') + '</b>' + t[1] + '</li>').join('') + '</ul></div>').join('');
+document.getElementById('mapa-elementos').innerHTML = MAPA_ELEMENTOS.map(e =>
+  '<div class="nodo"><b>' + e[0] + '</b>' + e[1] + '<br><span class="conecta">Pesa en: ' + e[2] + '</span></div>').join('');
+document.getElementById('mapa-ciclo').innerHTML = MAPA_CICLO.map(c =>
+  '<li><div class="nodo"><b>' + c[0] + '</b>PMBOK</div><em>en un proyecto sociotecnológico</em><div class="nodo pst"><b>' + c[1] + '</b>Armao y Urbina</div></li>').join('');
+document.getElementById('ejemplos').innerHTML = EJEMPLOS.map(e =>
+  '<div class="ejemplo" style="--c:' + e.color + '"><span class="area">' + e.area + '</span><h4>' + e.nombre + '</h4><dl>' +
+  '<dt>Problema</dt><dd>' + e.problema + '</dd><dt>Solución tecnológica</dt><dd>' + e.solucion + '</dd>' +
+  '<dt>Beneficiados</dt><dd>' + e.beneficiados + '</dd><dt>Fuente</dt><dd>' + e.fuente + '</dd></dl></div>').join('');
+document.getElementById('reflexiones').innerHTML = Object.keys(REFLEXIONES).map(n =>
+  '<div class="reflex"><h4>' + n + '</h4><dl>' + REFLEXIONES[n].map((r, i) =>
+    '<dt>' + ACTIVIDADES_PORTAFOLIO[i] + '</dt><dd>' + oPend(r) + '</dd>').join('') + '</dl></div>').join('');
+document.getElementById('referencias-portafolio').innerHTML = REFERENCIAS_PORTAFOLIO.map(r => '<li>' + r + '</li>').join('');
+const pillOrigen = { 'Actual': 'p-crit', 'Futuro': 'p-medio' };
+tabla('t-catalogo', ['Problema identificado', 'Herramienta (URL)', 'Tipo de herramienta', '¿Cómo resuelve el problema?'],
+  CATALOGO.map(c => [c[0] + '<span class="origen">' + pill(c[1], pillOrigen) + '</span>', externo(c[2], c[3]), c[4], c[5]]));
+
+// Marco teórico
+tabla('t-tendencias', ['Tendencia', 'Autor o referente', '¿En qué consiste?', 'Etapas para la ejecución', 'Aplicación al caso'],
+  TENDENCIAS.map(t => [t[0], t[1], t[2], lista(t[3]), t[4]]));
+tabla('t-gestion', ['Herramienta o software', 'Tipo', '¿Qué permite gestionar?', '¿Cómo se aplicaría al caso de la Fundación?', 'Enlace'],
+  HERRAMIENTAS_GESTION.map(g => [g[0], g[1], g[2], g[3], externo('Sitio oficial', g[4])]));
+tabla('t-autores', ['Autor', 'Obra o aporte principal', '¿En qué consiste su procedimiento?', '¿Cómo se aplica al caso de la Fundación?'],
+  AUTORES.map(a => [a[0], a[1], a[2], a[4]]));
+document.getElementById('fases').innerHTML = AUTORES.map(a =>
+  '<div class="carril" style="--c:' + a[5] + '"><h5>' + a[0] + '<small>' + a[3].length + ' fases</small></h5><ol>' +
+  a[3].map(f => '<li><span>' + f + '</span></li>').join('') + '</ol></div>').join('');
+
+// Navegación entre secciones
+const VISTAS = ['caso', 'diagnostico', 'habilidades', 'soporte', 'proyecto', 'portafolio', 'marco', 'entregas'];
+function mostrar() {
+  const [h, ancla] = location.hash.replace('#', '').split('/');
+  const actual = VISTAS.includes(h) ? h : 'caso';
+  VISTAS.forEach(v => { document.getElementById('v-' + v).hidden = (v !== actual); });
+  document.querySelectorAll('nav.vistas a').forEach(a => {
+    if (a.getAttribute('href') === '#' + actual) { a.setAttribute('aria-current', 'page'); a.scrollIntoView({ block: 'nearest', inline: 'center' }); }
+    else a.removeAttribute('aria-current');
+  });
+  const destino = ancla && document.getElementById(ancla);
+  if (destino) destino.scrollIntoView(); else window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', mostrar);
+mostrar();
+const btnArriba = document.getElementById('arriba');
+const revisarArriba = () => btnArriba.classList.toggle('visible', window.scrollY > 400);
+window.addEventListener('scroll', revisarArriba, { passive: true });
+revisarArriba();
+btnArriba.addEventListener('click', () => {
+  const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: suave ? 'smooth' : 'auto' });
+  document.querySelector('nav.vistas a[aria-current="page"]')?.focus({ preventScroll: true });
+});
+document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => {
+  document.getElementById(b.dataset.ir).scrollIntoView();
+}));
+</script>
+</body>
+</html>
