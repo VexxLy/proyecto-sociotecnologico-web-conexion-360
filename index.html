@@ -281,6 +281,104 @@ td:first-child{font-weight:600}
 .reflex dt:first-child{margin-top:0}
 .reflex dd{margin:.2rem 0 0; max-width:80ch}
 
+/* ===== Inicio renovado ===== */
+.ico{width:1.5rem; height:1.5rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none}
+.portada-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:1.5rem; align-items:center}
+.heroilu{width:100%; height:auto; max-width:520px; justify-self:end; border-radius:16px}
+@media (max-width:760px){ .portada-grid{grid-template-columns:1fr} .heroilu{justify-self:start} }
+.intro-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:1.5rem; align-items:start}
+@media (max-width:760px){ .intro-grid{grid-template-columns:1fr} }
+.ofrecemos{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem}
+.oferta{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.85rem; display:flex; flex-direction:column; gap:.3rem}
+.oferta .ico{width:2.2rem; height:2.2rem; color:var(--hero-ink); background:var(--accent); border-radius:10px; padding:.4rem}
+.oferta:nth-child(2) .ico{background:var(--alto)} .oferta:nth-child(3) .ico{background:var(--ok)} .oferta:nth-child(4) .ico{background:var(--crit)}
+.oferta b{font-family:"Bricolage Grotesque",sans-serif; font-size:1.02rem}
+.oferta span{color:var(--muted); font-size:.9rem; line-height:1.4}
+.mvv{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:1rem 0}
+.mvv .ficha{display:flex; gap:.8rem; align-items:flex-start}
+.mvv .ficha .ico{width:2.6rem; height:2.6rem; color:var(--accent); background:var(--bg); border:1px solid var(--line); border-radius:50%; padding:.5rem}
+.valores2{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); margin:1rem 0}
+.valor{display:flex; gap:.75rem; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-left:5px solid var(--sun); border-radius:10px; padding:.8rem .9rem}
+.valor .ico{color:var(--accent); width:1.9rem; height:1.9rem}
+.valor b{font-family:"Bricolage Grotesque",sans-serif}
+.valor p{margin:.15rem 0 0; font-size:.92rem; color:var(--muted)}
+.org{margin:1rem 0 .5rem}
+.org-top{max-width:440px; margin:0 auto; position:relative}
+.org-top::after{content:""; position:absolute; left:50%; bottom:-1.1rem; height:1.1rem; border-left:2px solid var(--line)}
+.org-rama{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.8rem; margin-top:2.2rem; position:relative}
+.org-externo{max-width:440px; margin:1.6rem auto 0}
+.org-externo > small{display:block; text-align:center; color:var(--muted); font-size:.82rem; margin-bottom:.4rem}
+.org-rama::before{content:""; position:absolute; top:-1.1rem; left:9%; right:9%; border-top:2px solid var(--line)}
+.org-rama .depto::before{content:""; position:absolute; top:-1.1rem; left:50%; height:1.1rem; border-left:2px solid var(--line)}
+.depto{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.85rem .95rem}
+.depto-cab{display:flex; align-items:center; gap:.55rem; margin-bottom:.4rem}
+.depto-cab .ico{width:2.2rem; height:2.2rem; padding:.42rem; border-radius:10px; background:var(--hero-bg); color:var(--sun)}
+.depto-cab b{font-family:"Bricolage Grotesque",sans-serif; font-size:1.02rem; line-height:1.2}
+.depto ul{margin:0; padding-left:1.05rem; font-size:.9rem; color:var(--muted)}
+.depto li{margin:.15rem 0}
+.depto.raiz{background:var(--hero-bg); color:var(--hero-ink); border-color:var(--hero-bg)}
+.depto.raiz ul{color:var(--hero-soft)}
+.depto.raiz .depto-cab .ico{background:var(--sun); color:var(--sun-ink)}
+.depto.ti{border:2px solid var(--sun)}
+.depto.externo{border-style:dashed}
+.chips{display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.5rem}
+.chips span{font-size:.8rem; font-weight:600; border:1px solid var(--line); border-radius:999px; padding:.05rem .55rem; background:var(--bg)}
+@media (max-width:1000px){ .org-rama::before,.org-rama .depto::before,.org-top::after{display:none} .org-rama{margin-top:1rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))} }
+.lugares{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin:1rem 0}
+.lugar{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.lugar svg{display:block; width:100%; height:auto}
+.lugar > div{padding:.75rem .9rem .9rem}
+.lugar h4{margin:0}
+.lugar .donde{color:var(--accent); font-weight:600; font-size:.9rem; margin:.1rem 0 .4rem}
+.lugar p{margin:.2rem 0; font-size:.92rem}
+.lugar .soporte{display:flex; align-items:center; gap:.4rem; color:var(--muted); font-size:.85rem; margin-top:.5rem}
+.lugar .soporte .ico{width:1.1rem; height:1.1rem}
+.partes{display:grid; gap:.9rem; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin:1rem 0}
+.parte{display:flex; gap:.8rem; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.85rem .95rem}
+.parte .avatar{width:2.8rem; height:2.8rem; padding:.5rem; border-radius:50%; background:var(--c); color:#FFFFFF}
+.parte b{display:block; font-family:"Bricolage Grotesque",sans-serif}
+.parte .rol{display:block; color:var(--accent); font-weight:600; font-size:.88rem}
+.parte p{margin:.3rem 0; font-size:.92rem}
+.parte .influ{font-size:.8rem; font-weight:700; color:var(--muted)}
+/* ===== Diagnóstico renovado ===== */
+.cifras dt{display:flex; align-items:center; gap:.5rem}
+.cifras dt .ico{width:1.6rem; height:1.6rem; color:var(--accent)}
+.cifras div:first-child dt .ico{color:var(--crit)}
+.tablero{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1rem 1.1rem; margin:1rem 0}
+.seg{display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.8rem}
+.seg button{font:inherit; font-size:.88rem; font-weight:600; border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:999px; padding:.35rem .8rem; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--hero-bg); color:var(--hero-ink); border-color:var(--hero-bg)}
+.leyenda2{display:flex; flex-wrap:wrap; gap:1rem; font-size:.86rem; color:var(--muted); margin:0 0 .6rem}
+.leyenda2 i{display:inline-block; width:.85rem; height:.85rem; border-radius:3px; margin-right:.35rem; vertical-align:-.1em}
+.fila-barra{display:grid; grid-template-columns:minmax(7rem,12rem) 1fr 2.2rem; align-items:center; gap:.7rem; width:100%; font:inherit; color:inherit;
+  background:none; border:0; border-top:1px solid var(--line); padding:.5rem .2rem; cursor:pointer; text-align:left}
+.fila-barra:hover,.fila-barra:focus-visible{background:var(--bg)}
+.fila-barra .eti{font-weight:600; font-size:.92rem; line-height:1.25}
+.fila-barra .eti small{display:block; font-weight:400; color:var(--muted); font-size:.78rem}
+.pista{display:flex; gap:2px; height:14px}
+.pista i{display:block; height:100%; border-radius:4px}
+.fila-barra .num{font-weight:700; text-align:right; font-size:.95rem}
+#t-equipos td:first-child{white-space:nowrap}
+.hallazgo{margin:.8rem 0 0; padding:.6rem .8rem; background:var(--bg); border-radius:8px; font-size:.94rem; max-width:none}
+#tip{position:fixed; z-index:20; pointer-events:none; background:var(--ink); color:var(--bg); font-size:.82rem; font-weight:600; border-radius:6px; padding:.3rem .55rem; max-width:240px}
+.perfil{display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); margin:1rem 0}
+.perfil div{background:var(--surface); border:1px solid var(--line); border-top:4px solid var(--ok); border-radius:10px; padding:.75rem .85rem}
+.perfil .ico{color:var(--ok); width:1.6rem; height:1.6rem}
+.perfil b{display:block; font-family:"Bricolage Grotesque",sans-serif; font-size:1.3rem; margin:.2rem 0}
+.perfil span{font-size:.88rem; color:var(--muted)}
+.extra{display:inline-flex; align-items:center; gap:.4rem; background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:.2rem .4rem .2rem .7rem; font-size:.86rem; font-weight:600}
+.filtros button.limpiar,.extra button{font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--surface); color:var(--accent); border-radius:6px; padding:.4rem .7rem; cursor:pointer}
+.extra button{border-radius:999px; padding:.05rem .5rem}
+.asis{list-style:none; padding:0; margin:1rem 0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:.6rem; counter-reset:a}
+.asis li{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.8rem; font-size:.9rem; line-height:1.4}
+.asis li .ico{width:2.2rem; height:2.2rem; padding:.42rem; border-radius:50%; background:var(--bg); color:var(--accent); border:1px solid var(--line); margin-bottom:.4rem}
+.asis li:last-child{border-color:var(--crit)}
+.asis li:last-child .ico{color:var(--crit)}
+.asis li:not(:last-child)::after{content:"\2192"; position:absolute; right:-.55rem; top:1.3rem; color:var(--muted); font-weight:700}
+@media (max-width:900px){ .asis{grid-template-columns:1fr} .asis li:not(:last-child)::after{content:"\2193"; right:auto; left:1.4rem; top:auto; bottom:-1rem} }
+.metas{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin:1rem 0}
+.pie-equipo{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.05rem; color:var(--sun)!important}
+
 footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px solid var(--sun); padding:1.8rem 0 calc(2rem + env(safe-area-inset-bottom,0px)); font-size:.95rem}
 .pie-grid{display:flex; gap:1.2rem; align-items:flex-start}
 .pie-logo{width:84px; height:84px; object-fit:contain; background:#FFFFFF; border-radius:12px; padding:6px; flex:none}
@@ -298,7 +396,7 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
   <div class="wrap">
     <div class="marca">Conexión <span>360</span></div>
     <nav class="vistas" aria-label="Secciones del sitio">
-      <a href="#caso">El caso</a>
+      <a href="#caso">Inicio</a>
       <a href="#diagnostico">Diagnóstico</a>
       <a href="#habilidades">Habilidades técnicas y blandas</a>
       <a href="#soporte">Soporte técnico</a>
@@ -315,70 +413,110 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
 <!-- ============================================================
      VISTA 1 · EL CASO
      ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="esc-caracas" viewBox="0 0 300 160">
+    <rect width="300" height="160" fill="#CFE6EF"/>
+    <path d="M0 100 C 50 45, 100 35, 150 70 S 240 40, 300 85 V160 H0Z" fill="#4E9A72"/>
+    <path d="M0 118 C 60 85, 130 90, 190 105 S 270 95, 300 110 V160 H0Z" fill="#3B7F5C"/>
+    <g fill="#5E7480"><rect x="20" y="95" width="26" height="65"/><rect x="50" y="80" width="22" height="80"/><rect x="76" y="105" width="30" height="55"/><rect x="110" y="70" width="24" height="90"/><rect x="138" y="98" width="28" height="62"/><rect x="170" y="86" width="20" height="74"/><rect x="194" y="110" width="34" height="50"/><rect x="232" y="92" width="22" height="68"/><rect x="258" y="104" width="30" height="56"/></g>
+    <g fill="#F2D27A" opacity=".85"><rect x="55" y="88" width="4" height="5"/><rect x="63" y="98" width="4" height="5"/><rect x="115" y="78" width="4" height="5"/><rect x="124" y="92" width="4" height="5"/><rect x="115" y="106" width="4" height="5"/><rect x="175" y="96" width="4" height="5"/><rect x="238" y="100" width="4" height="5"/><rect x="246" y="114" width="4" height="5"/></g>
+    <rect y="150" width="300" height="10" fill="#4A5C66"/>
+  </symbol>
+  <symbol id="esc-merida" viewBox="0 0 300 160">
+    <rect width="300" height="160" fill="#D9EEF7"/>
+    <path d="M0 160 L0 110 L60 60 L95 95 L150 25 L200 85 L240 55 L300 100 V160Z" fill="#5D7FA3"/>
+    <g fill="#FFFFFF"><path d="M150 25 L136 46 L146 42 L154 50 L162 41 L168 47Z"/><path d="M240 55 L229 70 L238 67 L245 73 L251 66Z"/><path d="M60 60 L50 72 L58 70 L64 76 L70 70Z"/></g>
+    <path d="M0 160 V128 C 70 110, 140 135, 210 120 S 280 125, 300 118 V160Z" fill="#6FAE7B"/>
+    <path d="M20 135 L150 40" stroke="#2C3E45" stroke-width="1.5"/>
+    <path d="M86 86 v6" stroke="#2C3E45" stroke-width="1.5"/>
+    <rect x="79" y="92" width="15" height="11" rx="2" fill="#B5321F"/>
+  </symbol>
+  <symbol id="esc-coro" viewBox="0 0 300 160">
+    <rect width="300" height="160" fill="#F8E7C2"/>
+    <circle cx="235" cy="45" r="22" fill="#F2B705"/>
+    <path d="M0 110 C 60 80, 120 85, 170 108 S 260 90, 300 100 V160 H0Z" fill="#E9C27A"/>
+    <path d="M0 130 C 70 105, 140 120, 200 132 S 270 118, 300 126 V160 H0Z" fill="#D9A651"/>
+    <path d="M0 148 C 80 135, 160 150, 300 140 V160 H0Z" fill="#C88F3C"/>
+    <path d="M120 100 q20 -6 40 0 M210 118 q15 -5 30 0" stroke="#F6DDA6" stroke-width="2" fill="none"/>
+    <g fill="#3F7A4C"><rect x="55" y="95" width="10" height="40" rx="5"/><rect x="43" y="105" width="8" height="18" rx="4"/><rect x="43" y="118" width="16" height="6" rx="3"/><rect x="69" y="100" width="8" height="16" rx="4"/><rect x="61" y="111" width="16" height="6" rx="3"/></g>
+  </symbol>
+  <symbol id="esc-porlamar" viewBox="0 0 300 160">
+    <rect width="300" height="160" fill="#CFEFF6"/>
+    <circle cx="240" cy="40" r="18" fill="#F2B705"/>
+    <rect y="88" width="300" height="42" fill="#2B97B8"/>
+    <path d="M200 88 q30 -18 60 0z" fill="#5FA67F"/>
+    <path d="M20 100 q10 -5 20 0 t20 0 M150 112 q10 -5 20 0 t20 0 M230 100 q10 -5 20 0" stroke="#E6F7FB" stroke-width="2" fill="none"/>
+    <path d="M0 125 C 80 112, 200 118, 300 128 V160 H0Z" fill="#F0D59B"/>
+    <path d="M80 150 C 78 120, 88 95, 104 75" stroke="#8A5A2B" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <g fill="#3F8F5A"><path d="M104 75 C 85 62, 70 66, 60 78 C 78 72, 92 74, 104 75Z"/><path d="M104 75 C 112 56, 128 52, 140 58 C 124 62, 114 68, 104 75Z"/><path d="M104 75 C 120 72, 134 80, 140 94 C 126 84, 114 80, 104 75Z"/><path d="M104 75 C 96 60, 98 46, 108 38 C 106 52, 106 64, 104 75Z"/><path d="M104 75 C 90 80, 82 92, 82 104 C 90 92, 96 84, 104 75Z"/></g>
+  </symbol>
+</svg>
 <section class="vista" id="v-caso">
   <div class="portada">
-    <div class="wrap">
-      <p class="inst" id="inst-portada"></p>
-      <h1>Fundación Rutas del Araguaney</h1>
-      <p class="lema">“Conocer Venezuela es un derecho de todos”</p>
-      <p class="equipo" id="firma-equipo"></p>
-      <ol class="ruta" id="ruta" aria-label="Sedes de la Fundación"></ol>
+    <div class="wrap portada-grid">
+      <div>
+        <p class="inst" id="inst-portada"></p>
+        <h1>Fundación Rutas del Araguaney</h1>
+        <p class="lema">“Conocer Venezuela es un derecho de todos”</p>
+        <p class="equipo" id="firma-equipo"></p>
+      </div>
+      <svg class="heroilu" viewBox="0 0 480 320" role="img" aria-label="Ilustración: un araguaney florecido junto a una carretera por la que pasa un autobús de turismo">
+        <title>Un araguaney y un autobús de turismo en la carretera</title>
+        <rect width="480" height="320" fill="#FFFFFF" opacity=".06"/>
+        <circle cx="400" cy="62" r="34" fill="#FFD23F" opacity=".9"/>
+        <path d="M0 210 C 90 150, 170 160, 250 190 S 400 150, 480 180 V320 H0Z" fill="#2F7A6B"/>
+        <path d="M0 250 C 120 215, 260 230, 480 220 V320 H0Z" fill="#256458"/>
+        <path d="M0 300 C 140 250, 330 262, 480 240 V280 C 330 296, 160 292, 0 330Z" fill="#14343B"/>
+        <path d="M0 316 C 150 270, 330 276, 480 260" stroke="#F2B705" stroke-width="3" stroke-dasharray="14 12" fill="none"/>
+        <path d="M112 262 C 116 222, 112 190, 104 165" stroke="#6B4423" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <path d="M110 205 C 126 186, 146 176, 166 170 M108 188 C 94 174, 80 168, 64 166" stroke="#6B4423" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="115" cy="120" r="30" fill="#F2B705"/><circle cx="80" cy="130" r="24" fill="#FFD23F"/><circle cx="150" cy="128" r="26" fill="#F7C948"/><circle cx="100" cy="95" r="24" fill="#FFD23F"/><circle cx="140" cy="92" r="22" fill="#F2B705"/><circle cx="62" cy="108" r="18" fill="#F7C948"/><circle cx="172" cy="108" r="18" fill="#FFD23F"/><circle cx="118" cy="72" r="20" fill="#F7C948"/><circle cx="88" cy="152" r="18" fill="#F2B705"/><circle cx="145" cy="154" r="18" fill="#FFD23F"/><circle cx="118" cy="150" r="16" fill="#F7C948"/><circle cx="190" cy="132" r="14" fill="#F2B705"/><circle cx="45" cy="132" r="14" fill="#FFD23F"/>
+        <g fill="#FFD23F"><circle cx="70" cy="245" r="3"/><circle cx="160" cy="236" r="2.5"/><circle cx="190" cy="250" r="3"/><circle cx="135" cy="268" r="2.5"/></g>
+        <g transform="translate(272 196)">
+          <rect width="160" height="58" rx="12" fill="#FFFFFF"/>
+          <rect y="36" width="160" height="8" fill="#0B5563"/>
+          <g fill="#BFE3E0"><rect x="12" y="10" width="26" height="18" rx="3"/><rect x="44" y="10" width="26" height="18" rx="3"/><rect x="76" y="10" width="26" height="18" rx="3"/><rect x="108" y="10" width="26" height="18" rx="3"/><rect x="141" y="10" width="13" height="24" rx="3"/></g>
+          <circle cx="34" cy="60" r="11" fill="#10282E"/><circle cx="34" cy="60" r="4" fill="#9FB8BA"/>
+          <circle cx="126" cy="60" r="11" fill="#10282E"/><circle cx="126" cy="60" r="4" fill="#9FB8BA"/>
+        </g>
+      </svg>
     </div>
   </div>
 
   <div class="wrap">
-    <h2>La organización</h2>
-    <p class="entrada">La Fundación Rutas del Araguaney es una organización venezolana de turismo social. Promueve planes vacacionales y recreacionales para institutos de educación básica y universitaria y para los trabajadores y trabajadoras de organismos públicos. Creció hasta abrir tres sucursales en el interior y acaba de crear su Departamento de Tecnología: dos personas para cuatro sedes.</p>
+    <h2>Quiénes somos</h2>
+    <div class="intro-grid">
+      <div>
+        <p class="entrada">La Fundación Rutas del Araguaney es una organización venezolana de turismo social. Organiza planes vacacionales y recreacionales para institutos de educación básica y universitaria y para los trabajadores y trabajadoras de organismos públicos.</p>
+        <p>Su propósito es que recrearse sea accesible y económico, y que cada viaje aproveche los recursos y servicios de la región que se visita. Empezó en Caracas y creció hasta abrir tres sucursales en el interior: Mérida, Porlamar y Coro.</p>
+      </div>
+      <div class="ofrecemos" id="ofrecemos"></div>
+    </div>
 
-    <div class="rejilla">
-      <div class="ficha"><h4>Misión</h4><p>Organizar planes vacacionales y recreacionales a bajo costo para estudiantes y para trabajadores y trabajadoras del sector público, con los recursos y servicios turísticos de cada región de Venezuela.</p></div>
-      <div class="ficha"><h4>Visión</h4><p>Ser la organización de turismo social más reconocida del país, con sedes en todas las regiones y una plataforma tecnológica que no detenga el trabajo de ninguna de ellas.</p></div>
-      <div class="ficha"><h4>Eslogan</h4><p>“Conocer Venezuela es un derecho de todos”.</p></div>
+    <div class="mvv">
+      <div class="ficha"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg><div><h4>Misión</h4><p>Organizar planes vacacionales y recreacionales a bajo costo para estudiantes y para trabajadores y trabajadoras del sector público, con los recursos y servicios turísticos de cada región de Venezuela.</p></div></div>
+      <div class="ficha"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><div><h4>Visión</h4><p>Ser la organización de turismo social más reconocida del país, con sedes en todas las regiones y una plataforma tecnológica que no detenga el trabajo de ninguna de ellas.</p></div></div>
+      <div class="ficha"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7H6v5h4v1c0 2-1 3-3 4M19 7h-4v5h4v1c0 2-1 3-3 4"/></svg><div><h4>Eslogan</h4><p>“Conocer Venezuela es un derecho de todos”.</p></div></div>
     </div>
 
     <h3>Valores</h3>
-    <ul class="valores">
-      <li>Inclusión</li><li>Solidaridad</li><li>Vocación de servicio</li><li>Responsabilidad</li><li>Identidad regional</li><li>Transparencia</li>
-    </ul>
+    <div class="valores2" id="valores"></div>
 
-    <h3>Organigrama</h3>
-    <ul class="arbol">
-      <li><span class="raiz">Presidencia<small style="color:var(--hero-soft)">Impulsa el convenio de dotación</small></span>
-        <ul>
-          <li><span>Administración y Finanzas</span></li>
-          <li><span>Talento Humano</span></li>
-          <li><span>Operaciones y Planes Turísticos</span></li>
-          <li><span class="ti">Departamento de Tecnología<small>Creado en la reestructuración</small></span>
-            <ul>
-              <li><span>Ingeniero en Sistemas<small>Jefe del departamento</small></span>
-                <ul><li><span>Técnico en informática<small>Único soporte operativo</small></span></li></ul>
-              </li>
-            </ul>
-          </li>
-          <li><span>Coordinación de Sucursales</span>
-            <ul>
-              <li><span>Sucursal Mérida</span></li>
-              <li><span>Sucursal Porlamar</span></li>
-              <li><span>Sucursal Coro</span></li>
-            </ul>
-          </li>
-          <li><span class="externo">Empresa privada aliada<small>Provee los equipos; no participa en la gestión interna</small></span></li>
-        </ul>
-      </li>
-    </ul>
+    <h3>Organigrama y funciones</h3>
+    <p>Cada unidad con sus funciones principales. El Departamento de Tecnología, marcado en amarillo, se creó en la última reestructuración.</p>
+    <div class="org">
+      <div class="org-top" id="org-top"></div>
+      <div class="org-rama" id="org-rama"></div>
+      <div class="org-externo"><small>Aliado externo, fuera de la estructura</small><div id="org-externo"></div></div>
+    </div>
 
     <h3>Lugares</h3>
-    <div id="t-lugares"></div>
+    <p>La sede principal y las tres sucursales, cada una en una región con atractivos distintos.</p>
+    <div class="lugares" id="lugares"></div>
 
-    <h3>Los actores</h3>
-    <div id="t-actores"></div>
-
-    <h3>El desafío del semestre</h3>
-    <div class="rejilla">
-      <div class="ficha"><h4>Soporte técnico al usuario <span class="peso">30 %</span></h4><p>Organizar la atención e identificar las habilidades blandas que necesita el equipo.</p></div>
-      <div class="ficha"><h4>Proyecto sociotecnológico <span class="peso">30 %</span></h4><p>Planificar cómo se reciben, configuran, distribuyen y atienden los equipos del convenio.</p></div>
-      <div class="ficha"><h4>Enfoque de Marco Lógico <span class="peso">40 %</span></h4><p>Armar la matriz del proyecto con sus objetivos, indicadores, medios de verificación y supuestos, y definir cómo se mantiene después de la entrega.</p></div>
-    </div>
+    <h3>Partes interesadas</h3>
+    <p>Quiénes intervienen en la Fundación, qué esperan y cuánto pueden influir en sus decisiones.</p>
+    <div class="partes" id="partes"></div>
   </div>
 </section>
 
@@ -388,28 +526,36 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
 <section class="vista" id="v-diagnostico" hidden>
   <div class="wrap">
     <h2>Diagnóstico</h2>
-    <p class="entrada">Cómo está hoy la plataforma tecnológica de la Fundación, antes de recibir los equipos del convenio.</p>
+    <p class="entrada">Una foto de cómo está hoy la plataforma tecnológica de la Fundación, antes de recibir los equipos del convenio.</p>
 
     <h3>Inventario de equipos y ubicación</h3>
-    <p>Levantamiento físico hecho puesto por puesto en las cuatro sedes en noviembre de 2026. Cada equipo quedó con su código, especificaciones, ubicación, usuario, estado y la acción que le corresponde.</p>
+    <p>Levantamiento físico hecho puesto por puesto en las cuatro sedes en noviembre de 2026. Cada equipo quedó con su código, marca, especificaciones, ubicación, usuario y estado.</p>
     <dl class="cifras" id="cifras"></dl>
+
+    <h4>Estadísticas del inventario</h4>
+    <p>Elige cómo agrupar los equipos. Pasa el cursor sobre una barra para ver el detalle, o haz clic en ella para ver esos equipos en la ficha técnica.</p>
+    <div class="tablero">
+      <div class="seg" id="seg" role="group" aria-label="Agrupar equipos por"></div>
+      <p class="leyenda2"><span><i style="background:var(--ok)"></i>Operativo</span><span><i style="background:var(--crit)"></i>Obsoleto</span><span><i style="background:var(--alto)"></i>Falla recurrente</span></p>
+      <div id="barras"></div>
+      <p class="hallazgo" id="hallazgo"></p>
+    </div>
+    <div id="tip" hidden></div>
+
+    <h4>¿Qué tienen en común los equipos que no fallan?</h4>
+    <div class="perfil" id="perfil"></div>
+    <p id="perfil-texto"></p>
 
     <h4>Resumen por sede</h4>
     <div id="t-inventario"></div>
 
-    <h4>Criterios de obsolescencia</h4>
-    <p>Un equipo se evalúa con seis criterios. La última columna dice cuántos de los 40 equipos no cumplen cada uno.</p>
-    <div id="t-criterios"></div>
-
-    <h4>Qué se hace con cada equipo</h4>
-    <div id="t-decision"></div>
-    <div class="nota" id="nota-convenio"></div>
-
-    <h4>Detalle de los 40 equipos</h4>
+    <h4 id="ficha">Ficha técnica por equipo</h4>
     <div class="filtros">
       <label>Sede<select id="f-sede"><option value="">Todas</option></select></label>
       <label>Estado<select id="f-estado"><option value="">Todos</option></select></label>
-      <label>Acción<select id="f-accion"><option value="">Todas</option></select></label>
+      <label>Marca<select id="f-marca"><option value="">Todas</option></select></label>
+      <label>Tipo<select id="f-tipo"><option value="">Todos</option></select></label>
+      <button type="button" class="limpiar" id="limpiar">Quitar filtros</button>
     </div>
     <p class="conteo" id="conteo" aria-live="polite"></p>
     <div id="t-equipos"></div>
@@ -418,25 +564,8 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
     <div id="t-problemas-diag"></div>
 
     <h3>Software de atención de fallas</h3>
-    <div class="rejilla">
-      <div class="ficha"><h4>Hoy</h4><p>No hay software. Las fallas se reportan por llamada al técnico; no quedan registradas, no tienen prioridad ni seguimiento, y no se pueden sacar estadísticas.</p></div>
-      <div class="ficha"><h4>Propuesta</h4><p>Una mesa de ayuda de software libre (GLPI), que reúne en una sola herramienta los tickets de fallas y el inventario de equipos, sin costo de licencia.</p></div>
-      <div class="ficha"><h4>Complementos</h4><p>Acceso remoto para atender a las sucursales, un formulario en línea como canal de respaldo para reportar fallas y un tablero en Looker Studio con los indicadores.</p></div>
-    </div>
-
-    <h4>Herramientas evaluadas</h4>
-    <div id="t-opciones"></div>
-
-    <h4>Flujo de atención propuesto</h4>
-    <ol class="flujo">
-      <li><b>Registro.</b> El usuario reporta la falla en la mesa de ayuda, por correo o por teléfono, y toda solicitud queda como ticket.</li>
-      <li><b>Clasificación.</b> El técnico define la categoría (hardware, software, redes o soporte remoto) y si es un incidente o una solicitud.</li>
-      <li><b>Priorización.</b> Se asigna la prioridad según cuántos usuarios afecta y cuánto puede esperar el trabajo, como indica la tabla de SLA.</li>
-      <li><b>Atención.</b> Se intenta resolver a distancia; si no se puede, el enlace local de la sucursal apoya en sitio.</li>
-      <li><b>Escalado.</b> Si vence el tiempo del SLA, el caso pasa al jefe del Departamento de Tecnología.</li>
-      <li><b>Cierre.</b> El técnico explica al usuario qué pasó y confirma que el equipo quedó funcionando.</li>
-      <li><b>Encuesta y registro.</b> El usuario responde la encuesta y la solución se guarda en la base de conocimiento para el próximo caso.</li>
-    </ol>
+    <p>Hoy la Fundación no tiene ningún software para atender fallas: ni mesa de ayuda, ni inventario en sistema, ni una herramienta formal de acceso remoto. Así se atiende hoy una falla:</p>
+    <ol class="asis" id="asis"></ol>
 
     <h3>Cumplimiento de normas de atención al usuario</h3>
     <div id="t-cumplimiento"></div>
@@ -510,7 +639,7 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
     <p class="entrada">Clasificación de los problemas, acuerdos de nivel de servicio, estadísticas y el marco teórico que lo sostiene.</p>
     <div class="indice" aria-label="Ir a">
       <button data-ir="s1">Clasificación</button><button data-ir="s2">Problemas futuros</button>
-      <button data-ir="s3">SLA</button><button data-ir="s4">Estadísticas</button><button data-ir="s5">Infografía ITIL, COBIT e ISO</button>
+      <button data-ir="s3">SLA</button><button data-ir="s4">Estadísticas</button><button data-ir="s5">Infografía ITIL, COBIT e ISO</button><button data-ir="s6">Propuesta de mesa de ayuda</button>
     </div>
 
     <h3 id="s1">Clasificación de los problemas actuales</h3>
@@ -570,6 +699,27 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
         <p class="frase">COBIT define qué se debe controlar y quién responde; ITIL explica cómo hacerlo en el día a día, e ISO/IEC 20000 comprueba con evidencia que se cumple.</p>
       </div>
     </div>
+
+    <h3 id="s6">Propuesta de mesa de ayuda</h3>
+    <p>Lo que se propone para cambiar la forma de atender fallas que describe el diagnóstico.</p>
+    <div class="rejilla">
+      <div class="ficha"><h4>Mesa de ayuda</h4><p>Una mesa de ayuda de software libre (GLPI), que reúne en una sola herramienta los tickets de fallas y el inventario de equipos, sin costo de licencia.</p></div>
+      <div class="ficha"><h4>Complementos</h4><p>Acceso remoto para atender a las sucursales, un formulario en línea como canal de respaldo para reportar fallas y un tablero en Looker Studio con los indicadores.</p></div>
+    </div>
+
+    <h4>Herramientas evaluadas</h4>
+    <div id="t-opciones"></div>
+
+    <h4>Flujo de atención propuesto</h4>
+    <ol class="flujo">
+      <li><b>Registro.</b> El usuario reporta la falla en la mesa de ayuda, por correo o por teléfono, y toda solicitud queda como ticket.</li>
+      <li><b>Clasificación.</b> El técnico define la categoría (hardware, software, redes o soporte remoto) y si es un incidente o una solicitud.</li>
+      <li><b>Priorización.</b> Se asigna la prioridad según cuántos usuarios afecta y cuánto puede esperar el trabajo, como indica la tabla de SLA.</li>
+      <li><b>Atención.</b> Se intenta resolver a distancia; si no se puede, el enlace local de la sucursal apoya en sitio.</li>
+      <li><b>Escalado.</b> Si vence el tiempo del SLA, el caso pasa al jefe del Departamento de Tecnología.</li>
+      <li><b>Cierre.</b> El técnico explica al usuario qué pasó y confirma que el equipo quedó funcionando.</li>
+      <li><b>Encuesta y registro.</b> El usuario responde la encuesta y la solución se guarda en la base de conocimiento para el próximo caso.</li>
+    </ol>
   </div>
 </section>
 
@@ -581,7 +731,7 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
     <h2>Proyecto</h2>
     <p class="entrada">Qué tipo de proyecto es la renovación tecnológica de la Fundación, de qué elementos se compone y qué opina cada integrante sobre su carácter sociotecnológico.</p>
     <div class="indice" aria-label="Ir a">
-      <button data-ir="p1">1.1 Clasificación del Proyecto</button><button data-ir="p2">1.2 Manuscritos Individuales</button><button data-ir="p3">1.3 Elementos del Proyecto</button>
+      <button data-ir="p1">1.1 Clasificación del Proyecto</button><button data-ir="p2">1.2 Manuscritos Individuales</button><button data-ir="p3">1.3 Elementos del Proyecto</button><button data-ir="p4">Plan para los equipos</button>
     </div>
 
     <h3 id="p1"><span class="codigo">1.1</span>Clasificación del Proyecto</h3>
@@ -615,6 +765,11 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
     <p>Definición breve de cada elemento y cómo se aplica al caso. La última columna indica el dominio de desempeño del PMBOK 7 con el que se relaciona.</p>
     <div id="t-elementos"></div>
     <p id="manuscrito-elementos"></p>
+
+    <h3 id="p4">Plan para los equipos</h3>
+    <p>A partir del diagnóstico, cada equipo recibe una acción según los criterios de obsolescencia.</p>
+    <div id="t-decision"></div>
+    <div class="nota" id="nota-convenio"></div>
 
     <h3>Referencias</h3>
     <ul class="flujo" id="referencias-proyecto"></ul>
@@ -779,6 +934,12 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
   <div class="wrap">
     <h2>Entregas y evaluación</h2>
     <p class="entrada">Dónde está cada parte que se evalúa en el semestre, con su peso y los enlaces al Drive del equipo. Los pesos son tentativos.</p>
+    <h3>Metas del semestre</h3>
+    <div class="metas">
+      <div class="ficha"><h4>Soporte técnico al usuario <span class="peso">30 %</span></h4><p>Organizar la atención e identificar las habilidades blandas que necesita el equipo.</p></div>
+      <div class="ficha"><h4>Proyecto sociotecnológico <span class="peso">30 %</span></h4><p>Planificar cómo se reciben, configuran, distribuyen y atienden los equipos del convenio.</p></div>
+      <div class="ficha"><h4>Enfoque de Marco Lógico <span class="peso">40 %</span></h4><p>Armar la matriz del proyecto con sus objetivos, indicadores, medios de verificación y supuestos, y definir cómo se mantiene después de la entrega.</p></div>
+    </div>
     <p id="carpeta"></p>
     <div id="entregas"></div>
     <h3>Equipo</h3>
@@ -797,6 +958,7 @@ footer.pie{background:var(--hero-bg); color:var(--hero-ink); border-top:4px soli
     <img class="pie-logo" src="logo-uneti.png" alt="Logo de la UNETI" onerror="this.remove()">
     <div>
       <p class="pie-uni" id="pie-uni"></p>
+      <p class="pie-equipo" id="pie-equipo"></p>
       <p id="pie-programa"></p>
       <p id="pie-autores"></p>
       <p id="pie-caso"></p>
@@ -974,46 +1136,46 @@ const MODULOS = [
 /* Inventario: un equipo por línea. Si cambia un dato, el resumen por sede,
    los criterios y las cifras del diagnóstico se recalculan solos. */
 const EQUIPOS = [
-  {"codigo": "RA-CCS-001", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Recepción", "usuario": "Recepcionista", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches de seguridad; tarda unos seis minutos en encender", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-002", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Se congela al abrir las hojas de cálculo con las listas de inscritos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-003", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-004", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Coordinador de atención al público", "estado": "Operativo", "hallazgo": "Estaba asignado a Talento Humano antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-CCS-005", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de inscripciones", "estado": "Falla recurrente", "hallazgo": "Pantalla azul varias veces por semana desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-CCS-006", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista contable", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-007", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Jefa de Administración y Finanzas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-008", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Asistente de pagos", "estado": "Obsoleto", "hallazgo": "El usuario instaló otra versión del programa contable y ya no abre los reportes", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-CCS-009", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista de presupuesto", "estado": "Operativo", "hallazgo": "Estaba asignado a Operaciones; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-CCS-010", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Analista de nómina", "estado": "Operativo", "hallazgo": "El sistema de nómina tarda en cargar por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-011", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Asistente de personal", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; el navegador actual no instala", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-012", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Jefe de Talento Humano", "estado": "Operativo", "hallazgo": "Estaba asignado a Presidencia antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-CCS-013", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Presidente", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-014", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Asistente de Presidencia", "estado": "Falla recurrente", "hallazgo": "Se apaga solo; la fuente de poder está dañada", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-015", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de planes turísticos", "estado": "Obsoleto", "hallazgo": "No soporta el programa de diseño de folletos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-016", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Coordinadora de planes turísticos", "estado": "Operativo", "hallazgo": "Tiene programas instalados sin autorización; hay que desinstalarlos", "accion": "Mantener", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-CCS-017", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de logística de viajes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-018", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de convenios con prestadores", "estado": "Obsoleto", "hallazgo": "Tarda más de un minuto en abrir el correo", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-019", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Coordinador de sucursales", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-020", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Analista de seguimiento de sedes", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Talento Humano; la batería no carga y se apaga al desconectarlo", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-CCS-021", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Ingeniero en Sistemas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-CCS-022", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Técnico en informática", "estado": "Operativo", "hallazgo": "Se usa para el soporte remoto a las sucursales", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-MER-001", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-MER-002", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; la impresora de la sede no tiene controlador para este sistema", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-MER-003", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Se reinicia solo desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-MER-004", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Administración; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-MER-005", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Se congela al cargar el sistema administrativo en línea", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-MER-006", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Mérida", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-POR-001", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Coordinación", "usuario": "Coordinador de sucursal", "estado": "Operativo", "hallazgo": "Estaba asignado a Atención al público antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-POR-002", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Puertos USB con corrosión por la humedad salina", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-POR-003", "tipo": "Escritorio", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Pierde la conexión varias veces al día; el puerto de red está dañado", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-POR-004", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Operativo", "hallazgo": "El usuario lo actualizó por su cuenta; disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-POR-005", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Porlamar", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches y sin antivirus vigente", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-POR-006", "tipo": "Laptop", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-COR-001", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-COR-002", "tipo": "Escritorio", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Muy lento; el ventilador está lleno de polvo y arena", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-COR-003", "tipo": "Laptop", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Coordinación; varias teclas no responden", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
-  {"codigo": "RA-COR-004", "tipo": "Escritorio", "modelo": "VIT", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Falla recurrente", "hallazgo": "Se apaga por recalentamiento; el usuario le instaló programas para \"acelerarlo\"", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
-  {"codigo": "RA-COR-005", "tipo": "Escritorio", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
-  {"codigo": "RA-COR-006", "tipo": "Laptop", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Promoción de planes", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Coordinación antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false}
+  {"codigo": "RA-CCS-001", "tipo": "Escritorio", "marca": "Siragon", "modelo": "Siragon de escritorio", "anio": 2010, "cpu": "Intel Core 2 Duo E7500", "compatibleW11": false, "ram": 2, "disco": "HDD 320 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Recepción", "usuario": "Recepcionista", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches de seguridad; tarda unos seis minutos en encender", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-002", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell OptiPlex 3010", "anio": 2013, "cpu": "Intel Core i3-3220", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Se congela al abrir las hojas de cálculo con las listas de inscritos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-003", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell OptiPlex 3070", "anio": 2019, "cpu": "Intel Core i5-9500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-004", "tipo": "Laptop", "marca": "Lenovo", "modelo": "Lenovo ThinkPad E14 Gen 2", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Coordinador de atención al público", "estado": "Operativo", "hallazgo": "Estaba asignado a Talento Humano antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-005", "tipo": "Escritorio", "marca": "HP", "modelo": "HP ProDesk 400 G1", "anio": 2014, "cpu": "Intel Core i3-4130", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Atención al público", "usuario": "Analista de inscripciones", "estado": "Falla recurrente", "hallazgo": "Pantalla azul varias veces por semana desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-006", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo ThinkCentre M720s", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista contable", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-007", "tipo": "Escritorio", "marca": "HP", "modelo": "HP ProDesk 400 G7", "anio": 2020, "cpu": "Intel Core i5-10500", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Jefa de Administración y Finanzas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-008", "tipo": "Escritorio", "marca": "HP", "modelo": "HP Compaq Pro 6300", "anio": 2012, "cpu": "Intel Core i5-3470", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Asistente de pagos", "estado": "Obsoleto", "hallazgo": "El usuario instaló otra versión del programa contable y ya no abre los reportes", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-009", "tipo": "Laptop", "marca": "HP", "modelo": "HP 240 G8", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Administración y Finanzas", "usuario": "Analista de presupuesto", "estado": "Operativo", "hallazgo": "Estaba asignado a Operaciones; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-010", "tipo": "Escritorio", "marca": "HP", "modelo": "HP ProDesk 400 G5", "anio": 2018, "cpu": "Intel Core i5-8500", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Analista de nómina", "estado": "Operativo", "hallazgo": "El sistema de nómina tarda en cargar por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-011", "tipo": "Escritorio", "marca": "VIT", "modelo": "VIT de escritorio", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Asistente de personal", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; el navegador actual no instala", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-012", "tipo": "Laptop", "marca": "Dell", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Planta baja", "area": "Talento Humano", "usuario": "Jefe de Talento Humano", "estado": "Operativo", "hallazgo": "Estaba asignado a Presidencia antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-013", "tipo": "Laptop", "marca": "HP", "modelo": "HP ProBook 440 G8", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 512 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Presidente", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-014", "tipo": "Escritorio", "marca": "HP", "modelo": "HP EliteDesk 800 G6 Mini", "anio": 2020, "cpu": "Intel Core i5-10500T", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Presidencia", "usuario": "Asistente de Presidencia", "estado": "Falla recurrente", "hallazgo": "Se apaga solo; la fuente de poder externa está dañada", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-015", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo ThinkCentre M73", "anio": 2014, "cpu": "Intel Core i3-4150", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de planes turísticos", "estado": "Obsoleto", "hallazgo": "No soporta el programa de diseño de folletos", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-016", "tipo": "Laptop", "marca": "Acer", "modelo": "Acer TravelMate P214-53", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Coordinadora de planes turísticos", "estado": "Operativo", "hallazgo": "Tiene programas instalados sin autorización; hay que desinstalarlos", "accion": "Mantener", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-CCS-017", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo V50s", "anio": 2020, "cpu": "Intel Core i5-10400", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de logística de viajes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-018", "tipo": "Escritorio", "marca": "Acer", "modelo": "Acer Veriton M2610", "anio": 2011, "cpu": "Intel Core i3-2100", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Operaciones y Planes Turísticos", "usuario": "Analista de convenios con prestadores", "estado": "Obsoleto", "hallazgo": "Tarda más de un minuto en abrir el correo", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-019", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell OptiPlex 3060", "anio": 2018, "cpu": "Intel Core i5-8500", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Coordinador de sucursales", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-020", "tipo": "Laptop", "marca": "Acer", "modelo": "Acer Aspire 5 A515-55", "anio": 2020, "cpu": "Intel Core i5-1035G1", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Caracas", "piso": "Piso 1", "area": "Coordinación de Sucursales", "usuario": "Analista de seguimiento de sedes", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Talento Humano; la batería no carga y se apaga al desconectarlo", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-CCS-021", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell Vostro 3681", "anio": 2020, "cpu": "Intel Core i5-10400", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Ingeniero en Sistemas", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-CCS-022", "tipo": "Laptop", "marca": "Dell", "modelo": "Dell Latitude 5420", "anio": 2021, "cpu": "Intel Core i5-1145G7", "compatibleW11": true, "ram": 16, "disco": "SSD 512 GB", "so": "Windows 11", "sede": "Caracas", "piso": "Piso 1", "area": "Departamento de Tecnología", "usuario": "Técnico en informática", "estado": "Operativo", "hallazgo": "Se usa para el soporte remoto a las sucursales", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-001", "tipo": "Escritorio", "marca": "Acer", "modelo": "Acer Veriton X2660G", "anio": 2018, "cpu": "Intel Core i5-8400", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-002", "tipo": "Escritorio", "marca": "VIT", "modelo": "VIT de escritorio", "anio": 2012, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches; la impresora de la sede no tiene controlador para este sistema", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-003", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell Inspiron 3647", "anio": 2014, "cpu": "Intel Core i3-4150", "compatibleW11": false, "ram": 4, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Se reinicia solo desde que el usuario lo actualizó por su cuenta", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-MER-004", "tipo": "Laptop", "marca": "Lenovo", "modelo": "Lenovo IdeaPad 3 15IIL05", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 4, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Atención al público", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Administración; con 4 GB se queda corto de memoria", "accion": "Repotenciar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-MER-005", "tipo": "Escritorio", "marca": "HP", "modelo": "HP Compaq 6200 Pro", "anio": 2011, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Mérida", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Se congela al cargar el sistema administrativo en línea", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-MER-006", "tipo": "Escritorio", "marca": "Asus", "modelo": "Asus ExpertCenter D500SA", "anio": 2021, "cpu": "Intel Core i5-10400", "compatibleW11": true, "ram": 8, "disco": "SSD 512 GB", "so": "Windows 11", "sede": "Mérida", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-001", "tipo": "Laptop", "marca": "HP", "modelo": "HP 250 G8", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Coordinación", "usuario": "Coordinador de sucursal", "estado": "Operativo", "hallazgo": "Estaba asignado a Atención al público antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-POR-002", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo ThinkCentre M71e", "anio": 2011, "cpu": "Intel Core i3-2120", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Puertos USB con corrosión por la humedad salina", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-003", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo ThinkCentre M70s Gen 1", "anio": 2020, "cpu": "Intel Core i5-10400", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Pierde la conexión varias veces al día; el puerto de red está dañado", "accion": "Reparar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-004", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell Vostro 3670", "anio": 2018, "cpu": "Intel Core i3-8100", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Porlamar", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Operativo", "hallazgo": "El usuario lo actualizó por su cuenta; disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-POR-005", "tipo": "Laptop", "marca": "Toshiba", "modelo": "Toshiba Satellite C55-A", "anio": 2013, "cpu": "Intel Core i3-3110M", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 7", "sede": "Porlamar", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Obsoleto", "hallazgo": "Windows 7 sin parches y sin antivirus vigente", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-POR-006", "tipo": "Laptop", "marca": "Asus", "modelo": "Asus VivoBook 15 X515EA", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 512 GB", "so": "Windows 11", "sede": "Porlamar", "piso": "", "area": "Promoción de planes", "usuario": "Promotora de planes", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-001", "tipo": "Escritorio", "marca": "Lenovo", "modelo": "Lenovo ThinkCentre M70q Gen 2", "anio": 2021, "cpu": "Intel Core i5-11400T", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Coordinación", "usuario": "Coordinadora de sucursal", "estado": "Operativo", "hallazgo": "Sin novedad", "accion": "Mantener", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-002", "tipo": "Escritorio", "marca": "Dell", "modelo": "Dell OptiPlex 7010", "anio": 2012, "cpu": "Intel Core i5-3470", "compatibleW11": false, "ram": 4, "disco": "HDD 500 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Obsoleto", "hallazgo": "Muy lento; el ventilador está lleno de polvo y arena", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-003", "tipo": "Laptop", "marca": "Acer", "modelo": "Acer Aspire 3 A315-56", "anio": 2020, "cpu": "Intel Core i3-1005G1", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de atención al ciudadano", "estado": "Falla recurrente", "hallazgo": "Estaba asignado a Coordinación; varias teclas no responden", "accion": "Reparar", "trasladado": true, "softwareUsuario": false},
+  {"codigo": "RA-COR-004", "tipo": "Escritorio", "marca": "Siragon", "modelo": "Siragon de escritorio", "anio": 2010, "cpu": "Intel Core 2 Duo E7500", "compatibleW11": false, "ram": 2, "disco": "HDD 320 GB", "so": "Windows 7", "sede": "Coro", "piso": "", "area": "Atención al público", "usuario": "Analista de reservas", "estado": "Falla recurrente", "hallazgo": "Se apaga por recalentamiento; el usuario le instaló programas para \"acelerarlo\"", "accion": "Reemplazar", "trasladado": false, "softwareUsuario": true},
+  {"codigo": "RA-COR-005", "tipo": "Escritorio", "marca": "HP", "modelo": "HP 280 G4", "anio": 2018, "cpu": "Intel Core i3-8100", "compatibleW11": true, "ram": 8, "disco": "HDD 1 TB", "so": "Windows 10", "sede": "Coro", "piso": "", "area": "Administración", "usuario": "Asistente administrativo", "estado": "Operativo", "hallazgo": "Arranque lento por el disco mecánico", "accion": "Repotenciar", "trasladado": false, "softwareUsuario": false},
+  {"codigo": "RA-COR-006", "tipo": "Laptop", "marca": "Dell", "modelo": "Dell Latitude 3420", "anio": 2021, "cpu": "Intel Core i5-1135G7", "compatibleW11": true, "ram": 8, "disco": "SSD 256 GB", "so": "Windows 11", "sede": "Coro", "piso": "", "area": "Promoción de planes", "usuario": "Promotor de planes", "estado": "Operativo", "hallazgo": "Estaba asignado a Coordinación antes de la cuarentena", "accion": "Mantener", "trasladado": true, "softwareUsuario": false}
 ];
 
 const DESC_SEDE = { 'Caracas': 'Sede principal, edificio de dos pisos', 'Mérida': 'Sucursal de los Andes', 'Porlamar': 'Sucursal insular, Nueva Esparta', 'Coro': 'Sucursal de Falcón' };
@@ -1022,20 +1184,86 @@ const malo = e => e.estado !== 'Operativo';
 const cuantos = f => EQUIPOS.filter(f).length;
 const SEDES = ORDEN_SEDES.map(s => [s, DESC_SEDE[s], cuantos(e => e.sede === s), cuantos(e => e.sede === s && malo(e))]);
 
-const LUGARES = [
-  ['Sede principal', 'Caracas, Distrito Capital', 'Edificio de dos pisos. Aquí trabajan la Presidencia y el Departamento de Tecnología.', 'Presencial'],
-  ['Sucursal Mérida', 'Mérida, estado Mérida', 'Planes de montaña y turismo andino.', 'Remoto'],
-  ['Sucursal Porlamar', 'Porlamar, estado Nueva Esparta', 'Planes de playa en la isla de Margarita.', 'Remoto'],
-  ['Sucursal Coro', 'Coro, estado Falcón', 'Planes en los médanos, Paraguaná y la costa falconiana.', 'Remoto']
+const ICONOS = {
+  maleta: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/>',
+  sol: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  birrete: '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v5"/>',
+  credencial: '<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 17c1.2-2 6.8-2 8 0"/>',
+  personas: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c2.8 0 5 1.4 5 4"/>',
+  corazon: '<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>',
+  sonrisa: '<circle cx="12" cy="12" r="9"/><path d="M8 14c1 1.5 2.4 2.2 4 2.2s3-.7 4-2.2M9 9.5h.01M15 9.5h.01"/>',
+  escudo: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  montana: '<path d="M3 19l6-10 4 6 3-4 5 8z"/>',
+  lupa: '<circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/>',
+  edificio: '<path d="M2 10l10-6 10 6M4 10v9M20 10v9M9 19v-6M15 19v-6M2 21h20"/>',
+  moneda: '<circle cx="12" cy="12" r="9"/><path d="M15 9c-.8-1-2-1.5-3.2-1.5-1.8 0-3 .9-3 2.2 0 3 6.4 1.6 6.4 4.6 0 1.4-1.4 2.3-3.2 2.3-1.3 0-2.6-.5-3.4-1.6M12 6v1.5M12 16.6V18"/>',
+  ruta: '<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>',
+  tecnologia: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+  red: '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M11 7.2L6.2 16.8M13 7.2l4.8 9.6M7.5 19h9"/>',
+  caja: '<path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/>',
+  remoto: '<rect x="2" y="5" width="9" height="7" rx="1"/><rect x="13" y="12" width="9" height="7" rx="1"/><path d="M6.5 15v2a2 2 0 0 0 2 2H11M17.5 9V7a2 2 0 0 0-2-2H13"/>',
+  persona: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/>',
+  alerta: '<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/>',
+  mover: '<path d="M5 9l-3 3 3 3M19 9l3 3-3 3M2 12h20"/>',
+  descarga: '<path d="M12 3v12M7 10l5 5 5-5M4 21h16"/>',
+  sinescudo: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/>',
+  telefono: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+  reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  auricular: '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
+  pausa: '<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',
+  sindoc: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9.5 12.5l5 5M14.5 12.5l-5 5"/>',
+  calendario: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  chip: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+  memoria: '<rect x="2" y="7" width="20" height="10" rx="1.5"/><path d="M6 17v3M10 17v3M14 17v3M18 17v3M6 10v4M10 10v4M14 10v4M18 10v4"/>',
+  disco: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 16h.01M11 16h6"/>',
+  etiqueta: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>'
+};
+const ico = (k, cls) => '<svg class="ico' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[k] + '</svg>';
+
+const OFRECEMOS = [
+  ['maleta', 'Planes vacacionales', 'Viajes de varios días a destinos de montaña, playa y médanos.'],
+  ['sol', 'Planes recreacionales', 'Salidas de un día y actividades de esparcimiento.'],
+  ['birrete', 'Instituciones educativas', 'Planes para escuelas, liceos y universidades.'],
+  ['credencial', 'Trabajadores públicos', 'Una alternativa económica y de fácil acceso para recrearse.']
 ];
 
-const ACTORES = [
-  ['Presidente de la Fundación', 'Impulsó el convenio', 'Presionado por las quejas del personal y por el presupuesto'],
-  ['Ingeniero en Sistemas', 'Jefe del Departamento de Tecnología', 'Responde por la estrategia con dos personas para cuatro sedes'],
-  ['Técnico en informática', 'Único soporte operativo', 'Atiende las llamadas de toda la organización'],
-  ['Trabajadores con equipos obsoletos', 'Usuarios del servicio', 'Frustrados; algunos ya improvisaron sus propias soluciones'],
-  ['Sedes del interior', 'Usuarios a distancia', 'Dependen del soporte remoto y se sienten desatendidas'],
-  ['Empresa privada', 'Aliada del convenio', 'Entrega los equipos, pero no participa en la gestión interna']
+const VALORES = [
+  ['personas', 'Inclusión', 'Diseñamos planes al alcance de estudiantes y trabajadores públicos.'],
+  ['corazon', 'Solidaridad', 'Apoyamos a las comunidades que nos reciben y compartimos con ellas lo que genera el turismo.'],
+  ['sonrisa', 'Vocación de servicio', 'Cada viajero recibe la misma atención, venga de la sede que venga.'],
+  ['escudo', 'Responsabilidad', 'Cumplimos lo que ofrecemos en fechas, costos y seguridad.'],
+  ['montana', 'Identidad regional', 'Mostramos lo propio de cada región: su paisaje, su comida y su gente.'],
+  ['lupa', 'Transparencia', 'Rendimos cuentas del uso de los recursos públicos y de los convenios.']
+];
+
+const ORGANIGRAMA = [
+  { nombre: 'Presidencia', icono: 'edificio', clase: 'raiz', funciones: ['Dirige la Fundación y fija sus metas', 'Aprueba el presupuesto y los convenios', 'Representa a la Fundación ante los organismos públicos'] },
+  { nombre: 'Administración y Finanzas', icono: 'moneda', funciones: ['Maneja el presupuesto y los pagos a prestadores turísticos', 'Lleva la contabilidad', 'Rinde cuentas del uso de los recursos'] },
+  { nombre: 'Talento Humano', icono: 'personas', funciones: ['Nómina y beneficios del personal', 'Selección e ingreso de trabajadores', 'Formación y capacitación'] },
+  { nombre: 'Operaciones y Planes Turísticos', icono: 'ruta', funciones: ['Diseña los planes vacacionales y recreacionales', 'Contrata transporte, alojamiento y guías', 'Atiende a los grupos antes, durante y después del viaje'] },
+  { nombre: 'Departamento de Tecnología', icono: 'tecnologia', clase: 'ti', funciones: ['Mantiene los equipos y la red de las cuatro sedes', 'Da soporte técnico en sitio y a distancia'], chips: ['Ingeniero en Sistemas (jefe)', 'Técnico en informática'] },
+  { nombre: 'Coordinación de Sucursales', icono: 'red', funciones: ['Enlace entre Caracas y las sucursales', 'Da seguimiento a las metas de cada región'], chips: ['Mérida', 'Porlamar', 'Coro'] },
+  { nombre: 'Empresa privada aliada', icono: 'caja', clase: 'externo', funciones: ['Provee los equipos del convenio', 'No participa en la gestión interna'] }
+];
+
+const LUGARES = [
+  { nombre: 'Sede principal', ubicacion: 'Caracas, Distrito Capital', escena: 'caracas', alt: 'El cerro El Ávila detrás de los edificios de Caracas',
+    descripcion: 'Edificio de dos pisos. Aquí trabajan la Presidencia, las unidades centrales y el Departamento de Tecnología.', soporte: 'Presencial' },
+  { nombre: 'Sucursal Mérida', ubicacion: 'Mérida, estado Mérida', escena: 'merida', alt: 'Picos nevados de la Sierra Nevada con un teleférico',
+    descripcion: 'Planes de montaña y turismo andino.', soporte: 'Remoto' },
+  { nombre: 'Sucursal Porlamar', ubicacion: 'Porlamar, estado Nueva Esparta', escena: 'porlamar', alt: 'Playa con palmera y mar en la isla de Margarita',
+    descripcion: 'Planes de playa en la isla de Margarita.', soporte: 'Remoto' },
+  { nombre: 'Sucursal Coro', ubicacion: 'Coro, estado Falcón', escena: 'coro', alt: 'Médanos de arena con un cardón bajo el sol',
+    descripcion: 'Planes en los médanos, Paraguaná y la costa falconiana.', soporte: 'Remoto' }
+];
+
+const PARTES = [
+  ['Presidente de la Fundación', 'Patrocinador del convenio', 'Que terminen las quejas del personal sin salirse del presupuesto.', 'Alta', 'var(--accent)'],
+  ['Ingeniero en Sistemas', 'Jefe del Departamento de Tecnología', 'Un plan realista para atender cuatro sedes con dos personas.', 'Alta', 'var(--ok)'],
+  ['Técnico en informática', 'Soporte operativo', 'Dejar de atender todo por teléfono y sin orden.', 'Media', 'var(--alto)'],
+  ['Trabajadores con equipos obsoletos', 'Usuarios internos', 'Equipos que les permitan trabajar sin interrupciones; algunos ya improvisan sus propias soluciones.', 'Media', 'var(--crit)'],
+  ['Sedes del interior', 'Usuarios a distancia', 'Recibir la misma atención que Caracas; hoy se sienten desatendidas.', 'Media', '#6B5BA6'],
+  ['Empresa privada aliada', 'Proveedor del convenio', 'Entregar los equipos según lo acordado.', 'Media', 'var(--bajo)']
 ];
 
 
@@ -1397,14 +1625,20 @@ function tabla(id, cols, filas) {
 }
 const oPend = v => v ? v : '<span class="pendiente">Por completar</span>';
 
-// Portada
+// Inicio
 document.getElementById('firma-equipo').textContent = 'Caso de estudio del equipo ' + EQUIPO.nombre + ': ' + EQUIPO.lema.toLowerCase() + '.';
-document.getElementById('ruta').innerHTML = SEDES.map(s =>
-  '<li><b>' + s[0] + '</b><small>' + s[1] + '</small><small>' + s[2] + ' equipos, ' + s[3] + ' obsoletos o con fallas</small></li>').join('');
-
-// El caso
-tabla('t-lugares', ['Sede', 'Ubicación', 'Descripción', 'Soporte que recibe'], LUGARES);
-tabla('t-actores', ['Actor', 'Papel', 'Situación'], ACTORES);
+document.getElementById('ofrecemos').innerHTML = OFRECEMOS.map(o => '<div class="oferta">' + ico(o[0]) + '<b>' + o[1] + '</b><span>' + o[2] + '</span></div>').join('');
+document.getElementById('valores').innerHTML = VALORES.map(v => '<div class="valor">' + ico(v[0]) + '<div><b>' + v[1] + '</b><p>' + v[2] + '</p></div></div>').join('');
+const depto = d => '<div class="depto' + (d.clase ? ' ' + d.clase : '') + '"><div class="depto-cab">' + ico(d.icono) + '<b>' + d.nombre + '</b></div><ul>' +
+  d.funciones.map(f => '<li>' + f + '</li>').join('') + '</ul>' + (d.chips ? '<div class="chips">' + d.chips.map(c => '<span>' + c + '</span>').join('') + '</div>' : '') + '</div>';
+document.getElementById('org-top').innerHTML = depto(ORGANIGRAMA[0]);
+document.getElementById('org-rama').innerHTML = ORGANIGRAMA.slice(1).filter(d => d.clase !== 'externo').map(depto).join('');
+document.getElementById('org-externo').innerHTML = ORGANIGRAMA.filter(d => d.clase === 'externo').map(depto).join('');
+document.getElementById('lugares').innerHTML = LUGARES.map(l =>
+  '<article class="lugar"><svg viewBox="0 0 300 160" role="img" aria-label="' + l.alt + '"><use href="#esc-' + l.escena + '"/></svg><div><h4>' + l.nombre + '</h4><p class="donde">' + l.ubicacion + '</p><p>' + l.descripcion + '</p>' +
+  '<p class="soporte">' + ico(l.soporte === 'Presencial' ? 'tecnologia' : 'remoto') + 'Soporte técnico ' + l.soporte.toLowerCase() + '</p></div></article>').join('');
+document.getElementById('partes').innerHTML = PARTES.map(p =>
+  '<div class="parte" style="--c:' + p[4] + '">' + ico('persona', 'avatar') + '<div><b>' + p[0] + '</b><span class="rol">' + p[1] + '</span><p>' + p[2] + '</p><span class="influ">Influencia ' + p[3].toLowerCase() + '</span></div></div>').join('');
 
 // Diagnóstico
 const pillEstado = { 'Operativo': 'p-ok', 'Obsoleto': 'p-crit', 'Falla recurrente': 'p-alto' };
@@ -1412,13 +1646,112 @@ const pillAccion = { 'Reemplazar': 'p-crit', 'Reparar': 'p-alto', 'Repotenciar':
 const pill = (txt, mapa) => '<span class="pill ' + (mapa[txt] || '') + '">' + txt + '</span>';
 const ANIO_ACTUAL = 2026;
 const total = EQUIPOS.length, nMalos = cuantos(malo);
+const ESTADOS = ['Operativo', 'Obsoleto', 'Falla recurrente'];
+const COLOR_ESTADO = { 'Operativo': 'var(--ok)', 'Obsoleto': 'var(--crit)', 'Falla recurrente': 'var(--alto)' };
+const pct = (a, b) => Math.round(a * 100 / b) + ' %';
+const enumerar = xs => xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' y ' + xs[xs.length - 1];
 
 document.getElementById('cifras').innerHTML = [
-  [nMalos + ' de ' + total, 'equipos obsoletos o con fallas recurrentes (' + Math.round(nMalos * 100 / total) + '\u00a0%)'],
-  [cuantos(e => e.trasladado), 'equipos estaban en un puesto distinto al asignado, por los traslados de la cuarentena'],
-  [cuantos(e => e.softwareUsuario), 'equipos tienen programas instalados o actualizados por el propio usuario'],
-  [cuantos(e => e.so !== 'Windows 11'), 'equipos no tienen Windows 11 y ya no reciben parches de seguridad']
-].map(c => '<div><dt>' + c[0] + '</dt><dd>' + c[1] + '</dd></div>').join('');
+  ['alerta', nMalos + ' de ' + total, 'equipos obsoletos o con fallas recurrentes (' + pct(nMalos, total) + ')'],
+  ['mover', cuantos(e => e.trasladado), 'equipos estaban en un puesto distinto al asignado, por los traslados de la cuarentena'],
+  ['descarga', cuantos(e => e.softwareUsuario), 'equipos tienen programas instalados o actualizados por el propio usuario'],
+  ['sinescudo', cuantos(e => e.so !== 'Windows 11'), 'equipos no tienen Windows 11 y ya no reciben parches de seguridad']
+].map(c => '<div><dt>' + ico(c[0]) + c[1] + '</dt><dd>' + c[2] + '</dd></div>').join('');
+
+// Criterios de obsolescencia
+const CRITERIOS = [
+  { nombre: 'Procesador', umbral: 'Compatible con Windows 11 (Intel de 8.ª generación o posterior)', falla: e => !e.compatibleW11 },
+  { nombre: 'Memoria RAM', umbral: '8 GB o más', falla: e => e.ram < 8 },
+  { nombre: 'Disco', umbral: 'SSD', falla: e => e.disco.startsWith('HDD') },
+  { nombre: 'Sistema operativo', umbral: 'Windows 11, con parches vigentes', falla: e => e.so !== 'Windows 11' },
+  { nombre: 'Antigüedad', umbral: '7 años o menos', falla: e => ANIO_ACTUAL - e.anio > 7 },
+  { nombre: 'Fallas', umbral: 'Menos de 3 en 6 meses', falla: e => e.estado === 'Falla recurrente' }
+];
+
+// Tablero de estadísticas
+const DIMENSIONES = [
+  { id: 'estado', nombre: 'Estado', clave: e => e.estado, orden: ESTADOS, filtro: 'f-estado' },
+  { id: 'sede', nombre: 'Sede', clave: e => e.sede, orden: ORDEN_SEDES, filtro: 'f-sede' },
+  { id: 'marca', nombre: 'Marca', clave: e => e.marca, filtro: 'f-marca' },
+  { id: 'anio', nombre: 'Año de adquisición', clave: e => String(e.anio) },
+  { id: 'tipo', nombre: 'Tipo', clave: e => e.tipo, filtro: 'f-tipo' },
+  { id: 'so', nombre: 'Sistema operativo', clave: e => e.so, orden: ['Windows 7', 'Windows 10', 'Windows 11'] },
+  { id: 'criterios', nombre: 'Criterios de obsolescencia' }
+];
+const gruposDe = dim => {
+  if (dim.id === 'criterios') return CRITERIOS.map(c => ({ etiqueta: c.nombre, sub: c.umbral, lista: EQUIPOS.filter(c.falla), fn: c.falla }));
+  let vals = dim.orden || [...new Set(EQUIPOS.map(dim.clave))];
+  if (!dim.orden) vals.sort(dim.id === 'anio' ? (a, b) => a - b : (a, b) => cuantos(e => dim.clave(e) === b) - cuantos(e => dim.clave(e) === a));
+  return vals.map(v => ({ etiqueta: v, valor: v, lista: EQUIPOS.filter(e => dim.clave(e) === v), fn: e => dim.clave(e) === v }));
+};
+const malos = xs => xs.filter(malo).length;
+const HALLAZGOS = {
+  estado: () => nMalos + ' de ' + total + ' equipos (' + pct(nMalos, total) + ') están obsoletos o fallan con frecuencia: ' + cuantos(e => e.estado === 'Obsoleto') + ' obsoletos y ' + cuantos(e => e.estado === 'Falla recurrente') + ' con fallas recurrentes.',
+  sede: gs => 'Equipos con problemas por sede: ' + enumerar(gs.map(g => g.etiqueta + ' ' + malos(g.lista) + ' de ' + g.lista.length)) + '. Las sucursales, que solo reciben soporte remoto, tienen la mitad de sus equipos con problemas.',
+  marca: gs => { const todos = gs.filter(g => malos(g.lista) === g.lista.length).map(g => g.etiqueta), ninguno = gs.filter(g => !malos(g.lista)).map(g => g.etiqueta);
+    return 'Hay ' + gs.length + ' marcas en la Fundación.' + (todos.length ? ' Con todos sus equipos obsoletos o con fallas: ' + enumerar(todos) + '.' : '') + (ninguno.length ? ' Sin ningún equipo con problemas: ' + enumerar(ninguno) + '.' : '') + ' La marca pesa menos que el año: un mismo fabricante tiene equipos sanos y obsoletos.'; },
+  anio: () => { const v = EQUIPOS.filter(e => e.anio <= 2014), n = EQUIPOS.filter(e => e.anio >= 2018);
+    return 'Los ' + v.length + ' equipos comprados en 2014 o antes están todos obsoletos o con fallas (' + malos(v) + ' de ' + v.length + '). De los ' + n.length + ' comprados desde 2018, solo ' + malos(n) + ' tienen fallas, y son daños puntuales que se pueden reparar.'; },
+  tipo: gs => gs.map(g => g.etiqueta + ': ' + malos(g.lista) + ' de ' + g.lista.length + ' con problemas').join('. ') + '. Las laptops fueron las que más cambiaron de puesto en la cuarentena: ' + cuantos(e => e.tipo === 'Laptop' && e.trasladado) + ' de ' + cuantos(e => e.tipo === 'Laptop') + '.',
+  so: () => cuantos(e => e.so === 'Windows 7') + ' equipos siguen con Windows 7 y ' + cuantos(e => e.so === 'Windows 10') + ' con Windows 10. Ninguno de los dos recibe parches de seguridad. Solo ' + cuantos(e => e.so === 'Windows 11') + ' tienen Windows 11.',
+  criterios: gs => { const m = gs.slice().sort((a, b) => b.lista.length - a.lista.length)[0];
+    return 'El criterio que más equipos incumplen es «' + m.etiqueta + '»: ' + m.lista.length + ' de ' + total + '. Cada barra cuenta los equipos que no cumplen ese criterio, separados por su estado.'; }
+};
+let filtroExtra = null;
+function pintarTablero(id) {
+  const dim = DIMENSIONES.find(d => d.id === id);
+  document.querySelectorAll('#seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.dim === id)));
+  const gs = gruposDe(dim);
+  const max = dim.id === 'criterios' ? total : Math.max(...gs.map(g => g.lista.length));
+  const barras = document.getElementById('barras');
+  barras.innerHTML = gs.map((g, i) => {
+    const segs = ESTADOS.map(s => [s, g.lista.filter(e => e.estado === s).length]).filter(x => x[1]);
+    const detalle = segs.map(([s, n]) => n + ' ' + s.toLowerCase()).join(', ');
+    return '<button type="button" class="fila-barra" data-i="' + i + '" aria-label="' + g.etiqueta + ': ' + g.lista.length + ' equipos (' + detalle + '). Ver en la ficha técnica">' +
+      '<span class="eti">' + g.etiqueta + (g.sub ? '<small>' + g.sub + '</small>' : '') + '</span><span class="pista">' +
+      segs.map(([s, n]) => '<i style="width:' + (n * 100 / max) + '%;background:' + COLOR_ESTADO[s] + '" data-tip="' + g.etiqueta + ': ' + n + ' ' + s.toLowerCase() + '"></i>').join('') +
+      '</span><span class="num">' + g.lista.length + '</span></button>';
+  }).join('');
+  barras.querySelectorAll('.fila-barra').forEach(b => b.addEventListener('click', () => {
+    const g = gs[+b.dataset.i];
+    ['f-sede', 'f-estado', 'f-marca', 'f-tipo'].forEach(f => { document.getElementById(f).value = ''; });
+    filtroExtra = null;
+    if (dim.filtro) document.getElementById(dim.filtro).value = g.valor;
+    else filtroExtra = { etiqueta: (dim.id === 'criterios' ? 'No cumple: ' : dim.nombre + ': ') + g.etiqueta, fn: g.fn };
+    pintarEquipos();
+    document.getElementById('ficha').scrollIntoView();
+  }));
+  document.getElementById('hallazgo').textContent = HALLAZGOS[id](gs);
+}
+document.getElementById('seg').innerHTML = DIMENSIONES.map(d => '<button type="button" data-dim="' + d.id + '" aria-pressed="false">' + d.nombre + '</button>').join('');
+document.querySelectorAll('#seg button').forEach(b => b.addEventListener('click', () => pintarTablero(b.dataset.dim)));
+{
+  const tip = document.getElementById('tip'), barras = document.getElementById('barras');
+  barras.addEventListener('pointermove', ev => {
+    const t = ev.target.closest('[data-tip]');
+    if (!t) { tip.hidden = true; return; }
+    tip.textContent = t.dataset.tip; tip.hidden = false;
+    tip.style.left = Math.min(ev.clientX + 14, window.innerWidth - 250) + 'px'; tip.style.top = (ev.clientY + 16) + 'px';
+  });
+  barras.addEventListener('pointerleave', () => { tip.hidden = true; });
+  window.addEventListener('scroll', () => { tip.hidden = true; }, { passive: true });
+}
+
+// Perfil de los equipos que no fallan
+{
+  const op = EQUIPOS.filter(e => !malo(e)), anios = op.map(e => e.anio);
+  const marcas = [...new Set(op.map(e => e.marca))];
+  document.getElementById('perfil').innerHTML = [
+    ['calendario', Math.min(...anios) + ' a ' + Math.max(...anios), 'años de compra de los ' + op.length + ' equipos operativos'],
+    ['chip', op.filter(e => e.compatibleW11).length + ' de ' + op.length, 'tienen procesador Intel de 8.ª generación o más reciente'],
+    ['memoria', op.filter(e => e.ram >= 8).length + ' de ' + op.length, 'tienen 8 GB de memoria o más'],
+    ['disco', op.filter(e => e.disco.startsWith('SSD')).length + ' de ' + op.length, 'tienen disco SSD'],
+    ['etiqueta', marcas.length + ' marcas', enumerar(marcas.map(m => m + ' (' + op.filter(e => e.marca === m).length + ')'))]
+  ].map(c => '<div>' + ico(c[0]) + '<b>' + c[1] + '</b><span>' + c[2] + '</span></div>').join('');
+  const viejos = EQUIPOS.filter(e => malo(e) && e.anio <= 2014).length;
+  document.getElementById('perfil-texto').textContent = 'Lo que distingue a un equipo que funciona es la generación, más que la marca: todos los equipos sin fallas son de 2018 en adelante, con procesador compatible con Windows 11. ' +
+    cuantos(e => e.tipo === 'Escritorio' && !malo(e)) + ' son de escritorio y ' + cuantos(e => e.tipo === 'Laptop' && !malo(e)) + ' son laptops. En cambio, ' + viejos + ' de los ' + nMalos + ' equipos con problemas se compraron en 2014 o antes.';
+}
 
 // Resumen por sede (Caracas se separa por piso)
 const grupos = [];
@@ -1434,17 +1767,46 @@ const filasSede = grupos.map(([s, p]) => {
 filasSede.push(['<b>Total</b>', 'Cuatro sedes', '<b>' + total + '</b>', '<b>' + (total - nMalos) + '</b>', '<b>' + nMalos + '</b>', '<b>' + cuantos(e => e.trasladado) + '</b>']);
 tabla('t-inventario', ['Sede', 'Áreas', 'Equipos', 'Operativos', 'Obsoletos o con fallas', 'Trasladados en cuarentena'], filasSede);
 
-// Criterios de obsolescencia
-tabla('t-criterios', ['Criterio', 'Valor aceptable', 'Por qué importa', 'Equipos que no lo cumplen'], [
-  ['Procesador', 'Compatible con Windows 11 (Intel Core de 8.ª generación o posterior)', 'Windows 10 dejó de recibir parches de seguridad el 14 de octubre de 2025. Un procesador más viejo no puede pasar a Windows 11.', cuantos(e => !e.compatibleW11)],
-  ['Memoria RAM', '8 GB o más', 'Con 4 GB el sistema y el navegador ocupan casi toda la memoria y el equipo se congela con varias ventanas abiertas.', cuantos(e => e.ram < 8)],
-  ['Disco', 'SSD', 'Con un disco mecánico el arranque y la apertura de programas tardan varias veces más.', cuantos(e => e.disco.startsWith('HDD'))],
-  ['Sistema operativo', 'Windows 11', 'Windows 7 no recibe parches desde el 14 de enero de 2020 y Windows 10 desde el 14 de octubre de 2025.', cuantos(e => e.so !== 'Windows 11')],
-  ['Antigüedad', '7 años o menos', 'Pasado ese tiempo la garantía venció y los repuestos cuestan conseguirlos.', cuantos(e => ANIO_ACTUAL - e.anio > 7)],
-  ['Fallas', 'Menos de 3 fallas reportadas en 6 meses', 'Tres fallas o más apuntan a un problema de fondo y no a un incidente aislado.', cuantos(e => e.estado === 'Falla recurrente')]
-]);
+// Ficha técnica con filtros
+const llenar = (id, valores) => {
+  const sel = document.getElementById(id);
+  valores.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
+  sel.addEventListener('change', () => { pintarEquipos(); });
+};
+llenar('f-sede', ORDEN_SEDES);
+llenar('f-estado', ESTADOS);
+llenar('f-marca', [...new Set(EQUIPOS.map(e => e.marca))].sort());
+llenar('f-tipo', ['Escritorio', 'Laptop']);
+document.getElementById('limpiar').addEventListener('click', () => {
+  ['f-sede', 'f-estado', 'f-marca', 'f-tipo'].forEach(f => { document.getElementById(f).value = ''; });
+  filtroExtra = null; pintarEquipos();
+});
+function pintarEquipos() {
+  const v = id => document.getElementById(id).value;
+  const fs = v('f-sede'), fe = v('f-estado'), fm = v('f-marca'), ft = v('f-tipo');
+  const sel = EQUIPOS.filter(e => (!fs || e.sede === fs) && (!fe || e.estado === fe) && (!fm || e.marca === fm) && (!ft || e.tipo === ft) && (!filtroExtra || filtroExtra.fn(e)));
+  const conteo = document.getElementById('conteo');
+  conteo.innerHTML = 'Mostrando ' + sel.length + ' de ' + total + ' equipos.' + (filtroExtra ? ' <span class="extra">' + filtroExtra.etiqueta + '<button type="button" id="quitar-extra" aria-label="Quitar este filtro">×</button></span>' : '');
+  if (filtroExtra) document.getElementById('quitar-extra').addEventListener('click', () => { filtroExtra = null; pintarEquipos(); });
+  tabla('t-equipos', ['Código', 'Equipo', 'Especificaciones', 'Sistema operativo', 'Ubicación', 'Usuario', 'Estado', 'Hallazgo'],
+    sel.map(e => [e.codigo, e.modelo + '<br><small>' + e.tipo + ', ' + e.anio + '</small>',
+      e.cpu + ', ' + e.ram + ' GB de RAM, ' + e.disco, e.so,
+      e.sede + (e.piso ? ', ' + e.piso.toLowerCase() : '') + '<br><small>' + e.area + '</small>',
+      e.usuario, pill(e.estado, pillEstado), e.hallazgo]));
+}
+pintarEquipos();
+pintarTablero('estado');
 
-// Decisión por equipo
+// Atención de fallas hoy
+document.getElementById('asis').innerHTML = [
+  ['telefono', 'El trabajador llama o escribe directamente al técnico.'],
+  ['reloj', 'Espera su turno: se atiende por orden de llamada o según quién insista más.'],
+  ['auricular', 'El técnico intenta resolver por teléfono; con las sucursales no hay otra vía.'],
+  ['pausa', 'Si la falla no se resuelve a distancia, la sede se detiene hasta que alguien viaje.'],
+  ['sindoc', 'No queda registro: no hay tickets, tiempos de respuesta ni estadísticas.']
+].map(p => '<li>' + ico(p[0]) + '<div>' + p[1] + '</div></li>').join('');
+
+// Plan para los equipos (pestaña Proyecto)
 const nAcc = a => cuantos(e => e.accion === a);
 const nSSD = cuantos(e => e.accion === 'Repotenciar' && e.disco.startsWith('HDD'));
 const nRAM = cuantos(e => e.accion === 'Repotenciar' && e.ram < 8);
@@ -1458,27 +1820,6 @@ const reemplazoSede = ORDEN_SEDES.map(s => s + ' ' + cuantos(e => e.sede === s &
 document.getElementById('nota-convenio').innerHTML = '<p>Para el convenio: hacen falta al menos <b>' + nAcc('Reemplazar') +
   ' equipos nuevos</b> (' + reemplazoSede + '). Los ' + nAcc('Reparar') + ' equipos por reparar y los ' + nAcc('Repotenciar') +
   ' por repotenciar se atienden con repuestos, sin esperar la dotación.</p>';
-
-// Detalle con filtros
-const llenar = (id, valores) => {
-  const sel = document.getElementById(id);
-  valores.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); });
-  sel.addEventListener('change', pintarEquipos);
-};
-llenar('f-sede', ORDEN_SEDES);
-llenar('f-estado', ['Operativo', 'Obsoleto', 'Falla recurrente']);
-llenar('f-accion', ['Reemplazar', 'Reparar', 'Repotenciar', 'Mantener']);
-function pintarEquipos() {
-  const fs = document.getElementById('f-sede').value, fe = document.getElementById('f-estado').value, fa = document.getElementById('f-accion').value;
-  const lista = EQUIPOS.filter(e => (!fs || e.sede === fs) && (!fe || e.estado === fe) && (!fa || e.accion === fa));
-  document.getElementById('conteo').textContent = 'Mostrando ' + lista.length + ' de ' + total + ' equipos.';
-  tabla('t-equipos', ['Código', 'Equipo', 'Especificaciones', 'Sistema operativo', 'Ubicación', 'Usuario', 'Estado', 'Hallazgo', 'Acción'],
-    lista.map(e => [e.codigo, e.modelo + '<br><small>' + e.tipo + ', ' + e.anio + '</small>',
-      e.cpu + ', ' + e.ram + ' GB de RAM, ' + e.disco, e.so,
-      e.sede + (e.piso ? ', ' + e.piso.toLowerCase() : '') + '<br><small>' + e.area + '</small>',
-      e.usuario, pill(e.estado, pillEstado), e.hallazgo, pill(e.accion, pillAccion)]));
-}
-pintarEquipos();
 
 tabla('t-opciones', ['Herramienta', 'Inventario de equipos', 'Licencia', 'En español', 'Decisión'], OPCIONES);
 tabla('t-problemas-diag', ['Problema', 'Descripción', 'Dónde ocurre'], PROBLEMAS_DIAG);
@@ -1590,9 +1931,10 @@ document.getElementById('fases').innerHTML = AUTORES.map(a =>
   const I = INSTITUCION;
   const extra = [I.seccion && 'Sección ' + I.seccion, I.lapso && 'Lapso ' + I.lapso, I.docente && 'Docente: ' + I.docente].filter(Boolean);
   document.getElementById('pie-uni').textContent = I.universidad;
+  document.getElementById('pie-equipo').textContent = 'Equipo ' + EQUIPO.nombre + ': ' + EQUIPO.lema;
   document.getElementById('pie-programa').textContent = I.programa + '. ' + I.unidad + ', ' + I.trayecto + '.' + (extra.length ? ' ' + extra.join('. ') + '.' : '');
   document.getElementById('pie-autores').innerHTML = '<b>Autores:</b> ' + EQUIPO.integrantes.map(p =>
-    p.nombre + (CEDULAS[p.nombre] ? ' (C.I. ' + CEDULAS[p.nombre] + ')' : '')).join(' y ') + '. Equipo ' + EQUIPO.nombre + '.';
+    p.nombre + (CEDULAS[p.nombre] ? ' (C.I. ' + CEDULAS[p.nombre] + ')' : '')).join(' y ') + '.';
   document.getElementById('pie-caso').textContent = 'Caso de estudio: Fundación Rutas del Araguaney. Sedes en Caracas, Mérida, Porlamar y Coro.';
   document.getElementById('inst-portada').textContent = 'UNETI. ' + I.programa + '. ' + I.unidad + ', ' + I.trayecto + '.';
 }
